@@ -1,0 +1,4 @@
+kappa 0.0: CTR old 0.2928 uniform 0.1952 -> uniform loses 33.4% of clicks; per 1000 slice users x 6 rounds = 586.0 clicks lost
+kappa 0.4: CTR old 0.2649 uniform 0.1832 -> uniform loses 30.8% of clicks; per 1000 slice users x 6 rounds = 490.2 clicks lost
+kappa 0.8: CTR old 0.2404 uniform 0.1747 -> uniform loses 27.3% of clicks; per 1000 slice users x 6 rounds = 394.3 clicks lost
+OBD real (RESULTS.md): Random 0.005124 vs BTS 0.006743 -> uniform loses 24.0% of clicks

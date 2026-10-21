@@ -1,0 +1,8 @@
+design kappa 0.0 true10 +0.0367 elapsed 119
+design kappa 0.2 true10 +0.0053 elapsed 237
+design kappa 0.3 true10 -0.0054 elapsed 353
+design kappa 0.35 true10 -0.0099 elapsed 476
+design kappa 0.4 true10 -0.0132 elapsed 596
+curve kappa 0.0 true10 +0.0367 elapsed 178
+curve kappa 0.2 true10 +0.0053 elapsed 350
+curve kappa 0.35 true10 -0.0099 elapsed 526
