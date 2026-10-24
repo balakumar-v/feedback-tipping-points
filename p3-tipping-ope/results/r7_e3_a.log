@@ -1,0 +1,9 @@
+kappa 0.0 true10 +0.0367 elapsed 31
+kappa 0.2 true10 +0.0053 elapsed 64
+kappa 0.3 true10 -0.0054 elapsed 94
+kappa 0.35 true10 -0.0099 elapsed 123
+kappa 0.4 true10 -0.0132 elapsed 152
+kappa 0.6 true10 -0.0211 elapsed 181
+kappa 0.8 true10 -0.0240 elapsed 209
+kappa 1.0 true10 -0.0250 elapsed 237
+kappa 1.5 true10 -0.0246 elapsed 265

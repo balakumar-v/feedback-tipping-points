@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{--ink:#14213d;--mut:#4a5568;--bg:#f6f7fb;--line:#14213d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,"DejaVu Sans",sans-serif;color:var(--ink);width:1500px;padding:36px 40px}
+h1{font-size:44px;margin:0 0 6px}.sub{font-size:20px;color:var(--mut);margin-bottom:22px}
+.flow{display:grid;grid-template-columns:1fr 34px 1.05fr 34px 1.5fr 34px 1.1fr;align-items:stretch}
+.arr{display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--mut)}
+.box{background:#fff;border:1.5px solid #cdd3e0;border-top:5px solid var(--line);padding:14px 16px}
+.box.core{border-style:solid}.box.str{border-style:dashed;border-top-style:solid}
+.box h2{margin:0 0 4px;font-size:25px}.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.5px;padding:2px 7px;border-radius:3px;margin-left:8px;vertical-align:middle}
+.t-mvp{background:#dfeee8;color:#0b6b4f}.t-core{background:#e3e8f7;color:#26418f}.t-str{background:#f3e6cc;color:#8a5200}
+.chip{background:#eceff8;padding:5px 9px;margin:5px 0;font-size:15px}.chip.d{border:1.5px dashed var(--mut);background:#fff}
+.m{font-size:15px;color:var(--mut);margin:4px 0}.f{font-family:"DejaVu Serif",serif;font-style:italic;background:#eceff8;padding:7px 9px;font-size:15px;margin:6px 0}
+.v{padding:7px 10px;margin:6px 0;font-weight:700;font-size:15px}.va{background:#dff0ea;color:#0b6b4f}.vr{background:#f8e1db;color:#b93220}.vn{background:#faebd2;color:#8a5200}
+.link{margin-top:6px}.lk{grid-column:5;text-align:center;font-size:15px;font-weight:700;color:#26418f;padding:4px 0}
+.row2{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;margin-top:20px}
+.rule{font-size:15px;line-height:1.45}.rule b{font-weight:700}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:22px}
+.panel{background:#fff;border:1.5px solid #cdd3e0;padding:14px 16px}.panel h3{margin:0 0 2px;font-size:21px}.panel .m{margin-bottom:8px}
+svg text.lab{font-size:13.5px;fill:#14213d}svg text.bt{font-size:13px;fill:#fff;font-weight:700}svg text.bk{font-size:13px;fill:#0b7a5a;font-weight:700}svg text.sm{font-size:12px;fill:#4a5568}
+.legend span{display:inline-block;margin-right:16px;font-size:14px}.legend i{display:inline-block;width:12px;height:12px;margin-right:5px;vertical-align:-1px}
+.foot{font-size:14px;color:var(--mut);margin-top:16px;line-height:1.5}
+</style></head><body>
+<h1>Measured feedback tipping points</h1>
+<div class="sub">Pre-rollout audit for a ranking policy: logged data (+ a small randomised slice) in; APPROVE, REJECT or NEED RANDOMIZED DATA (with the slice size) out.</div>
+<div class="flow">
+ <div class="box"><h2>Logged data</h2><div class="chip">Simulator <span class="tag t-mvp">MVP</span></div><div class="chip">Open Bandit Data (static only) <span class="tag t-mvp">MVP</span></div><div class="chip d">KuaiRand (real dynamics) <span class="tag t-str">STRETCH</span></div></div>
+ <div class="arr">➜</div>
+ <div class="box"><h2>Static layer <span class="tag t-mvp">MVP</span></h2><div class="m"><b>IPW · SNIPS · DR</b></div><div class="m">lift with 95% user-bootstrap interval (OBD: row-level)</div><div class="m">ESS/n flags thin overlap</div></div>
+ <div class="arr">➜</div>
+ <div class="box core"><h2>Dynamic layer <span class="tag t-core">CORE</span></h2><div class="f">logit(click) = base(context, item) − κ · g(history) + round-index term</div><div class="m"><b>g = count · log(1+count) · 0.7-discounted recency · tail guard c + max(c−2, 0)</b>; verdict needs all four to agree</div><div class="m">forecast over H = 10 rounds (6 logged; round term held at round 6); κ* = where forecast lift hits 0</div></div>
+ <div class="arr">➜</div>
+ <div class="box core"><h2>Verdict <span class="tag t-core">CORE</span></h2><div class="v va">APPROVE</div><div class="v vr">REJECT</div><div class="v vn">NEED RANDOMIZED DATA (+ n*)</div></div>
+</div>
+<div class="flow link"><div></div><div></div><div class="lk">▲ slice (when available) refits base, κ̂ and the static lift</div><div></div><div></div><div></div><div></div></div>
+<div class="row2">
+ <div class="box core"><h2>Randomised slice <span class="tag t-core">CORE</span></h2><div class="m">round 1 uniform (propensity 1/10), later rounds repeat the last item w.p. 0.5 (propensity known), 10 rounds (last-only fails: κ-hat bias −0.27…−0.33). Refits base, κ-hat and static lift. A 3,000-user pilot only sizes n*; the final verdict uses fresh users. Cost: uniform serving lost 24% of clicks on OBD (Random 0.51% vs BTS 0.67%), so slices are capped at 8,000 users.</div>
+ <div class="m">κ-hat is population-averaged: hidden taste attenuates it (−0.18 at taste ×2), but κ* is solved in the same model, so the forecast is compared like-for-like.</div></div>
+ <div class="box"><h2>Verdict rule (frozen before held-out runs)</h2><div class="rule">All intervals: two-sided 95% joint user-bootstrap. <b>APPROVE</b> iff static-lift and forecast-lift lower ends &gt; 0 for all four shapes and a free-form count-curve model.<br><b>REJECT</b> iff, for all four, the static or forecast upper end ≤ 0.<br><b>NEED DATA</b> otherwise (no slice: REJECT or NEED DATA only); asks for a fresh slice of n* users: n* = ((1.96 + 0.84) s / |estimate|)² per shape (95% interval, 80% power), max over shapes, s = bootstrap SD × √n<sub>pilot</sub>, pilot = 3,000 users. Above 8,000 users it abstains and reports n* with a pilot band.</div></div>
+</div>
+<div class="legend" style="margin-top:14px"><span class="tag t-mvp">MVP</span> guaranteed (brief + OBD control) &nbsp; <span class="tag t-core">CORE</span> prototyped on the simulator, committed &nbsp; <span class="tag t-str">STRETCH</span> dashed, dropped first if time runs short</div>
+<div class="panels">
+ <div class="panel"><h3>Logs only under hidden taste: approvals blocked</h3><div class="m">Logs only, hidden taste ×1, linear fatigue, N = 4,000, 16 runs per κ. Hatched = what the four-shape rule would approve; a logs-only audit may not approve (taste cannot be tested from logs). Without the cap it approves 17/80 truly worse policies (16/16 at κ=0.4).</div>
+ <svg style="width:100%;height:auto" viewBox="0 0 720 {{HA}}"><defs><pattern id="hat" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><rect width="3" height="6" fill="#0b7a5a" opacity=".55"/></pattern></defs>{{PANEL_A}}</svg></div>
+ <div class="panel"><h3>Verdicts by true κ, hidden taste + 3,000-user uniform slice (fitted family)</h3><div class="m">Taste ×1, four-shape rule, 16 fresh runs per κ. Truly better: κ ≤ 0.2; worse: κ ≥ 0.3. 0/112 false approvals; most runs abstain (4/16 approvals at +0.037 with 3,000 users, 13/16 at the 8,000 cap).</div>
+ <svg style="width:100%;height:auto" viewBox="0 0 720 {{HS}}">{{PANEL_S}}</svg></div>
+</div>
+<div class="legend" style="margin-top:10px"><span><i style="background:#0b7a5a"></i>APPROVE</span><span><i style="background:#a05a00"></i>NEED RANDOMIZED DATA</span><span><i style="background:#b93220"></i>REJECT</span></div>
+<div class="foot">Prototype (simulator, fresh seeds): slice audit with hidden taste 0/112 false approvals (0/32 near the boundary). Misses: a free-form fatigue-curve veto leaves 0/144 false approvals on a fresh generator (6/144 without it) and 1/72 on the earlier delayed-onset one, at lower correct-approve (8/24 vs 13/24); abstention on truly-better 0.52 (second generator, logs) and 0.59 (slice at the 8,000 cap); the n* band covers the oracle in 85% of pilots (target 90%). Tipping margin (κ̂ − κ*)/SE: Brier 0.082 vs 0.25. Before/after under adverse drift has the wrong sign in 82% of 200 simulator runs; one-step OPE under hidden taste approves 100% of truly worse policies.</div>
+</body></html>

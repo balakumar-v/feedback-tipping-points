@@ -1,0 +1,6 @@
+# Exact versions used to verify this release (Python 3.12.3). Install with: pip install -r requirements-tested.txt
+numpy==2.4.4
+scipy==1.17.1
+scikit-learn==1.8.0
+pandas==3.0.2
+matplotlib==3.10.8

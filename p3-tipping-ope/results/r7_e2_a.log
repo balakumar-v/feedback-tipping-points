@@ -1,0 +1,5 @@
+lin 0.2 true10 +0.0343 elapsed 41
+lin 0.4 true10 +0.0100 elapsed 82
+lin 0.6 true10 -0.0017 elapsed 124
+lin 0.8 true10 -0.0073 elapsed 164
+lin 1.0 true10 -0.0103 elapsed 205

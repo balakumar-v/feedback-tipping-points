@@ -1,0 +1,14 @@
+m 1.0 kappa 0.0 true10 +0.0367 elapsed 62
+m 1.0 kappa 0.2 true10 +0.0053 elapsed 125
+m 1.0 kappa 0.4 true10 -0.0132 elapsed 187
+m 1.0 kappa 0.6 true10 -0.0211 elapsed 245
+m 1.0 kappa 0.8 true10 -0.0240 elapsed 303
+m 1.0 kappa 1.0 true10 -0.0250 elapsed 367
+m 1.0 kappa 1.5 true10 -0.0246 elapsed 427
+m 2.0 kappa 0.0 true10 -0.0411 elapsed 485
+m 2.0 kappa 0.2 true10 -0.0589 elapsed 543
+m 2.0 kappa 0.4 true10 -0.0684 elapsed 600
+m 2.0 kappa 0.6 true10 -0.0698 elapsed 659
+m 2.0 kappa 0.8 true10 -0.0682 elapsed 720
+m 2.0 kappa 1.0 true10 -0.0650 elapsed 787
+m 2.0 kappa 1.5 true10 -0.0573 elapsed 845

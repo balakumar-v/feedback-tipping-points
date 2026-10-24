@@ -1,0 +1,13 @@
+lin 0.4 true10 +0.0219 elapsed 49
+lin 0.8 true10 +0.0044 elapsed 200
+lin 1.0 true10 -0.0001 elapsed 351
+lin 1.2 true10 -0.0031 elapsed 504
+lin 1.5 true10 -0.0061 elapsed 665
+lin 2.0 true10 -0.0089 elapsed 824
+convex 0.4 true10 +0.0063 elapsed 977
+convex 0.9 true10 -0.0060 elapsed 1133
+convex 1.5 true10 -0.0099 elapsed 1280
+quad 0.1 true10 +0.0182 elapsed 1433
+quad 0.3 true10 -0.0021 elapsed 1588
+quad 0.4 true10 -0.0052 elapsed 1736
+quad 0.8 true10 -0.0099 elapsed 1893
