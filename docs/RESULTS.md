@@ -116,3 +116,58 @@ Consequences carried into abstract_v32.md: KuaiRand moved from stretch to plan (
 # ROUND 6 (2026-10-21, REAL world; Addendum 10 pre-registered): which layer causes abstention? (r6_e1.py, an_r6.py, out/r6.jsonl; 64 slice audits, kappa 0 (+0.037) and .2 (+0.005), NS 3000/8000, 16 seeds)
 H1 FAIL: static (one-step) lower end <= 0 in only 43% of NEED runs (needed >= 70%). H2 FAIL: some shape's forecast lower end <= 0 in 82% of NEED runs (needed <= 50%). So the hypothesis 'the one-step lift interval limits approval' is REJECTED and removed from the abstract.
 What actually happens: at +0.037 lift (kappa 0) NEED runs are static-bound 75% (forecast 33%); at +0.005 (kappa .2) the forecast interval binds in 100% (static 31%): forecast point estimates there are 0.002-0.005 against SD 0.007-0.012 (static SD 0.013-0.018; median static/forecast SD ratio 1.37). Abstention near the tipping point is mostly the small forecast lift itself (power), not one layer's variance. At kappa 0: approve 7/16 at 3000, 13/16 at 8000; kappa .2: 0/32.
+
+# ROUND 7 (2026-10-21, REAL world; Addendum 11-12 pre-registered before the runs). Re-tests the claims under the FINAL four-shape rule v4 (lin, log, mem7, tail2), which the abstract states but earlier slice runs (R2-5, R3-1, R4-2, R5, R6) and the R2-3 logs-only runs did NOT use (they used three shapes).
+| # | Claim | Result |
+|---|---|---|
+| P45a | out-of-family (convex .6 .9, quad .2 .4 .8), logs only, fresh seeds 1000-1031 (160 truly-worse): v4 false approvals <= 3/160 (CP95 upper <= 0.05) | PASS: 0/160 (upper 0.0185). Three-shape rule on the same runs: 20/160 |
+| P45b | pooled with earlier real R3-3 (80 runs, 1 FA): <= 0.05 | PASS: 1/240 (upper 0.0196). Quad .2 cell 0/32 in the new runs, so the earlier 1/80 was sampling noise against a 5.8% bound. Tail guard effect: three-shape 12/80 + 20/160 = 32/240 -> four-shape 1/240 |
+| P46a | linear logs, v4 correct-approve at +0.034 >= 0.50 | PASS: 20/20 |
+| P46b | v4 false approvals over truly-worse = 0 | PASS on count: 0/40 (kappa .8, 1.0), CP95 upper 0.072. Prereg error: kappa .6 (true -0.0017) is 'marginal' under the -0.002 cutoff, so only 40 runs (not 60) are truly worse; with kappa .6 as worse 0/60 (0.049) |
+| P46c | v4 false rejects on truly-better = 0 | PASS: 0/40 |
+| P47a | slice (taste x1, 3,000 users, v4), truly-worse 112 runs: 0 false approvals | PASS: 0/112 (upper 0.026) |
+| P47b | near-boundary slice (kappa .3, .35; 32 runs): 0 FA, bound <= 0.10 | PASS: 0/32 (upper 0.089) |
+| P47c | slice false rejects on truly-better <= 1/32 | PASS: 0/32 |
+| P47d | slice correct-approve at +0.037 (3,000 users) >= 0.50 | FAIL: 4/16 = 0.25 (three-shape rule on the same runs 7/16; pooled three-shape over four seed sets 28/60 = 0.47). Abstention on truly-better 0.875 |
+| P48a | slice correct-approve at +0.037 at the 8,000 cap >= 0.50 | PASS: 13/16 = 0.81 |
+| P48b | abstention on truly-better at the cap <= 0.50 | FAIL: 19/32 = 0.594 (kappa .2, +0.005: 16/16 abstain; 0/16 approvals) |
+Descriptive: four-shape correct-approve at +0.010 (logs, linear) is 2/20 vs 20/20 for three shapes: the tail guard removes small-lift approvals. The diagram's left panel previously showed the three-shape rule (kappa .4: 95% approve); it now shows the final rule (10%). Earlier prototype figures quoted as 0/240 (logs) and 0/228 (slice) were three-shape results; the four-shape counts are in this table and in R4-1 (0/192 second generator).
+Reproduce: python -m experiments.r7_e1 1000 1016 results/r7_e1_a.jsonl (and 1016 1032 -> _b); r7_e2 1100 1110 / 1110 1120; r7_e3 1200 1208 / 1208 1216; r7_e4 1300 1308 / 1308 1316; then python -m analysis.an_r7. About 60 minutes on two CPU cores for all 436 audits (4-9 s each).
+
+# ROUND 8-9 (2026-10-22, REAL world; Addenda 13-14 pre-registered before the runs). Motivated by the judge-panel read of abstract v38.
+| # | Claim | Result |
+|---|---|---|
+| P49a | four-shape rule v4, LOGS ONLY under hidden taste x1: false approvals CP95 upper <= 0.05 | FAIL: 17/80 truly-worse approved (kappa .4 16/16, kappa .6 1/16); upper 0.302. At taste x2: 64/112. Every earlier logs-only result had no hidden taste. |
+| P49b | rule v5 (logs-only may not APPROVE): false rejects on truly-better <= 10% | PASS: 0/32 (taste x1; no truly-better cell exists at x2). v5 cap adopted. |
+| P50a | held-out generator W3 (step / exponential / late-onset fatigue, per-item kappa, kappa coupled to taste), uniform slice, 3,000 users: false approvals CP95 upper <= 0.05 | FAIL: 37/144 (upper 0.324): step 18/48, late 19/48, exponential 0/48 |
+| P50b | near-boundary truly-worse <= 0.10 | FAIL: 15/80 (upper 0.274) |
+| P50c | false rejects <= 10% | PASS: 0/48. Correct-approve 12/48, abstention 0.75 |
+| P51a | tail-targeted slice (R9-1, fresh seeds 5000-5015) false approvals CP95 upper <= 0.10 | FAIL: 12/96 (upper 0.195): step 0/48, late-onset 12/48 |
+| P51b | false rejects <= 10% | PASS: 0/32; correct-approve 15/32 |
+Consequence: fatigue that only starts at the third or later repeat is not covered by the verdict; the abstract says so. The tail guard's earlier 1/240 is on its own design shapes (convex, quad). Reproduce: python -m experiments.r8_e1 3000 3016 results/r8_e1.jsonl; python -m experiments.r8_e2 4000 4016 results/r8_e2.jsonl; P3_SLICE=tail P3_CELLS=step,late python -m experiments.r8_e2 5000 5016 results/r9_e1.jsonl; python -m analysis.an_r8.
+
+# ROUND 10 (2026-10-22, Addendum 15 pre-registered): n* with a pilot-uncertainty band. 3,000-user slice pilots, linear fatigue, taste x1, kappa 0/.2/.3/.4/.6, 32 pilots each (seeds 6000-6031).
+| # | Claim | Result |
+|---|---|---|
+| P52a | band [n*(|e|+1.96 se), n*(|e|-1.96 se)] contains the oracle n* in >= 90% of pilots | FAIL: 0.85 (kappa 0: .94, .2: .97, .3: .88, .4: .81, .6: .66) |
+| P52b | point n* within 2x of the oracle in >= 50% | FAIL: 0.34 (point n* is too small: kappa .4 median 4,259 vs oracle 12,769) |
+| P52c | band upper end <= 8,000 => oracle <= 8,000 in >= 90% | FAIL: 27/32 = 0.84 (32 pilots declared affordable) |
+Descriptive: upper end infinite in 28% (kappa 0), 97% (.2), 84% (.3), 38% (.4), 0% (.6) of pilots. Consequence: n* is reported as a band, labelled indicative; the point value under-sizes, and the band under-covers when the true effect is clearly nonzero (kappa .6). Reproduce: python -m experiments.r10_e1 6000 6032 results/r10_e1.jsonl; python -m analysis.an_r10.
+
+# ROUND 11 (2026-10-22, Addendum 16 pre-registered before any run): rule v6 = repeat-heavy 10-round slice + coverage guard (APPROVE only if <= 5% of the new policy's forecast impressions have prior counts above the slice's support), fourth generator W4 (cliff4 / late4 / quadlate, taste-coupled kappa), 16 fresh seeds per cell (7000-7015).
+| # | Claim | Result |
+|---|---|---|
+| P53a | false approvals on truly-worse (144 runs) CP95 upper <= 0.05 | FAIL: 18/144, upper 0.180 (cliff4 1, late4 10, quadlate 7) |
+| P53b | near-boundary (|true lift| <= 0.01, 96 runs) upper <= 0.10 | FAIL: 16/96, upper 0.242 (the other 2 false approvals have true lift -0.012) |
+| P53c | false rejects <= 10% | PASS: 0/48 |
+| P53d | correct-approve on truly-better >= 0.25 | PASS: 25/48 = 0.52 |
+Guard: unsupported share 2-4%, so the guard passed in all 288 audits and changed no verdict (v5 = v6). The repeat-heavy 10-round slice itself lowered false approvals on W3 from 12/96 (6 rounds) to 5/96 (descriptive: W3 is no longer held out). P54 (saved R8-2 data): single-shape false approvals lin 56, log 78, mem7 69, tail2 37, four-shape agreement 37 of 144, so agreement ties the tail guard alone. Consequence: fatigue that starts after the third repeat is not reliably covered, and the abstract states the measured rates. Reproduce: python -m experiments.r11_e1 7000 7016 results/r11_e1.jsonl; python -m analysis.an_r11.
+
+# ROUND 12 (2026-10-22, Addendum 17 pre-registered before the run): rule v7 = v6 + free-form count-curve veto (coefficient per prior-count bin 1..6, >=7; APPROVE also needs its static and forecast lower ends > 0). Fifth generator W5 (cubic, q2, expl3; taste-coupled kappa), 10-round repeat-heavy slice, 3,000 users, 16 fresh seeds per cell (8000-8015).
+| # | Claim | Result |
+|---|---|---|
+| P55a | false approvals on truly-worse (144 runs) CP95 upper <= 0.05 | PASS: v7 0/144, upper 0.021 (v6 on the same runs: 6/144, upper 0.081) |
+| P55b | near-boundary (48 runs) upper <= 0.10 | PASS: v7 0/48, upper 0.061 (v6: 6/48) |
+| P55c | false rejects <= 10% | PASS: 0/48 |
+| P55d | correct-approve >= 0.25 | PASS: 26/48 = 0.54 (v6: 29/48) |
+Descriptive W4 retro (12 cells, 8 seeds, seeds 8000-8007; W4 was seen by R11): v7 false approvals 1/72 (upper 0.064; late4 kappa 1.6, true lift -0.0038), near-boundary 1/48 (upper 0.095), false rejects 0/24, correct-approve 8/24 (v6: 7/72 false approvals, 13/24 correct-approve). Cost: the veto trades about 0.2 correct-approve (W4) or 0.06 (W5) for removing the delayed-onset false approvals. Limits: one fresh generator family; the free-form curve is estimated only for repeat counts the slice shows (up to 7). Reproduce: python -m experiments.r12_e1 8000 8016 results/r12_e1.jsonl W5; python -m experiments.r12_e1 8000 8008 results/r12_e1_w4.jsonl W4; python -m analysis.an_r12.

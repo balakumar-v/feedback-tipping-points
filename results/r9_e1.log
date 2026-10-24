@@ -1,0 +1,8 @@
+step 0.3 true10 +0.0225 elapsed 67
+step 1.2 true10 -0.0046 elapsed 138
+step 1.6 true10 -0.0112 elapsed 206
+step 2.0 true10 -0.0159 elapsed 270
+late 0.3 true10 +0.0153 elapsed 331
+late 0.8 true10 -0.0031 elapsed 393
+late 1.2 true10 -0.0098 elapsed 454
+late 2.0 true10 -0.0159 elapsed 520

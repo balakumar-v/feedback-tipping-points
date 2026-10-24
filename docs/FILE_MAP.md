@@ -44,3 +44,5 @@ Where the records say `python3 r3_e3.py ...`, run `python -m experiments.r3_e3 .
 | `out/` | `results/` |
 | `out/standin/` | `results/standin_superseded/` |
 | `README.md (original)` | `README.md (rewritten)` |
+
+| (new, Round 7) | `experiments/r7_e1.py` … `r7_e4.py`, `analysis/an_r7.py`, `results/r7_e*_{a,b}.jsonl`, `docs/archive/abstract_v37.md`, `figures/archive/p3_diagram_v10.png` |

@@ -138,3 +138,89 @@ R6 (r6_e1.py): slice audit as r3_e1.audit (hidden taste x1, uniform slice, three
 - H1: among NEED runs (pooled over cells and NS), the static lower end <= 0 in >= 70% of runs.
 - H2: forecast lower end <= 0 for at least one shape in <= 50% of NEED runs.
 - Descriptive: sd_s vs sd_f per shape; how often both bind. If H1 or H2 fails the stretch-(1) hypothesis is rejected and the abstract must drop it.
+
+---
+# ADDENDUM 11 (written 2026-10-21 ~17:00 IST, BEFORE any R7 audit). Motivated by the strict judge-panel read of abstract v37 + diagram. REAL world. Truth scan (no audits) done first: true 10-round lift, logs-only no taste: convex .6 -0.0093, .9 -0.0122; quad .2 -0.0041, .4 -0.0110, .8 -0.0135; lin .2 +0.0343, .4 +0.0100, .6 -0.0017, .8 -0.0073, 1.0 -0.0103. Slice (taste x1, lin): k0 +0.0367, .2 +0.0053, .3 -0.0054, .35 -0.0099, .4 -0.0132, .6 -0.0211, .8 -0.0240, 1.0 -0.0250, 1.5 -0.0246.
+Findings that motivate this (re-reading code/logs, no runs): (i) abstract v37 says the verdict needs all FOUR shapes (lin, log, mem7, tail2) but the diagram's left panel (R2-3) and every SLICE result (R2-5, R3-1, R5, R6, R4-2) used THREE shapes (lin, log, mem7); only R3-3 and R4-1 used four. (ii) the one-sided CP95 upper bound of the reported out-of-family 1/80 is 0.058 > 0.05.
+Rule v4 (frozen, = abstract): per shape in {lin, log, mem7, tail2}: APPROVE iff static and forecast 95% interval lower ends > 0; REJECT iff either upper end <= 0; else NEED. APPROVE iff all four APPROVE; REJECT iff all four REJECT; else NEED. Truly worse: true lift < -0.002; truly better: > +0.002.
+## R7-1 out-of-family false approval, logs only, no taste, N=4000, B=30 (as R3-3), fresh seeds 1000-1031 (32/cell), cells convex .6 .9 | quad .2 .4 .8 (all truly worse; 160 runs).
+- P45a: v4 false approvals <= 3/160 (CP95 upper <= 0.05).
+- P45b: pooled with the earlier R3-3 real runs on the same cells (80 runs, 1 FA): <= 6/240 (upper <= 0.05; the 1/80 alone is 0.058, which would fail by itself).
+- Descriptive: v3 (three-shape) false approvals on the same runs.
+## R7-2 linear fatigue, logs only, no taste, v4 four-shape rule, kappa .2 .4 .6 .8 1.0, fresh seeds 1100-1119 (20/cell) = left panel of the diagram redrawn under the FINAL rule.
+- P46a: v4 correct-approve at kappa .2 (+0.034) >= 0.50.
+- P46b: v4 false approvals over truly-worse (.6 .8 1.0: 60 runs) = 0 (CP95 upper 0.049).
+- P46c: v4 false rejects on truly-better (.2 .4) = 0.
+- Descriptive: v3 on same runs; correct-approve at .4 (+0.010; R3-3 prior: 0.25).
+## R7-3 SLICE audit under the final four-shape rule v4 (adds tail2 to the three-shape audit of r3_e1 unchanged otherwise): hidden taste x1, uniform slice 3000 users, bulk 4000, B=30, fresh seeds 1200-1215 (16/cell), kappa 0 .2 .3 .35 .4 .6 .8 1.0 1.5 (144 audits).
+- P47a: false approvals over truly-worse (kappa .3 .35 .4 .6 .8 1.0 1.5 = 112 runs) = 0 (CP95 upper 0.026).
+- P47b: near-boundary truly-worse (kappa .3 .35, 32 runs): 0 false approvals (CP95 upper 0.089 <= 0.10).
+- P47c: false rejects on truly-better (kappa 0 .2; 32 runs) <= 1/32.
+- P47d: correct-approve on strong-better (kappa 0, +0.037) >= 0.50. (Expect FAIL or borderline: earlier v3 results at the same setting 4/12, 10/16, 7/16 across three seed sets = 21/44 = 0.48.)
+- Descriptive: abstention on truly-better and overall; v3 verdict on the same runs.
+Any deviation from this design will be reported as a deviation. Claims that fail are reported as failures.
+
+## R7 RESULTS (analysis after run; thresholds above fixed before): P45a PASS (v4 0/160 false approvals, CP95 upper 0.0185; v3 20/160); P45b PASS (pooled with earlier real R3-3: 1/240, upper 0.0196; quad .2 cell 0/32, so the earlier 1/80 was sampling noise at the 5.8% bound, not a bias); P46a PASS (20/20 at +0.034); P46b PASS on count (0/40 truly-worse; NOTE prereg error: kappa .6 true lift -0.0017 is 'marginal' under the -0.002 cutoff so only 40 runs are truly worse, CP95 upper 0.072, not the 0.049 written for 60 runs); P46c PASS (0 false rejects). Descriptive: v4 correct-approve at +0.010 (kappa .4) is 2/20 (v3 20/20): the tail guard removes the in-family correct-approvals at small lifts. P47a PASS (0/112, upper 0.026); P47b PASS (0/32 near-boundary, upper 0.089); P47c PASS (0 false rejects); P47d FAIL: v4 correct-approve at +0.037 is 4/16 = 0.25 (v3 on the same runs 7/16); abstention on truly-better 0.875 (v3 0.78); pooled v3 over four seed sets at kappa 0 = 28/60 = 0.47.
+
+---
+# ADDENDUM 12 (written 2026-10-21, BEFORE the run; after R7). Slice audit at the 8,000-user cap under the final four-shape rule v4 (the abstract quotes a cap figure that so far exists only for the three-shape rule).
+R7-4: as R7-3 but NS = 8000, kappa 0 (+0.0367) and .2 (+0.0053), fresh seeds 1300-1315 (16/cell, 32 audits).
+- P48a: v4 correct-approve at kappa 0 >= 0.50.
+- P48b: v4 abstention on truly-better (both kappas pooled, 32 runs) <= 0.50 (expected FAIL because of kappa .2).
+- Descriptive: v3 on the same runs.
+
+## R7-4 RESULTS: P48a PASS (v4 correct-approve at +0.037, 8,000 users: 13/16 = 0.81; v3 identical on these runs); P48b FAIL as expected (abstention on truly-better 19/32 = 0.594; kappa .2 (+0.005) abstains 16/16). 0/16 approvals at +0.005 even at the cap.
+
+---
+# ADDENDUM 13 (written 2026-10-22, BEFORE any R8 audit run). Motivated by the strict judge-panel read of abstract v38 + diagram v11 (two major findings). REAL world.
+Findings (from re-reading code and logs, not new experiments): (i) EVERY logs-only result so far (R2-3, R3-3, R4-1, R7-1, R7-2: the 0/40, 0/160, 0/192 false-approval counts) was run with NO hidden taste (beta = gamma = 0); the only hidden-taste results are slice audits. The abstract's own motivating example (taste breaks unconfoundedness) therefore was never tested on the logs-only path. (ii) The tail guard (tail2) was added after seeing 32/240 out-of-family false approvals on convex and quad truths, so those cells (and the c^2 control) are design cells, not held-out cells.
+Disclosure: one smoke-test audit (r8_e1.audit(m=1, kappa=.4, seed=1), outside the run seeds) was executed to check timing before this addendum was written. It returned APPROVE with true lift -0.0132, i.e. a false approval.
+Rule v5 (frozen here) = v4 per-shape rule and four-shape agreement, plus: a LOGS-ONLY audit (no randomised slice) may return REJECT or NEED RANDOMIZED DATA but never APPROVE, because hidden taste cannot be tested from logs. With a slice, v5 = v4 unchanged.
+## R8-1 logs-only under hidden taste, v4, linear fatigue, taste x1 (beta .5, gamma .8) and x2 (1.0, 1.6), kappa 0 .2 .4 .6 .8 1.0 1.5, N=4000, B=30, fresh seeds 3000-3015 (16/cell, 224 audits). Truly worse: true 10-round lift < -0.002; truly better: > +0.002.
+- P49a: v4 logs-only false approvals on truly-worse at taste x1: CP95 upper <= 0.05. (Expected FAIL, given the smoke test.)
+- P49b: v5 false rejects on truly-better, taste x1 and x2 pooled: <= 10%.
+- Descriptive: v4 false approvals at taste x2; v4 correct-approve on truly-better (the cost of the v5 cap); one-step SNIPS estimate vs truth.
+## R8-2 held-out generator W3 (p3ope/r8_lib.py), slice audit at 3,000 users, taste x1, four shapes lin/log/mem7/tail2 (rule v5 = v4 with a slice), B=30, bulk logs 4000, fresh seeds 4000-4015 (16/cell, 192 audits). W3 truths are shapes the guard was not tuned on (step 2*1[c>=3], expo (e^{.35c}-1)/.35, late 1.5*max(c-3,0)) with per-item and per-user kappa, the per-user kappa coupled to the hidden taste (kappa_i = kappa*exp(.5U-.125)). Cells chosen from a TRUTH scan (no audits looked at): step .3 (+0.0225) | step 1.2 (-0.0046) 1.6 (-0.0112) 2.0 (-0.0159) | expo .04 (+0.0203) | expo .15 (-0.0042) .2 (-0.0099) .4 (-0.0200) | late .3 (+0.0153) | late .8 (-0.0031) 1.2 (-0.0098) 2.0 (-0.0159). Truly worse = 9 cells (144 runs); near-boundary truly worse (|true| <= 0.01) = step 1.2, expo .15, expo .2, late .8, late 1.2 (80 runs); truly better = 3 cells (48 runs).
+- P50a: false approvals on truly-worse (144 runs): CP95 upper <= 0.05.
+- P50b: near-boundary truly-worse (80 runs): CP95 upper <= 0.10.
+- P50c: false rejects on truly-better (48 runs): <= 10%.
+- Descriptive: abstention and correct-approve on truly-better; per-shape table.
+The rule is frozen: whatever R8-2 shows, no rule change is made afterwards; failures are reported with their counts and the abstract states the measured rate instead of the target.
+
+---
+# ADDENDUM 14 (written 2026-10-22, AFTER R8 results, BEFORE any R9 audit). R8 RESULTS: P49a FAIL (v4 logs-only under taste: 17/80 false approvals at x1, 64/112 at x2; v5 caps logs-only at REJECT/NEED, 0/32 false rejects, P49b PASS). P50a FAIL: held-out W3 uniform slice, 3,000 users: 37/144 false approvals (CP95 upper 0.324), all on the delayed-onset truths (late 19/48, step 18/48; expo 0/48); P50b FAIL 15/80; P50c PASS 0/48. Diagnosis (not yet tested): a uniform slice almost never shows an item three times in six rounds, so onset at the third repeat is invisible while the new policy repeats heavily.
+## R9-1 (only remedy tested, fixed now, no tuning): the same audit with the tail-targeted slice of r5_lib (round 0 uniform; later rounds repeat previous item w.p. 0.5, propensity known), W3 cells step 1.2 1.6 2.0 | late .8 1.2 2.0 (96 truly-worse) and step .3 | late .3 (32 truly-better), fresh seeds 5000-5015, rule v5 unchanged.
+- P51a: false approvals on truly-worse: CP95 upper <= 0.10 (<= 5/96); P51b: false rejects <= 10%. Descriptive: correct-approve, abstention.
+If P51a fails the abstract states that delayed-onset fatigue is NOT covered by the verdict.
+
+---
+# ADDENDUM 15 (written 2026-10-22, BEFORE any R10 audit). Panel item: report n* with a pilot-uncertainty band (the pilot estimate in |estimate| is noisy, and n* explodes near zero).
+Band (frozen): from a 3,000-user pilot, forecast-lift estimate e with bootstrap SE se (= sd_f / sqrt(3000)); n*(e) = ((1.96+0.84) * sd_f / |e|)^2. Band = [n*(|e|+1.96 se), n*(|e|-1.96 se)]; upper end = infinity if |e| <= 1.96 se (cannot rule out zero lift). Shown as "n* about X (band lo-hi)". Linear fatigue shape, forecast component only (the binding term in earlier rounds), taste x1, kappa 0, .2, .3, .4, .6 (true 10-round lift +0.037, +0.005, -0.005, -0.013, -0.021), fresh seeds 6000-6031 (32 per kappa, 160 pilots). Oracle n* = ((1.96+0.84) * mean pilot sd_f of that kappa / |true10|)^2.
+- P52a: the band contains the oracle n* in >= 90% of pilots (infinite upper end counts as containing).
+- P52b: point n* is within a factor 2 of the oracle in >= 50% of pilots (expected to fail near the tipping point).
+- P52c: among pilots whose band upper end <= 8,000 (declared affordable), oracle n* <= 8,000 in >= 90%.
+- Descriptive: share of pilots with infinite upper end per kappa; median band width.
+
+---
+# ADDENDUM 16 (written 2026-10-22, AFTER R10, BEFORE any R11 audit). Panel items: coverage guard (J1), freeze a fourth generator before testing a remedy (J2), four-shape vs best single shape (J1/J3, free from saved R8-2 data).
+Diagnosis of the R8/R9 misses: the new policy's exposure reaches prior counts of 9, but a 6-round slice supports counts only up to 2 (uniform) or 5 (repeat-heavy, q=.5). Fatigue that starts at the 3rd-4th repeat lives in the unsupported range.
+Rule v6 (frozen here) = v5 plus: (a) slice = repeat-heavy design (q=.5, propensity known), horizon 10 rounds (= H); (b) COVERAGE GUARD: APPROVE only if the share of the new policy's forecast impressions (10 rounds, 20,000 simulated users, outcome-independent) with prior count c above c_sup is at most 5%, where c_sup = the largest c with at least 100 slice impressions; otherwise the audit returns NEED RANDOMIZED DATA (REJECT unaffected). Design calculation done before writing this (no audit outcomes): uniform 10-round slice c_sup=3, unsupported share about 19% (blocked); repeat-heavy 10-round slice c_sup=7, unsupported about 2% (passes). The 5% threshold is the false-approval tolerance, chosen before any run.
+Fourth generator W4 (p3ope/r8_lib.py, shapes never used in any design): cliff4 3*1[c>=4]; late4 2*max(c-4,0); quadlate .6*max(c-3,0)^2; per-item kappa and taste-coupled per-user kappa as in W3. Cells from a TRUTH scan only (no audits): cliff4 .3 (+0.0199) | 1.2 (-0.0065) 1.6 (-0.0116) 2.0 (-0.0149); late4 .3 (+0.0189) | 1.6 (-0.0038) 3.0 (-0.0075) 5.0 (-0.0087); quadlate .1 (+0.0259) | .8 (-0.0023) 1.2 (-0.0072) 2.0 (-0.0121). Truly worse (< -0.002): 9 cells, 144 runs; near-boundary (|true| <= .01): cliff4 1.2, late4 x3, quadlate .8, 1.2 = 96 runs; truly better 3 cells, 48 runs. Taste x1, slice 3,000 users, 16 fresh seeds per cell (7000-7015), four shapes, B=30. Also (descriptive, W3 is no longer held out): v6 on W3 step 1.2 1.6 2.0 and late .8 1.2 2.0 (96 runs, seeds 7000-7015).
+- P53a: v6 false approvals on W4 truly-worse: CP95 upper <= 0.05.
+- P53b: near-boundary truly-worse: CP95 upper <= 0.10.
+- P53c: false rejects on truly-better <= 10%.
+- P53d: correct-approve on truly-better >= 0.25 (the cost of the guard; no target above that is claimed).
+- Descriptive: the same runs WITHOUT the guard (v5 on the 10-round repeat-heavy slice) to isolate the guard; guard pass rate; W3 retro.
+- P54 (saved data, no new runs): on R8-2 uniform-slice audits, false approvals of each single shape (lin, log, mem7, tail2) vs the four-shape agreement, to test that agreement helps. Pre-registered expectation: agreement <= every single shape.
+If P53a fails the abstract says delayed-onset fatigue is still not covered even with the guard.
+
+---
+# ADDENDUM 17 (written 2026-10-22, AFTER R11, BEFORE any R12 audit). R11 showed the support guard never fires and 18/144 delayed-onset false approvals remain, because every fitted shape (lin/log/mem7/tail2) is a parametric guess outside what the slice shows. New idea: stop guessing the shape inside the range the 10-round repeat-heavy slice supports.
+Rule v7 (frozen here) = v6 plus a fifth model, the FREE-FORM COUNT CURVE: logit(click) = base(context, item) + f(c) + round term, where f is a free coefficient for each prior-count bin c = 1, 2, 3, 4, 5, 6, >=7 (f(0) = 0), fitted on the slice by the same penalised logit; forecast and bootstrap exactly as for the other shapes (counts above 7 use the >=7 coefficient). It acts as a VETO on approval: APPROVE needs the free-form model's own static and forecast lower ends > 0 as well; REJECT and NEED rules are unchanged (it cannot create a REJECT). Hypothesis: when the four parametric shapes are optimistic about delayed-onset fatigue, the free-form interval includes or lies below 0, so the false approval turns into NEED RANDOMIZED DATA; cost: a wider interval and fewer correct approvals.
+Fifth generator W5 (p3ope/r8_lib.py, shapes new to every design and test so far): cubic .08 c^3; q2 .3 max(c-2,0)^2; expl3 exp(.5 max(c-3,0))-1; per-item and taste-coupled kappa as in W3/W4. (bump and late5 were scanned first and dropped: their truth lift never goes negative, so they cannot test false approvals.) Cells from a TRUTH scan only: cubic .05 (+0.0200) | .2 (-0.0043) .3 (-0.0116) .5 (-0.0188); q2 .1 (+0.0271) | 1.0 (-0.0081) 1.5 (-0.0139) 2.5 (-0.0197); expl3 .3 (+0.0170) | 1.5 (-0.0068) 2.5 (-0.0125) 4.0 (-0.0164). Truly worse = 9 cells, 144 runs; near-boundary (|true| <= .01): cubic .2, q2 1.0, expl3 1.5 = 48 runs; truly better 3 cells, 48 runs. Taste x1, 10-round repeat-heavy slice with 3,000 users, 16 fresh seeds per cell (8000-8015), B=30. Also descriptive: W4 retro with v7 (12 cells, 8 seeds each, 8000-8007).
+- P55a: v7 false approvals on W5 truly-worse: CP95 upper <= 0.05 (<= 3/144 gives 0.054, so 2/144 or fewer).
+- P55b: near-boundary truly-worse (48 runs): CP95 upper <= 0.10 (<= 1/48).
+- P55c: false rejects on truly-better <= 10%.
+- P55d: correct-approve on truly-better >= 0.25.
+- Descriptive: v6 vs v7 on the same runs (isolates the veto); W4 retro; recorded lower ends (for a post-hoc practical-margin analysis, which is NOT a claim).
+Disclosure: one smoke-test audit (cubic .3, seed 1) is run for timing before the full run. If P55a fails the abstract states that delayed-onset fatigue is still not reliably covered and reports the measured rate.
