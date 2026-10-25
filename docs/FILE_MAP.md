@@ -46,3 +46,6 @@ Where the records say `python3 r3_e3.py ...`, run `python -m experiments.r3_e3 .
 | `README.md (original)` | `README.md (rewritten)` |
 
 | (new, Round 7) | `experiments/r7_e1.py` … `r7_e4.py`, `analysis/an_r7.py`, `results/r7_e*_{a,b}.jsonl`, `docs/archive/abstract_v37.md`, `figures/archive/p3_diagram_v10.png` |
+
+| (new, Round 8-12 files, previously unlisted) | `p3ope/r8_lib.py`, `p3ope/r12_lib.py`, `experiments/r7_e*.py`, `experiments/r8_e*.py`, `experiments/r10_e1.py`, `experiments/r11_e1.py`, `experiments/r12_e1.py`, `analysis/an_r7.py`, `analysis/an_r8.py`, `analysis/an_r10.py`, `analysis/an_r11.py`, `analysis/an_r12.py` |
+| (new, v40 improvement) | `p3ope/audit.py`, `p3ope/summary.py`, `p3ope/report.py`, `p3ope/cli.py`, `p3ope/__main__.py`, `tests/`, `docs/dashboard.html`, `docs/improvement/`, `requirements-tested.txt` |
