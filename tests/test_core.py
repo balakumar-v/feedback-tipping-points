@@ -184,5 +184,33 @@ class Dashboard(unittest.TestCase):
         self.assertNotIn("http://", html.replace("http://www.w3.org", ""))   # no external requests
 
 
+class Round13(unittest.TestCase):
+    """Golden values for the strict-panel round (R13): guard stress and the drift MVP."""
+
+    def test_guard_stress(self):
+        import glob
+        from p3ope import summary as S
+        r = [x for f in sorted(glob.glob("results/r13_e1_*.jsonl")) for x in S.load_records(f)]
+        self.assertEqual(len(r), 96)
+        self.assertTrue(all(x["guard_fires"] for x in r))
+        h7 = S.headline(r, "v7")
+        self.assertEqual((h7["false_approve"], h7["n_worse"], h7["correct_approve"], h7["n_better"]), (0, 72, 0, 24))
+        self.assertEqual(S.headline(r, "v5")["correct_approve"], 23)   # without the guard it would approve 23/24
+
+    def test_drift_mvp(self):
+        from p3ope import summary as S
+        r = S.load_records("results/mvp_drift_logit_d1.0.jsonl")
+        self.assertEqual(len(r), 200)
+        self.assertEqual(sum(x["ba_wrong_sign"] for x in r), 200)
+        self.assertAlmostEqual(sum(x["dr_cov"] for x in r) / 200, 0.935, places=3)
+
+    def test_drift_reproduces_exactly(self):
+        from experiments import mvp_drift as M
+        first = json.loads(open("results/mvp_drift_dir_d1.0.jsonl").readline()) if os.path.exists("results/mvp_drift_dir_d1.0.jsonl") else None
+        if first is None:
+            self.skipTest("log missing")
+        self.assertAlmostEqual(M.one(first["seed"], first["truth"])["dr"], first["dr"], places=9)
+
+
 if __name__ == "__main__":
     unittest.main()

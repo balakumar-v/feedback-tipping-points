@@ -171,3 +171,19 @@ Guard: unsupported share 2-4%, so the guard passed in all 288 audits and changed
 | P55c | false rejects <= 10% | PASS: 0/48 |
 | P55d | correct-approve >= 0.25 | PASS: 26/48 = 0.54 (v6: 29/48) |
 Descriptive W4 retro (12 cells, 8 seeds, seeds 8000-8007; W4 was seen by R11): v7 false approvals 1/72 (upper 0.064; late4 kappa 1.6, true lift -0.0038), near-boundary 1/48 (upper 0.095), false rejects 0/24, correct-approve 8/24 (v6: 7/72 false approvals, 13/24 correct-approve). Cost: the veto trades about 0.2 correct-approve (W4) or 0.06 (W5) for removing the delayed-onset false approvals. Limits: one fresh generator family; the free-form curve is estimated only for repeat counts the slice shows (up to 7). Reproduce: python -m experiments.r12_e1 8000 8016 results/r12_e1.jsonl W5; python -m experiments.r12_e1 8000 8008 results/r12_e1_w4.jsonl W4; python -m analysis.an_r12.
+
+# ROUND 13 (2026-10-27, REAL world; Addendum 18 pre-registered before any R13 audit). Motivated by the strict judge-panel read of abstract v39 + diagram. Output: results/r13_summary.txt (python -m analysis.an_r13).
+| # | Claim | Result |
+|---|---|---|
+| P56a | guard (unsupported share > 5%) fires in >= 90% of 96 audits when the new policy is sharper (TN 0.2) | PASS: 96/96 (unsupported share 0.088-0.090) |
+| P56b | v7 false approvals on truly-worse <= 1/72 | PASS: 0/72 (CP95 upper 0.041). Without the guard (v5) also 0/72 on these runs, so the stress test shows the guard fires, not that it prevents a false approval |
+| P56c | v7 false rejects on truly-better <= 10% | PASS: 0/24 |
+| P56 desc | v5 (no guard) correct-approve 23/24; v6 and v7 0/24 | the guard converts every approval into NEED RANDOMIZED DATA when the new policy repeats beyond the slice's support (abstention by design) |
+| P57a | before/after wrong sign in >= 50% of 200 runs, preregistered drift d = 1.0 along DRIFT_DIR | FAIL: 0/200 (mean before/after +0.049 vs truth +0.075). d = 2.0, 3.0: 0/200, before/after rises (+0.068, +0.106): that direction lowers the average logit over items, not every item's |
+| P57b | SNIPS and DR 95% intervals cover the truth round-one lift in >= 90% of runs | PASS: 187/200 = 0.935 for both (mean widths 0.017 / 0.019) |
+| P57 amend | uniform logit shift (every item's logit lowered by delta; amendment fixed before running), delta 0.5 and 1.0, same claims | delta 0.5: wrong sign 96/200 = 0.48 (P57a FAIL by 2 points); delta 1.0: 200/200 = 1.00 (PASS); P57b PASS in both (0.935) |
+Descriptive R13-2 (saved W5 logs, 192 audits, post hoc): single shapes false approvals lin 19/144, log 68, mem7 74, tail2 6; the free-form model alone 0/144 (correct-approve 26/48), identical to the full rule v7. Four-shape agreement alone = tail2 alone = 6/144; dropping tail2 gives 19/144, dropping any other shape gives 6/144. So on W5 the free-form veto does the work and the four-shape agreement adds nothing beyond tail2; the four-shape rule was designed on W3/W4, which informed it.
+Logs-only under hidden taste (saved R8-1, 224 audits): v4 REJECT on truly-better 0/32 (taste x1; no truly-better cell at x2); the mean one-step SNIPS lift exceeds the true 10-round lift by 0.092, i.e. hidden taste biases toward APPROVE in this simulator, so logs-only REJECT is conservative here; taste that biases the other way is untested.
+Cost: 6.1 s per audit on one CPU core (96 audits; 4,000 logged + 3,000 slice users, B = 30, five models).
+Smoke test and amendment disclosures: see Addendum 18.
+Reproduce: P3_TN=0.2 python -m experiments.r13_e1 9000 9004 results/r13_e1_a.jsonl (and 9004 9008 -> _b); python -m experiments.mvp_drift 0 200 results/mvp_drift_dir_d1.0.jsonl 1.0; P3_DRIFT_MODE=logit python -m experiments.mvp_drift 0 200 results/mvp_drift_logit_d1.0.jsonl 1.0; python -m analysis.an_r13.

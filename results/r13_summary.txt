@@ -1,0 +1,40 @@
+## R13-1 guard stress (TN 0.2), 96 audits, mean 6.1 s/audit
+guard fires: 96/96 = 1.000; unsupported share mean 0.090 (min 0.088)
+rule v5                            false-approve   0/72  (CP95 upper 0.041)  correct-approve  23/24   false-reject 0/24
+rule v6                            false-approve   0/72  (CP95 upper 0.041)  correct-approve   0/24   false-reject 0/24
+rule v7                            false-approve   0/72  (CP95 upper 0.041)  correct-approve   0/24   false-reject 0/24
+truly-worse runs the four shapes agreed to APPROVE (v5): 0/72
+
+## R13-2 ablation on saved W5 logs (192 audits; post hoc, descriptive)
+single shape lin                   false-approve  19/144 (CP95 upper 0.188)  correct-approve  29/48   false-reject 0/48
+single shape log                   false-approve  68/144 (CP95 upper 0.544)  correct-approve  29/48   false-reject 0/48
+single shape mem7                  false-approve  74/144 (CP95 upper 0.585)  correct-approve  29/48   false-reject 0/48
+single shape tail2                 false-approve   6/144 (CP95 upper 0.081)  correct-approve  29/48   false-reject 0/48
+four-shape agreement (v5)          false-approve   6/144 (CP95 upper 0.081)  correct-approve  29/48   false-reject 0/48
+drop lin (3 shapes)                false-approve   6/144 (CP95 upper 0.081)  correct-approve  29/48   false-reject 0/48 |  false-approve   0/144 (CP95 upper 0.021)  correct-approve  26/48   false-reject 0/48
+drop log (3 shapes)                false-approve   6/144 (CP95 upper 0.081)  correct-approve  29/48   false-reject 0/48 |  false-approve   0/144 (CP95 upper 0.021)  correct-approve  26/48   false-reject 0/48
+drop mem7 (3 shapes)               false-approve   6/144 (CP95 upper 0.081)  correct-approve  29/48   false-reject 0/48 |  false-approve   0/144 (CP95 upper 0.021)  correct-approve  26/48   false-reject 0/48
+drop tail2 (3 shapes)              false-approve  19/144 (CP95 upper 0.188)  correct-approve  29/48   false-reject 0/48 |  false-approve   0/144 (CP95 upper 0.021)  correct-approve  26/48   false-reject 0/48
+four + guard (v6)                  false-approve   6/144 (CP95 upper 0.081)  correct-approve  29/48   false-reject 0/48
+four + guard + ff veto (v7)        false-approve   0/144 (CP95 upper 0.021)  correct-approve  26/48   false-reject 0/48
+free-form model alone              false-approve   0/144 (CP95 upper 0.021)  correct-approve  26/48   false-reject 0/48
+
+## logs-only audit under hidden taste (R8-1, 224 audits): rule v5 = v4 with APPROVE capped to NEED
+taste x1: truly-better 32: v4 REJECT 0 (false rejects) ; truly-worse 80: v4 REJECT 16 correct, APPROVE 17 (capped to NEED by v5)
+taste x2: truly-better 0: v4 REJECT 0 (false rejects) ; truly-worse 112: v4 REJECT 16 correct, APPROVE 64 (capped to NEED by v5)
+mean one-step SNIPS lift minus true 10-round lift (hidden taste x1): 0.092
+
+## R13-3 drift dir_d1.0: 200 runs, truth +0.0751, mean before/after +0.0486
+before/after wrong sign 0.000 | SNIPS interval covers truth 0.935 | DR 0.935 | mean widths SNIPS 0.0174 DR 0.0186
+
+## R13-3 drift dir_d2.0: 200 runs, truth +0.0751, mean before/after +0.0683
+before/after wrong sign 0.000 | SNIPS interval covers truth 0.935 | DR 0.935 | mean widths SNIPS 0.0174 DR 0.0186
+
+## R13-3 drift dir_d3.0: 200 runs, truth +0.0751, mean before/after +0.1062
+before/after wrong sign 0.000 | SNIPS interval covers truth 0.935 | DR 0.935 | mean widths SNIPS 0.0174 DR 0.0186
+
+## R13-3 drift logit_d0.5: 200 runs, truth +0.0751, mean before/after -0.0003
+before/after wrong sign 0.480 | SNIPS interval covers truth 0.935 | DR 0.935 | mean widths SNIPS 0.0174 DR 0.0186
+
+## R13-3 drift logit_d1.0: 200 runs, truth +0.0751, mean before/after -0.0595
+before/after wrong sign 1.000 | SNIPS interval covers truth 0.935 | DR 0.935 | mean widths SNIPS 0.0174 DR 0.0186

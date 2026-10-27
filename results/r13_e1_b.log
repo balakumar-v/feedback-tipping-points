@@ -1,0 +1,12 @@
+W5 cubic 0.05 true10 +0.0262 elapsed 24
+W5 cubic 0.2 true10 -0.0245 elapsed 47
+W5 cubic 0.3 true10 -0.0366 elapsed 72
+W5 cubic 0.5 true10 -0.0483 elapsed 96
+W5 q2 0.1 true10 +0.0446 elapsed 120
+W5 q2 1.0 true10 -0.0318 elapsed 144
+W5 q2 1.5 true10 -0.0414 elapsed 170
+W5 q2 2.5 true10 -0.0507 elapsed 194
+W5 expl3 0.3 true10 +0.0163 elapsed 219
+W5 expl3 1.5 true10 -0.0301 elapsed 244
+W5 expl3 2.5 true10 -0.0396 elapsed 269
+W5 expl3 4.0 true10 -0.0459 elapsed 294

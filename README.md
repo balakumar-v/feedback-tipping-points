@@ -41,7 +41,7 @@ For `cubic`, kappa = 0.5 the one-step estimate says the new policy lifts clicks 
 ```
 .
 ├── docs/
-│   ├── abstract.md            Round-1 abstract (v39; v37, v38 in docs/archive/)
+│   ├── abstract.md            Round-1 abstract (v40; earlier versions in docs/archive/)
 │   ├── PREREGISTRATION.md     Thresholds fixed before each run (addenda 1-10)
 │   ├── RESULTS.md             Pass/fail outcome for every claim, per round
 │   ├── FILE_MAP.md            Old flat filenames -> current paths
@@ -133,6 +133,11 @@ python -m experiments.r12_e1 8000 8016 results/r12_e1.jsonl W5   # rule v7, free
 python -m experiments.r12_e1 8000 8008 results/r12_e1_w4.jsonl W4
 python -m analysis.an_r11
 python -m analysis.an_r12
+# Round 13 (strict-panel fixes): guard stress, drift MVP, ablation from saved logs
+P3_TN=0.2 python -m experiments.r13_e1 9000 9004 results/r13_e1_a.jsonl   # and: 9004 9008 results/r13_e1_b.jsonl (about 5 min each)
+python -m experiments.mvp_drift 0 200 results/mvp_drift_dir_d1.0.jsonl 1.0          # covariate drift along DRIFT_DIR (not adverse for the new policy)
+P3_DRIFT_MODE=logit python -m experiments.mvp_drift 0 200 results/mvp_drift_logit_d1.0.jsonl 1.0   # uniform logit shift: before/after wrong sign 200/200
+python -m analysis.an_r13   # also prints the ablation and the logs-only false-reject check
 ```
 
 Figures: `python figures/make_diagram.py` renders `figures/diagram.html` from the results.
@@ -144,6 +149,7 @@ Figures: `python figures/make_diagram.py` renders `figures/diagram.html` from th
 ## Not done
 
 Fatigue that starts only at the third or later repeat is not covered (R8-2, R9-1 failed their targets). n* band covers the oracle in 85% of pilots (target 90%), see Round 10. Rule v6 (repeat-heavy 10-round slice + coverage guard) still gives 18/144 false approvals on delayed-onset fatigue (target 5%), see Round 11; the v7 free-form veto brings that to 0/144 on a fresh generator (Round 12).
+Round 13: with a sharper new policy the coverage guard fires in 96/96 audits, so the audit abstains rather than approves (0/24 correct-approves); the MVP drift check at half strength (logit shift 0.5) misses its 50% target (96/200 wrong sign); on fresh generators the free-form model alone matches the full rule (0/144), so four-shape agreement is partly redundant. The Open Bandit control (P17) is documented but its script is not in this archive.
 KuaiRand (stretch goal), sequential slice sizing, sensitivity bounds. Closed-loop slice sizing was dropped because it fails in the real-world setting.
 
 `python -m p3ope audit` runs the verdict rule (v7) only; it does not print the n\* slice size, which lives in `experiments/r3_e1.py` and `experiments/r10_e1.py`.
