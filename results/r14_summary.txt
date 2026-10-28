@@ -1,0 +1,42 @@
+audits: 192
+truly worse 144 near-boundary 48 truly better 48 marginal 0
+P58a v7 false approvals on truly-worse: 0/144 CP95 upper 0.021 (<=0.05?) -> PASS
+P58b near-boundary: 0/48 CP95 upper 0.061 (<=0.10?) -> PASS
+P58c false rejects: 0/48 = 0.000 (<=0.10?) -> PASS
+P58d correct-approve: 26/48 = 0.542 (>=0.25?) -> PASS ; abstain 22
+
+== descriptive, same runs: false approvals on truly-worse / correct-approve on truly-better / false rejects
+                              rule  FA/144  CP95up  FA near-bdry/48  correct-approve/48  reject-or-not-approve/48
+                        single lin       0   0.021                0                  27                         0
+                        single log       1   0.033                1                  29                         0
+                       single mem7       3   0.053                3                  30                         0
+                      single tail2       0   0.021                0                  27                         0
+                   free-form alone       0   0.021                0                  29                         0
+                     v5 four-shape       0   0.021                0                  27                         0
+                         v6 +guard       0   0.021                0                  27                         0
+                  v7 +veto (final)       0   0.021                0                  26                         0
+one-step logs gate (SNIPS lower>0)     144   1.000               48                  48                         0
+
+per cell v7 (A=approve N=need R=reject):
+               true     A     N     R   v6A  linA   ffA  guard_ok
+kind  kappa                                                      
+hump  0.3    0.0301   9.0   7.0   0.0   9.0   9.0  10.0       1.0
+      3.0   -0.0026   0.0   0.0  16.0   0.0   0.0   0.0       1.0
+      5.0   -0.0110   0.0   0.0  16.0   0.0   0.0   0.0       1.0
+      8.0   -0.0166   0.0   0.0  16.0   0.0   0.0   0.0       1.0
+logsq 0.1    0.0296  10.0   6.0   0.0  11.0  11.0  10.0       1.0
+      0.8   -0.0030   0.0  16.0   0.0   0.0   0.0   0.0       1.0
+      1.2   -0.0115   0.0  11.0   5.0   0.0   0.0   0.0       1.0
+      2.0   -0.0196   0.0   2.0  14.0   0.0   0.0   0.0       1.0
+sigm  0.3    0.0215   7.0   9.0   0.0   7.0   7.0   9.0       1.0
+      1.2   -0.0059   0.0  16.0   0.0   0.0   0.0   0.0       1.0
+      2.0   -0.0166   0.0  16.0   0.0   0.0   0.0   0.0       1.0
+      3.0   -0.0225   0.0   8.0   8.0   0.0   0.0   0.0       1.0
+
+R14-2 on 192 non-marginal runs (worse 144): Brier margin 0.0035 | CI-only 0.0049 | constant 0.1875
+P59a Brier(margin) < constant: True ; P59b AUC margin 1.000 vs CI-only 1.000 (margin >= CI-only - 0.02?) -> PASS
+per-generator AUC margin / CI-only: {'hump': (np.float64(1.0), np.float64(1.0)), 'logsq': (np.float64(1.0), np.float64(1.0)), 'sigm': (np.float64(1.0), np.float64(1.0))}
+among v7-NEED runs (n=91, worse 69): AUC margin 1.000 | CI-only 1.000
+P59a gap: mean(p_margin) 0.742 vs base rate 0.750; margin>0 share among worse 0.993, among better 0.000
+
+P59c saved R5 runs with 3-shape verdict NEED: n=211 (worse 125): AUC margin 0.939 (>=0.70?) -> PASS

@@ -1,0 +1,6 @@
+W6 sigm 0.3 true10 +0.0215 elapsed 76
+W6 sigm 2.0 true10 -0.0166 elapsed 151
+W6 hump 0.3 true10 +0.0301 elapsed 226
+W6 hump 5.0 true10 -0.0110 elapsed 301
+W6 logsq 0.1 true10 +0.0296 elapsed 375
+W6 logsq 1.2 true10 -0.0115 elapsed 450

@@ -16,7 +16,7 @@ from p3ope.exp13_lib import K, D, logits_r, pi_old_full, pi_old_nominal, pi_new,
 
 CPL, ISIG = 0.5, 0.4
 M_ITEM = np.exp(ISIG * np.random.default_rng(2026).normal(size=K) - ISIG ** 2 / 2)
-NEW_SHAPES = ("step", "expo", "late", "cliff4", "late4", "quadlate", "bump", "late5", "cubic", "pow15", "q2", "expl3")
+NEW_SHAPES = ("step", "expo", "late", "cliff4", "late4", "quadlate", "bump", "late5", "cubic", "pow15", "q2", "expl3", "sigm", "hump", "logsq")
 
 
 def feat3(st, kind, a):
@@ -31,6 +31,10 @@ def feat3(st, kind, a):
         if kind == "q2": return 0.3 * np.maximum(c - 2, 0) ** 2
         if kind == "expl3": return np.exp(0.5 * np.maximum(c - 3, 0)) - 1.0
         if kind == "late4": return 2.0 * np.maximum(c - 4, 0)
+        # W6 (Addendum 19): sealed generator, added after the rule v7 was frozen
+        if kind == "sigm": return 3.0 * (1.0 / (1.0 + np.exp(-(c - 3.5))) - 1.0 / (1.0 + np.exp(3.5)))
+        if kind == "hump": return 1.2 * c * np.exp(-c / 3.0)
+        if kind == "logsq": return 0.9 * np.log1p(c) ** 2
         if kind == "quadlate": return 0.6 * np.maximum(c - 3, 0) ** 2
         if kind == "expo": return (np.exp(0.35 * c) - 1.0) / 0.35
         return 1.5 * np.maximum(c - 3, 0)

@@ -1,0 +1,491 @@
+../tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/tests/test_core.py:181: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpy9w_ol03/dash.html' mode='r' encoding='utf-8'>
+  html = open(out, encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......../tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r12.py:6: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r12_e1.jsonl' mode='r' encoding='utf-8'>
+  d = pd.DataFrame([json.loads(l) for l in open(path)]); d["cls"] = np.where(d.true10 < -.002, "worse", np.where(d.true10 > .002, "better", "marg"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+== W5 (held-out, pre-registered P55) runs 192
+v7                     APPROVE  NEED
+kind  kappa true10                  
+cubic 0.05   0.020048        9     7
+      0.20  -0.004288        0    16
+      0.30  -0.011585        0    16
+      0.50  -0.018832        0    16
+expl3 0.30   0.016952        5    11
+      1.50  -0.006837        0    16
+      2.50  -0.012507        0    16
+      4.00  -0.016437        0    16
+q2    0.10   0.027112       12     4
+      1.00  -0.008133        0    16
+      1.50  -0.013918        0    16
+      2.50  -0.019702        0    16
+v6: FA 6/144 CP95 upper 0.081 | near-boundary FA 6/48 upper 0.232 | false rejects 0/48 | correct-approve 29/48 = 0.60
+v7: FA 0/144 CP95 upper 0.021 | near-boundary FA 0/48 upper 0.061 | false rejects 0/48 | correct-approve 26/48 = 0.54
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r12.py:6: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r12_e1_w4.jsonl' mode='r' encoding='utf-8'>
+  d = pd.DataFrame([json.loads(l) for l in open(path)]); d["cls"] = np.where(d.true10 < -.002, "worse", np.where(d.true10 > .002, "better", "marg"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+== W4 retro (descriptive) runs 96
+v7                        APPROVE  NEED
+kind     kappa true10                  
+cliff4   0.3    0.019888        2     6
+         1.2   -0.006477        0     8
+         1.6   -0.011590        0     8
+         2.0   -0.014857        0     8
+late4    0.3    0.018928        2     6
+         1.6   -0.003840        1     7
+         3.0   -0.007458        0     8
+         5.0   -0.008668        0     8
+quadlate 0.1    0.025950        4     4
+         0.8   -0.002338        0     8
+         1.2   -0.007202        0     8
+         2.0   -0.012057        0     8
+v6: FA 7/72 CP95 upper 0.175 | near-boundary FA 7/48 upper 0.257 | false rejects 0/24 | correct-approve 13/24 = 0.54
+v7: FA 1/72 CP95 upper 0.064 | near-boundary FA 1/48 upper 0.095 | false rejects 0/24 | correct-approve 8/24 = 0.33
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r4_margin.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r4_e1.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for l in open("results/r4_e1.jsonl")]); df["cls"]=cls(df.true10.values)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+cell-level v4 false approval (m=0):
+kind    kappa
+convex  0.9      0
+        1.5      0
+lin     1.2      0
+        1.5      0
+        2.0      0
+quad    0.3      0
+        0.4      0
+        0.8      0
+
+margin m | FA/144 (CP95 upper) | correct-approve all truly-better | correct-approve lift>=+0.02
+0.000 | 0/192 (0.015) | 0.479 | 0.917
+0.001 | 0/192 (0.015) | 0.438 | 0.750
+0.002 | 0/192 (0.015) | 0.375 | 0.500
+0.003 | 0/192 (0.015) | 0.323 | 0.292
+0.005 | 0/192 (0.015) | 0.271 | 0.083
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r2_e3.py:5: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r2_e3_a.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for f in ("results/r2_e3_a.jsonl","results/r2_e3_b.jsonl") for l in open(f)])
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r2_e3.py:5: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r2_e3_b.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for f in ("results/r2_e3_a.jsonl","results/r2_e3_b.jsonl") for l in open(f)])
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+               n  true10  true6     cls    A3    N3    R3    A1    N1   R1
+kind   kappa                                                              
+lin    0.2    20   0.034  0.050  better  1.00  0.00  0.00  1.00  0.00  0.0
+       0.4    20   0.010  0.031  better  0.95  0.05  0.00  0.95  0.05  0.0
+       0.6    20  -0.002  0.017    marg  0.00  1.00  0.00  0.00  0.60  0.4
+       0.8    20  -0.007  0.008   worse  0.00  0.95  0.05  0.00  0.00  1.0
+       1.0    20  -0.010  0.002   worse  0.00  0.05  0.95  0.00  0.00  1.0
+sat    0.4    20   0.039  0.046  better  1.00  0.00  0.00  1.00  0.00  0.0
+       0.9    20   0.010  0.019  better  0.00  1.00  0.00  0.00  0.10  0.9
+       1.5    20  -0.006  0.002   worse  0.00  0.00  1.00  0.00  0.00  1.0
+       2.5    20  -0.012 -0.008   worse  0.00  0.00  1.00  0.00  0.00  1.0
+       4.0    20  -0.013 -0.011   worse  0.00  0.00  1.00  0.00  0.00  1.0
+decay  0.4    20   0.044  0.048  better  1.00  0.00  0.00  1.00  0.00  0.0
+       0.9    20   0.014  0.022  better  0.85  0.15  0.00  0.85  0.15  0.0
+       1.5    20  -0.006  0.004   worse  0.00  1.00  0.00  0.00  0.00  1.0
+       2.5    20  -0.019 -0.010   worse  0.00  0.00  1.00  0.00  0.00  1.0
+window 0.4    20   0.042  0.046  better  1.00  0.00  0.00  1.00  0.00  0.0
+       0.9    20   0.012  0.019  better  0.55  0.45  0.00  0.55  0.45  0.0
+       1.5    20  -0.008  0.001   worse  0.00  1.00  0.00  0.00  0.00  1.0
+       2.5    20  -0.019 -0.011   worse  0.00  0.00  1.00  0.00  0.00  1.0
+convex 0.2    20   0.011  0.039  better  1.00  0.00  0.00  1.00  0.00  0.0
+       0.4    20  -0.004  0.019   worse  0.00  1.00  0.00  0.00  0.90  0.1
+       0.6    20  -0.009  0.007   worse  0.00  1.00  0.00  0.00  0.00  1.0
+       0.9    20  -0.012 -0.001   worse  0.00  0.00  1.00  0.00  0.00  1.0
+three-shape v3 worse n=240 FA=0 CP95 upper 0.012 | better n=180 correct-approve 0.817 false-reject 0.000 NEED 0.183
+   excluding convex: worse n=180 FA=0
+   convex worse n=60 FA=0
+linear-only v1 worse n=240 FA=0 CP95 upper 0.012 | better n=180 correct-approve 0.817 false-reject 0.100 NEED 0.083
+   excluding convex: worse n=180 FA=0
+   convex worse n=60 FA=0
+P29 sat .9 truth 0.009899999999999997 v3 R/N/A 0.0 1.0 0.0 v1 R 0.9
+v3 false-reject among truly-better 0 / 180
+v1 false-reject among truly-better 18 / 180
+cells where sign(true6)!=sign(true10): {('convex', 0.4): {'t6': 0.0187, 't10': -0.0039}, ('convex', 0.6): {'t6': 0.0075, 't10': -0.0093}, ('decay', 1.5): {'t6': 0.0039, 't10': -0.0061}, ('lin', 0.6): {'t6': 0.0173, 't10': -0.0017}, ('lin', 0.8): {'t6': 0.0083, 't10': -0.0073}, ('lin', 1.0): {'t6': 0.002, 't10': -0.0103}, ('sat', 1.5): {'t6': 0.0018, 't10': -0.0056}, ('window', 1.5): {'t6': 0.0009, 't10': -0.0076}}
+lin-shape forecast median |err| H10 0.0041 H6 0.0037
+standin taste x1 lin: [(0, 0.0367), (0.1, 0.0198), (0.2, 0.0053), (0.25, -0.0004), (0.3, -0.0054), (0.35, -0.0099), (0.4, -0.0132), (0.5, -0.0178), (0.6, -0.0211)]
+sec 1
+slice audit s 2.2 NEED
+logs audit s (B=30, 4 shapes) 2.7 APPROVE
+lin [(0.2, 0.0412), (0.4, 0.0219), (0.6, 0.0112), (0.8, 0.0044), (1.0, -0.0001), (1.5, -0.0061), (2.0, -0.0089)]
+quad [(0.05, 0.0355), (0.1, 0.0182), (0.2, 0.0039), (0.4, -0.0052), (0.8, -0.0099)]
+convex [(0.2, 0.0224), (0.4, 0.0063), (0.6, -0.0011), (0.9, -0.006), (1.5, -0.0099)]
+homogeneous probit lin [(0.4, 0.0109), (0.8, -0.0073), (1.2, -0.0113)]
+sec 3
+kappa 0.0: CTR old 0.2550 uniform 0.1283 -> uniform loses 49.7% of clicks; per 1000 slice users x 6 rounds = 760.2 clicks lost
+kappa 0.4: CTR old 0.2257 uniform 0.1207 -> uniform loses 46.5% of clicks; per 1000 slice users x 6 rounds = 630.1 clicks lost
+kappa 0.8: CTR old 0.2043 uniform 0.1153 -> uniform loses 43.5% of clicks; per 1000 slice users x 6 rounds = 533.6 clicks lost
+OBD real (RESULTS.md): Random 0.005124 vs BTS 0.006743 -> uniform loses 24.0% of clicks
+W2 lin  [(0.2, 0.0412), (0.4, 0.0219), (0.6, 0.0112), (0.8, 0.0044), (1.0, -0.0001), (1.2, -0.0031), (1.5, -0.0061), (2.0, -0.0089), (3.0, -0.0109)]
+W2 quad [(0.05, 0.0355), (0.1, 0.0182), (0.2, 0.0039), (0.3, -0.0021), (0.4, -0.0052), (0.6, -0.0084), (0.8, -0.0099)]
+W2 cvx  [(0.2, 0.0224), (0.4, 0.0063), (0.6, -0.0011), (0.9, -0.006), (1.2, -0.0086), (1.5, -0.0099)]
+taste x1 lin [(0.2, 0.0053), (0.25, -0.0004), (0.3, -0.0054), (0.35, -0.0099), (0.4, -0.0132), (0.5, -0.0178)]
+R3-3 truths: lin [(0.4, 0.01), (0.8, -0.0073), (1.0, -0.0103)] convex [(0.2, 0.0115), (0.6, -0.0093), (0.9, -0.0122)] quad [(0.05, 0.0262), (0.2, -0.0041), (0.4, -0.011), (0.8, -0.0135)]
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r2_e5.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r2_e5.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for l in open("results/r2_e5.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+            n   true     cls    v3A    v3R    v3N    v1A    v1R     fc
+m   kappa                                                             
+1.0 0.0    12  0.037  better  0.333  0.000  0.667  0.333  0.000  0.040
+    0.2    12  0.005  better  0.000  0.000  1.000  0.000  0.000  0.001
+    0.4    12 -0.013   worse  0.000  0.000  1.000  0.000  0.417 -0.017
+    0.6    12 -0.021   worse  0.000  0.083  0.917  0.000  1.000 -0.033
+    0.8    12 -0.024   worse  0.000  0.167  0.833  0.000  1.000 -0.032
+    1.0    12 -0.025   worse  0.000  0.667  0.333  0.000  1.000 -0.032
+    1.5    12 -0.025   worse  0.000  1.000  0.000  0.000  1.000 -0.037
+2.0 0.0    12 -0.041   worse  0.000  1.000  0.000  0.000  1.000 -0.040
+    0.2    12 -0.059   worse  0.000  1.000  0.000  0.000  1.000 -0.070
+    0.4    12 -0.068   worse  0.000  1.000  0.000  0.000  1.000 -0.083
+    0.6    12 -0.070   worse  0.000  1.000  0.000  0.000  1.000 -0.092
+    0.8    12 -0.068   worse  0.000  1.000  0.000  0.000  1.000 -0.095
+    1.0    12 -0.065   worse  0.000  1.000  0.000  0.000  1.000 -0.089
+    1.5    12 -0.057   worse  0.000  1.000  0.000  0.000  1.000 -0.083
+3.0 0.0    12 -0.118   worse  0.000  1.000  0.000  0.000  1.000 -0.113
+    0.2    12 -0.127   worse  0.000  1.000  0.000  0.000  1.000 -0.140
+    0.4    12 -0.130   worse  0.000  1.000  0.000  0.000  1.000 -0.147
+    0.6    12 -0.128   worse  0.000  1.000  0.000  0.000  1.000 -0.153
+    0.8    12 -0.122   worse  0.000  1.000  0.000  0.000  1.000 -0.155
+    1.0    12 -0.116   worse  0.000  1.000  0.000  0.000  1.000 -0.153
+    1.5    12 -0.101   worse  0.000  1.000  0.000  0.000  1.000 -0.142
+v3 (three-shape) worse n=228 FA=0 CP95 upper 0.013 | better n=24 correct-approve 0.17 false-reject 0.00 NEED 0.83 | strong-better(>=.02) n=12 correct-approve 0.33
+v1 (linear-only) worse n=228 FA=0 CP95 upper 0.013 | better n=24 correct-approve 0.17 false-reject 0.00 NEED 0.83 | strong-better(>=.02) n=12 correct-approve 0.33
+m 1.0 worse n 60 FA v3 0 FA v1 0 REJ v3 0.38
+m 2.0 worse n 84 FA v3 0 FA v1 0 REJ v3 1.00
+m 3.0 worse n 84 FA v3 0 FA v1 0 REJ v3 1.00
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r3_e3.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r3_e3.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for l in open("results/r3_e3.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+               n   true     cls   v3A    v3N    v3R    v4A    v4N    v4R  linA
+kind   kappa                                                                  
+lin    0.40   16  0.010  better  1.00  0.000  0.000  0.250  0.750  0.000  1.00
+       0.80   16 -0.007   worse  0.00  0.875  0.125  0.000  0.875  0.125  0.00
+       1.00   16 -0.010   worse  0.00  0.000  1.000  0.000  0.000  1.000  0.00
+convex 0.20   16  0.011  better  1.00  0.000  0.000  1.000  0.000  0.000  1.00
+       0.60   16 -0.009   worse  0.00  1.000  0.000  0.000  1.000  0.000  0.00
+       0.90   16 -0.012   worse  0.00  0.000  1.000  0.000  0.000  1.000  0.00
+quad   0.05   16  0.026  better  1.00  0.000  0.000  1.000  0.000  0.000  1.00
+       0.20   16 -0.004   worse  0.75  0.250  0.000  0.062  0.938  0.000  0.75
+       0.40   16 -0.011   worse  0.00  1.000  0.000  0.000  1.000  0.000  0.00
+       0.80   16 -0.013   worse  0.00  0.000  1.000  0.000  0.000  1.000  0.00
+out-of-family (convex+quad) v3 worse n=80 FA=12 CP95 upper 0.232 | better n=32 approve 1.000 need 0.000 reject 0.000
+out-of-family (convex+quad) v4 worse n=80 FA=1 CP95 upper 0.058 | better n=32 approve 1.000 need 0.000 reject 0.000
+out-of-family (convex+quad) lin-only worse FA 12 / 80
+in-family lin v3 worse n=32 FA=0 CP95 upper 0.089 | better n=16 approve 1.000 need 0.000 reject 0.000
+in-family lin v4 worse n=32 FA=0 CP95 upper 0.089 | better n=16 approve 0.250 need 0.750 reject 0.000
+in-family lin lin-only worse FA 0 / 32
+all v3 worse n=112 FA=12 CP95 upper 0.168 | better n=48 approve 1.000 need 0.000 reject 0.000
+all v4 worse n=112 FA=1 CP95 upper 0.042 | better n=48 approve 0.750 need 0.250 reject 0.000
+all lin-only worse FA 12 / 112
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r2_e1.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r2_e1.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for l in open("results/r2_e1.jsonl")])
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+                  n  pool_bias  pool_sd  ri_bias  ri_sd  fe_bias  fe_sd      nd
+m   kappa ns                                                                   
+1.0 0.4   1500  100     -0.037    0.076   -0.023  0.078   -0.015  0.112  286.24
+          3000  100     -0.034    0.059   -0.020  0.062   -0.011  0.086  579.89
+    0.8   1500  100     -0.043    0.087   -0.020  0.090    0.011  0.140  265.41
+          3000  100     -0.049    0.067   -0.026  0.070    0.002  0.101  531.66
+2.0 0.4   1500  100     -0.094    0.065   -0.076  0.065    0.012  0.111  312.44
+          3000  100     -0.103    0.050   -0.086  0.052   -0.007  0.091  628.18
+    0.8   1500  100     -0.182    0.075   -0.154  0.075   -0.009  0.127  297.94
+          3000  100     -0.182    0.054   -0.153  0.056    0.006  0.099  596.34
+3.0 0.4   1500  100     -0.166    0.054   -0.147  0.056    0.004  0.123  309.69
+          3000  100     -0.165    0.037   -0.147  0.037    0.000  0.085  614.49
+    0.8   1500  100     -0.312    0.067   -0.280  0.067    0.010  0.142  301.64
+          3000  100     -0.321    0.052   -0.289  0.054   -0.005  0.088  609.88
+P20 pool bias m2 k.8 n3000: -0.182 (<=-0.05?) ; monotone in m at k=.8,n=3000: [np.float64(-0.049), np.float64(-0.182), np.float64(-0.321)]
+P21 fe |bias|<=.03 at n=3000 all cells: 0.011
+P22 fe SD<=.10 at n=3000: 0.101
+P23 ri reduces |bias| >=50% at m2 k.8 n3000: pool -0.182 ri -0.153 -> 16% reduction
+              n  last_bias  last_sd  every_bias  every_sd  fe_lastworld_bias
+kappa ns                                                                    
+0.4   1500  100     -0.273    0.132      -0.020     0.081             -0.004
+      3000  100     -0.305    0.081      -0.029     0.057             -0.000
+0.8   1500  100     -0.296    0.161      -0.043     0.094              0.000
+      3000  100     -0.329    0.083      -0.060     0.068              0.002
+P24 k 0.4 last bias -0.273 every bias -0.020 ratio 13.5
+P24 k 0.8 last bias -0.296 every bias -0.043 ratio 6.8
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r8.py:5: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r8_e1.jsonl' mode='r' encoding='utf-8'>
+  def load(p): return pd.DataFrame([json.loads(l) for f in sorted(glob.glob(p)) for l in open(f)])
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+== R8-1 logs-only UNDER hidden taste, v4 (16/cell)
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r8.py:11: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  g["n"] = g[["APPROVE", "NEED", "REJECT"]].sum(1); print(g[["n", "APPROVE", "NEED", "REJECT"]].round(4).to_string())
+v4                           n  APPROVE  NEED  REJECT
+m   kappa true10    cls                              
+1.0 0.0    0.036708 better  16       16     0       0
+    0.2    0.005315 better  16       16     0       0
+    0.4   -0.013202 worse   16       16     0       0
+    0.6   -0.021117 worse   16        1    15       0
+    0.8   -0.023993 worse   16        0    16       0
+    1.0   -0.024980 worse   16        0    16       0
+    1.5   -0.024553 worse   16        0     0      16
+2.0 0.0   -0.041098 worse   16       16     0       0
+    0.2   -0.058877 worse   16       16     0       0
+    0.4   -0.068433 worse   16       16     0       0
+    0.6   -0.069772 worse   16       16     0       0
+    0.8   -0.068173 worse   16        0    16       0
+    1.0   -0.064983 worse   16        0    16       0
+    1.5   -0.057278 worse   16        0     0      16
+taste x1: v4 FA 17/80 CP95 upper 0.302 | truly-better n=32 v4 approve 32 reject 0 | mean one-step +0.082
+taste x2: v4 FA 64/112 CP95 upper 0.651 | truly-better n=0 v4 approve 0 reject 0 | mean one-step +0.084
+P49b v5 false rejects (taste x1+x2 pooled): 0/32 = 0.000
+P49a v4 FA at taste x1: 17/80 upper 0.302  -> FAIL
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r8.py:5: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r8_e2.jsonl' mode='r' encoding='utf-8'>
+  def load(p): return pd.DataFrame([json.loads(l) for f in sorted(glob.glob(p)) for l in open(f)])
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+== R8-2 held-out W3 slice audit, taste x1, 3,000 users (16/cell)
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r8.py:11: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  g["n"] = g[["APPROVE", "NEED", "REJECT"]].sum(1); print(g[["n", "APPROVE", "NEED", "REJECT"]].round(4).to_string())
+v4                            n  APPROVE  NEED  REJECT
+kind kappa true10    cls                              
+expo 0.04   0.020267 better  16        2    14       0
+     0.15  -0.004162 worse   16        0    16       0
+     0.20  -0.009915 worse   16        0    16       0
+     0.40  -0.020028 worse   16        0    16       0
+late 0.30   0.015322 better  16        5    11       0
+     0.80  -0.003145 worse   16        6    10       0
+     1.20  -0.009847 worse   16        5    11       0
+     2.00  -0.015927 worse   16        8     8       0
+step 0.30   0.022497 better  16        5    11       0
+     1.20  -0.004575 worse   16        4    12       0
+     1.60  -0.011212 worse   16        9     7       0
+     2.00  -0.015875 worse   16        5    11       0
+P50a FA 37/144 CP95 upper 0.324 -> FAIL
+P50b near-boundary FA 15/80 upper 0.274 -> FAIL
+P50c false rejects 0/48 = 0.000 -> PASS
+descriptive: truly-better abstain 0.750 correct-approve 12/48
+per-shape FA: {'expo': '0/48', 'late': '19/48', 'step': '18/48'}
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r3_e1.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r3_e1.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for l in open("results/r3_e1.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+pilots 84
+        n    true  A   N   R
+kappa                       
+0.0    14  0.0367  7   7   0
+0.2    14  0.0053  0  14   0
+0.4    14 -0.0132  0  14   0
+0.6    14 -0.0211  0  12   2
+0.8    14 -0.0240  0   2  12
+1.0    14 -0.0250  0   2  12
+NEED pilots 51
+V0 median n* 3571 | share n*<=cap 0.69 (35/51) | decisive among uncapped 0.14 (5/35) | decisive overall (capped=abstain) 0.10
+V1 median n* 65288 | share n*<=cap 0.16 (8/51) | decisive among uncapped 0.88 (7/8) | decisive overall (capped=abstain) 0.14
+V2 median n* 133240 | share n*<=cap 0.02 (1/51) | decisive among uncapped 0.00 (0/1) | decisive overall (capped=abstain) 0.00
+pilot false approvals 0 of truly-worse pilots 56
+V0 FA after: 0 / 26 uncapped truly-worse | false reject after: 0 / 9 uncapped truly-better; correct-approve after 1
+V1 FA after: 0 / 5 uncapped truly-worse | false reject after: 0 / 3 uncapped truly-better; correct-approve after 2
+V2 FA after: 0 / 1 uncapped truly-worse | false reject after: 0 / 0 uncapped truly-better; correct-approve after 0
+        n       n0         n1         n2  kstar
+kappa                                          
+0.0     7   3943.0     8479.0    17303.0    0.0
+0.2    14  13657.0  1458635.0  2976807.0    0.0
+0.4    14   4582.0   173523.0   354128.0    0.0
+0.6    12    749.0    39317.0    80238.0    0.0
+0.8     2    442.0    10529.0    21487.0    0.0
+1.0     2    507.0     7563.0    15434.0    1.0
+                                     after_V0                                after_V1                  after_V2
+kappa                                                                                                          
+0.0    {'NEED': 4, 'CAPPED': 2, 'APPROVE': 1}  {'CAPPED': 4, 'APPROVE': 2, 'NEED': 1}             {'CAPPED': 7}
+0.2                 {'CAPPED': 10, 'NEED': 4}                          {'CAPPED': 14}            {'CAPPED': 14}
+0.4                 {'NEED': 10, 'CAPPED': 4}                          {'CAPPED': 14}            {'CAPPED': 14}
+0.6                 {'NEED': 11, 'REJECT': 1}              {'CAPPED': 9, 'REJECT': 3}            {'CAPPED': 12}
+0.8                  {'NEED': 1, 'REJECT': 1}              {'REJECT': 1, 'CAPPED': 1}  {'NEED': 1, 'CAPPED': 1}
+1.0                             {'REJECT': 2}              {'REJECT': 1, 'CAPPED': 1}             {'CAPPED': 2}
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r2_e4.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r2_e4.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for l in open("results/r2_e4.jsonl")])
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+              n  ka_bias  kb_bias  theta     t6    t10
+kappa delta                                           
+0.2   0.0    30   -0.004   -0.006 -0.002  0.050  0.034
+      0.1    30    0.113    0.004 -0.096  0.044  0.028
+      0.2    30    0.233    0.005 -0.198  0.039  0.024
+0.6   0.0    30   -0.001   -0.000  0.000  0.017 -0.002
+      0.1    30    0.119    0.003 -0.098  0.017  0.004
+      0.2    30    0.249    0.005 -0.202  0.017  0.007
+a H 6 median|err| 0.0083 sign-correct (non-marginal) 1.000 n 180
+a H 10 median|err| 0.0098 sign-correct (non-marginal) 0.600 n 150
+bflat H 6 median|err| 0.0019 sign-correct (non-marginal) 1.000 n 180
+bflat H 10 median|err| 0.0025 sign-correct (non-marginal) 0.947 n 150
+blin H 6 median|err| 0.0019 sign-correct (non-marginal) 1.000 n 180
+blin H 10 median|err| 0.0018 sign-correct (non-marginal) 0.973 n 150
+P25 no-round-term |bias| at delta .2: {0.2: 0.233, 0.6: 0.249} ; with round term all cells max |bias|: 0.006
+true lift sign changes between H=6 and H=10 cells: {(0.2, 0.0): {'t6': 0.0503, 't10': 0.0343}, (0.2, 0.1): {'t6': 0.0439, 't10': 0.0278}, (0.2, 0.2): {'t6': 0.0392, 't10': 0.0239}, (0.6, 0.0): {'t6': 0.0173, 't10': -0.0017}, (0.6, 0.1): {'t6': 0.0174, 't10': 0.0036}, (0.6, 0.2): {'t6': 0.0174, 't10': 0.0066}}
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r11.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r11_e1.jsonl' mode='r' encoding='utf-8'>
+  d = pd.DataFrame([json.loads(l) for l in open("results/r11_e1.jsonl")]); d["cls"] = np.where(d.true10 < -.002, "worse", np.where(d.true10 > .002, "better", "marg"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+guard: csup [np.int64(6), np.int64(7)] unsupported share [0.02  0.043] pass(<=5%) rate 1.0
+
+== W4 runs 192
+v6                        APPROVE  NEED
+kind     kappa true10                  
+cliff4   0.3    0.019888        9     7
+         1.2   -0.006477        1    15
+         1.6   -0.011590        0    16
+         2.0   -0.014857        0    16
+late4    0.3    0.018928        8     8
+         1.6   -0.003840        3    13
+         3.0   -0.007458        3    13
+         5.0   -0.008668        4    12
+quadlate 0.1    0.025950        8     8
+         0.8   -0.002338        3    13
+         1.2   -0.007202        2    14
+         2.0   -0.012057        2    14
+v6 (with guard): FA 18/144 CP95 upper 0.180 | near-boundary FA 16/96 upper 0.242 | false rejects 0/48 | correct-approve 25/48
+v5 (no guard, same slice): FA 18/144 CP95 upper 0.180 | near-boundary FA 16/96 upper 0.242 | false rejects 0/48 | correct-approve 25/48
+
+== W3 runs 96
+v6                    APPROVE  NEED
+kind kappa true10                  
+late 0.8   -0.003145        4    12
+     1.2   -0.009847        1    15
+     2.0   -0.015927        0    16
+step 1.2   -0.004575        0    16
+     1.6   -0.011212        0    16
+     2.0   -0.015875        0    16
+v6 (with guard): FA 5/96 CP95 upper 0.106 | near-boundary FA 5/48 upper 0.207 | false rejects 0/0 | correct-approve 0/0
+v5 (no guard, same slice): FA 5/96 CP95 upper 0.106 | near-boundary FA 5/48 upper 0.207 | false rejects 0/0 | correct-approve 0/0
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r14.py:8: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r14_e1_a.jsonl' mode='r' encoding='utf-8'>
+  D = pd.DataFrame([json.loads(l) for f in sorted(glob.glob("results/r14_e1_*.jsonl")) for l in open(f)])
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r14.py:8: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r14_e1_b.jsonl' mode='r' encoding='utf-8'>
+  D = pd.DataFrame([json.loads(l) for f in sorted(glob.glob("results/r14_e1_*.jsonl")) for l in open(f)])
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+audits: 192
+truly worse 144 near-boundary 48 truly better 48 marginal 0
+P58a v7 false approvals on truly-worse: 0/144 CP95 upper 0.021 (<=0.05?) -> PASS
+P58b near-boundary: 0/48 CP95 upper 0.061 (<=0.10?) -> PASS
+P58c false rejects: 0/48 = 0.000 (<=0.10?) -> PASS
+P58d correct-approve: 26/48 = 0.542 (>=0.25?) -> PASS ; abstain 22
+
+== descriptive, same runs: false approvals on truly-worse / correct-approve on truly-better / false rejects
+                              rule  FA/144  CP95up  FA near-bdry/48  correct-approve/48  reject-or-not-approve/48
+                        single lin       0   0.021                0                  27                         0
+                        single log       1   0.033                1                  29                         0
+                       single mem7       3   0.053                3                  30                         0
+                      single tail2       0   0.021                0                  27                         0
+                   free-form alone       0   0.021                0                  29                         0
+                     v5 four-shape       0   0.021                0                  27                         0
+                         v6 +guard       0   0.021                0                  27                         0
+                  v7 +veto (final)       0   0.021                0                  26                         0
+one-step logs gate (SNIPS lower>0)     144   1.000               48                  48                         0
+
+per cell v7 (A=approve N=need R=reject):
+               true     A     N     R   v6A  linA   ffA  guard_ok
+kind  kappa                                                      
+hump  0.3    0.0301   9.0   7.0   0.0   9.0   9.0  10.0       1.0
+      3.0   -0.0026   0.0   0.0  16.0   0.0   0.0   0.0       1.0
+      5.0   -0.0110   0.0   0.0  16.0   0.0   0.0   0.0       1.0
+      8.0   -0.0166   0.0   0.0  16.0   0.0   0.0   0.0       1.0
+logsq 0.1    0.0296  10.0   6.0   0.0  11.0  11.0  10.0       1.0
+      0.8   -0.0030   0.0  16.0   0.0   0.0   0.0   0.0       1.0
+      1.2   -0.0115   0.0  11.0   5.0   0.0   0.0   0.0       1.0
+      2.0   -0.0196   0.0   2.0  14.0   0.0   0.0   0.0       1.0
+sigm  0.3    0.0215   7.0   9.0   0.0   7.0   7.0   9.0       1.0
+      1.2   -0.0059   0.0  16.0   0.0   0.0   0.0   0.0       1.0
+      2.0   -0.0166   0.0  16.0   0.0   0.0   0.0   0.0       1.0
+      3.0   -0.0225   0.0   8.0   8.0   0.0   0.0   0.0       1.0
+
+R14-2 on 192 non-marginal runs (worse 144): Brier margin 0.0035 | CI-only 0.0049 | constant 0.1875
+P59a Brier(margin) < constant: True ; P59b AUC margin 1.000 vs CI-only 1.000 (margin >= CI-only - 0.02?) -> PASS
+per-generator AUC margin / CI-only: {'hump': (np.float64(1.0), np.float64(1.0)), 'logsq': (np.float64(1.0), np.float64(1.0)), 'sigm': (np.float64(1.0), np.float64(1.0))}
+among v7-NEED runs (n=91, worse 69): AUC margin 1.000 | CI-only 1.000
+P59a gap: mean(p_margin) 0.742 vs base rate 0.750; margin>0 share among worse 0.993, among better 0.000
+
+P59c saved R5 runs with 3-shape verdict NEED: n=211 (worse 125): AUC margin 0.939 (>=0.70?) -> PASS
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r5.py:6: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r5_design.jsonl' mode='r' encoding='utf-8'>
+  def load(f): return pd.DataFrame([json.loads(l) for l in open(f)]) if os.path.exists(f) else pd.DataFrame()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r5.py:6: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r5_curve.jsonl' mode='r' encoding='utf-8'>
+  def load(f): return pd.DataFrame([json.loads(l) for l in open(f)]) if os.path.exists(f) else pd.DataFrame()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+runs: design 160 curve 90
+
+== per design/NS/kappa
+ design   ns  kappa   true  n  APPROVE  NEED  REJECT  med_se    med_nV2
+   tail 3000   0.00  0.037 16    0.500 0.500   0.000   0.026   5713.586
+   tail 3000   0.20  0.005 16    0.062 0.938   0.000   0.028 112111.950
+   tail 3000   0.30 -0.005 16    0.000 1.000   0.000   0.030  71334.603
+   tail 3000   0.35 -0.010 16    0.000 1.000   0.000   0.030 375696.282
+   tail 3000   0.40 -0.013 16    0.000 0.938   0.062   0.031 153968.577
+uniform 1500   0.00  0.037 10    0.000 1.000   0.000   0.072  16294.016
+uniform 1500   0.20  0.005 10    0.000 1.000   0.000   0.074 140305.082
+uniform 1500   0.35 -0.010 10    0.000 1.000   0.000   0.084 923449.386
+uniform 3000   0.00  0.037 16    0.625 0.375   0.000   0.048   5650.069
+uniform 3000   0.20  0.005 16    0.125 0.812   0.062   0.049  51101.417
+uniform 3000   0.30 -0.005 16    0.000 1.000   0.000   0.056 247274.527
+uniform 3000   0.35 -0.010 16    0.000 1.000   0.000   0.058 282871.338
+uniform 3000   0.40 -0.013 16    0.000 1.000   0.000   0.056 344643.100
+uniform 6000   0.00  0.037 10    0.700 0.300   0.000   0.034  10918.735
+uniform 6000   0.20  0.005 10    0.100 0.900   0.000   0.037 210234.281
+uniform 6000   0.35 -0.010 10    0.000 1.000   0.000   0.041 229596.669
+uniform 8000   0.00  0.037 10    0.800 0.200   0.000   0.030   6919.981
+uniform 8000   0.20  0.005 10    0.000 1.000   0.000   0.033  86215.417
+uniform 8000   0.35 -0.010 10    0.000 1.000   0.000   0.034 616961.658
+
+P42a abstention on truly-better: {'tail': np.float64(0.719), 'uniform': np.float64(0.594)} diff uniform-tail = -0.125 (>=0.20?) -> FAIL
+P42b tail false approvals on truly-worse: 0/48 CP95 upper 0.061 -> PASS ; uniform 0/48
+P42a' correct-approve truly-better: {'tail': np.float64(0.281), 'uniform': np.float64(0.375)}
+P42c cost (clicks per user-round):
+         ctr_slice  ctr_old  lost_vs_old_%  lost_vs_uniform_%
+design                                                       
+tail        0.1143    0.233        50.9218              8.298
+uniform     0.1247    0.233        46.4808              0.000
+
+P43 power curve (uniform): abstention / approve by NS
+NS 1500: truly-better n=20 abstain 1.00 approve 0.00 | truly-worse n=10 FA 0
+NS 3000: truly-better n=32 abstain 0.59 approve 0.38 | truly-worse n=16 FA 0
+NS 6000: truly-better n=20 abstain 0.60 approve 0.40 | truly-worse n=10 FA 0
+NS 8000: truly-better n=20 abstain 0.60 approve 0.40 | truly-worse n=10 FA 0
+P43a abstention at NS=8000 on truly-better: 0.600 (<=0.50?) -> FAIL
+P43b false approvals over ALL truly-worse runs (all designs/NS): 0/126 CP95 upper 0.023 -> PASS
+
+P44 margin: Brier 0.0817 vs constant 0.2500; reliability bins:
+       bin  n  pred   obs   gap
+[0.0, 0.1) 72 0.012 0.028 0.015
+[0.1, 0.3) 22 0.198 0.000 0.198
+[0.3, 0.5) 21 0.419 0.238 0.181
+[0.5, 0.7) 10 0.591 0.500 0.091
+[0.7, 0.9) 29 0.803 0.828 0.024
+[0.9, 1.0) 96 0.979 0.938 0.041
+mean |pred-obs| (bins n>=10, n-weighted) = 0.059 (<=0.15?) ; Brier better than constant: True -> PASS
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r10.py:2: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r10_e1.jsonl' mode='r' encoding='utf-8'>
+  d = pd.DataFrame([json.loads(l) for l in open("results/r10_e1.jsonl")]); Z = 2.8
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+        n  true10      oracle     med_pt    med_lo  inf_hi  in_band  pt_within2
+kappa                                                                          
+0.0    32   0.037    4269.985   3248.732  1087.435   0.281    0.938       0.531
+0.2    32   0.005  143073.787  68370.217  3626.487   0.969    0.969       0.312
+0.3    32  -0.005  104762.232  15731.860  2309.155   0.844    0.875       0.125
+0.4    32  -0.013   12768.814   4258.984  1266.143   0.375    0.812       0.281
+0.6    32  -0.021    2950.876   1397.008   639.760   0.000    0.656       0.469
+P52a band coverage 0.85 | P52b point within 2x 0.344
+P52c affordable-declared 32 oracle<=cap 0.84375
+/tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/analysis/an_r6.py:2: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/r6.jsonl' mode='r' encoding='utf-8'>
+  df=pd.DataFrame([json.loads(l) for l in open("results/r6.jsonl")]); SH=("lin","log","mem7")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+runs 64
+             n  APPROVE  NEED  REJECT  static_lo_le0  fc_lo_le0  sd_static  sd_fc_lin  sd_fc_log  sd_fc_mem7     spt     fpt
+kappa ns                                                                                                                    
+0.0   3000  16        7     9       0         0.3750       0.25     0.0179     0.0150     0.0103      0.0117  0.0345  0.0296
+      8000  16       13     3       0         0.1875       0.00     0.0131     0.0098     0.0072      0.0078  0.0320  0.0350
+0.2   3000  16        0    16       0         0.5000       1.00     0.0173     0.0120     0.0093      0.0102  0.0332  0.0017
+      8000  16        0    16       0         0.1250       1.00     0.0131     0.0084     0.0068      0.0075  0.0397  0.0046
+
+NEED runs 44
+H1 static lower end <=0 in 0.432 of NEED runs (>=0.70?) -> FAIL
+H2 any-shape forecast lower end <=0 in 0.818 of NEED runs (<=0.50?) -> FAIL
+both bind 0.250 | static only 0.182 | forecast only 0.568 | neither (shape disagreement?) 0.000
+kappa 0.0 NEED 12 static binds 0.75 forecast binds 0.33
+kappa 0.2 NEED 32 static binds 0.31 forecast binds 1.00
+static SD / forecast SD (lin) median ratio: 1.37
+........./tmp/claude-0/-home-claude/a98bdc94-b93f-5c24-aa1e-bd94d4413df0/scratchpad/proj/feedback-tipping-points-main/tests/test_core.py:209: ResourceWarning: unclosed file <_io.TextIOWrapper name='results/mvp_drift_dir_d1.0.jsonl' mode='r' encoding='utf-8'>
+  first = json.loads(open("results/mvp_drift_dir_d1.0.jsonl").readline()) if os.path.exists("results/mvp_drift_dir_d1.0.jsonl") else None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.......
+----------------------------------------------------------------------
+Ran 26 tests in 35.815s
+
+OK

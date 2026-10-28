@@ -187,3 +187,17 @@ Logs-only under hidden taste (saved R8-1, 224 audits): v4 REJECT on truly-better
 Cost: 6.1 s per audit on one CPU core (96 audits; 4,000 logged + 3,000 slice users, B = 30, five models).
 Smoke test and amendment disclosures: see Addendum 18.
 Reproduce: P3_TN=0.2 python -m experiments.r13_e1 9000 9004 results/r13_e1_a.jsonl (and 9004 9008 -> _b); python -m experiments.mvp_drift 0 200 results/mvp_drift_dir_d1.0.jsonl 1.0; P3_DRIFT_MODE=logit python -m experiments.mvp_drift 0 200 results/mvp_drift_logit_d1.0.jsonl 1.0; python -m analysis.an_r13.
+
+# ROUND 14 (2026-10-28, REAL world; Addendum 19 pre-registered before the 192 audits). Sealed generator W6 (sigm, hump, logsq; added after rule v7 froze) + tipping margin vs CI-only score. Output: results/r14_summary.txt (python -m analysis.an_r14).
+| # | Claim | Result |
+|---|---|---|
+| P58a | v7 false approvals on W6 truly-worse (144 runs): CP95 upper <= 0.05 | PASS: 0/144 (upper 0.021) |
+| P58b | near-boundary (48 runs) upper <= 0.10 | PASS: 0/48 (upper 0.061) |
+| P58c | false rejects on truly-better <= 10% | PASS: 0/48 |
+| P58d | correct-approve on truly-better >= 0.25 | PASS: 26/48 = 0.54 (22 abstain) |
+| P59a | Brier(Phi(margin)) < constant | PASS: 0.0035 vs 0.1875 (CI-only score 0.0049) |
+| P59b | AUC(margin) >= AUC(CI-only) - 0.02 | PASS, TIE: 1.000 vs 1.000 (both separate every worse run from every better run) |
+| P59c | saved R5 runs with verdict NEED: margin AUC >= 0.70 | PASS: 0.939 (n = 211, worse 125; only 5 distinct true lifts, correct-shape generator, so a favourable test) |
+Descriptive, same 192 W6 runs: single shapes false-approve lin 0, log 1, mem7 3 (CP95 upper 0.053, would miss the 5% target), tail2 0; free-form alone 0; v5, v6, v7 all 0; a one-step logs-only gate (SNIPS lower end > 0) approves 144/144 truly-worse. Guard passed in all 192 audits (unsupported share <= 5%).
+Reading (honest): W6 is smooth and nearly monotone, so the linear and tail2 models alone also reach 0/144; W6 shows that v7 does not fail on fresh shapes and that a one-step gate always fails, but it does NOT show that the guard or the veto earn anything (that evidence is W3-W5: delayed onset, linear 19/144 and four-shape 6/144 on W5). The margin ties the plain interval-based score; it is an interpretable unit (fatigue strength at which lift flips), not extra discrimination. W6 was authored by the rule's authors: sealed from the rule, not independent of the team.
+Reproduce: python -m experiments.r14_e1 10000 10016 results/r14_e1_a.jsonl 0 (and ... _b.jsonl 1); python -m analysis.an_r14.
