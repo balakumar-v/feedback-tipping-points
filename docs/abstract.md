@@ -29,21 +29,21 @@ Official MVP (IPW/DR and a case that differs from before/after): `python -m p3op
 
 ## 5. Stretch ambitions
 
-Dropped last-first: (1) KuaiRand [3] (randomly exposed videos): κ̂ on real repeats, shuffled-round placebo. (2) Marginal-sensitivity bounds [8, 9] (implemented, unit-tested) added to the verdict: how much hidden confounding an APPROVE survives.
+Dropped last-first: (1) KuaiRand [3] (randomly exposed videos): κ̂ on real repeats, shuffled-round placebo. (2) Marginal-sensitivity bounds [8, 9] (implemented) in the verdict: how much hidden confounding an APPROVE survives.
 
 ## 6. Novelty / differentiation
 
-Claim to test: a verdict built on measured fatigue approves fewer worse policies than one-step OPE, before/after or the best single model. Beyond IPW/DR on OBD [1, 2]: (a) a fatigue tipping point κ*, like E-value tipping analysis [7] but for dynamics; (b) targeted randomization for repeat-heavy histories; (c) abstention via guard and veto, added after fresh-generator failures. Prior work: [4, 5] handle non-stationarity without a launch verdict or slice; [6] assumes stationary reward; [10] debiases a static effect; [11, 12] model fatigue for planning; [13] covers reserve prices.
+Claim to test: a verdict built on measured fatigue approves fewer worse policies than one-step OPE, before/after or the best single model. Beyond IPW/DR on OBD [1, 2]: (a) a fatigue tipping point κ*, like E-value tipping analysis [7] but for dynamics; (b) targeted randomization for repeat-heavy histories; (c) abstention via guard and veto, added after fresh-generator failures. Prior: [4, 5] handle non-stationarity without a launch verdict or slice; [6] assumes stationary reward; [10] debiases static effects; [11, 12] model fatigue for planning; [13] covers reserve prices.
 
 ## 7. Evaluation plan
 
-**Truth:** exact 60,000-user Monte Carlo lift in our simulators; OBD A/B rates as a real static check. **Metrics:** false approval [worse policy approved] with a one-sided 95% Clopper–Pearson upper bound, also near the boundary (|true lift| ≤ 0.01); false reject; correct approve; abstention. **Baselines:** before/after; one-step OPE; best single-shape gate. **Ablations:** shapes, guard, veto, margin vs CI-only score. A sharper policy must trigger the guard.
+**Truth:** exact 60,000-user simulator Monte Carlo; OBD A/B rates as a real static check. **Metrics:** false approval [worse policy approved] with a one-sided 95% Clopper–Pearson upper bound, also near the boundary (|true lift| ≤ 0.01); false reject; correct approve; abstention. **Baselines:** before/after; one-step OPE; best single-shape gate. **Ablations:** shapes, guard, veto, margin vs CI-only score. A sharper policy must trigger the guard.
 
 **Preregistered criterion** (Addendum 19; sealed generator with sigmoid, recovering-hump and log-square fatigue, added after the rule froze): false-approval upper bound ≤ 5% (≤ 2/144), near-boundary ≤ 10%, false reject ≤ 10%, correct approve ≥ 25%, else we report failure. Result: 0/144, 0/48, 0/48, 26/48. But linear-only also scored 0/144, so this family does not show the guard or veto helps (earlier family: linear-only 19/144, final rule 0/144). One-step gate: 144/144 false approvals. The margin tied a CI-only score (AUC 1.00 each): a unit, not extra accuracy.
 
 ## 8. Feasibility and Risks
 
-**Team.** Balakumar V [simulation, bootstrap inference]: estimators. Kishore Kumar J [pandas pipelines]: engineering, loaders. K Asvitha [experiment design, plotting, demo UI]: evaluation, demo. [Add one prior project each.] Prototype, tests and run log exist; about 14 of 28 engineer-days remain.
+**Team.** Balakumar V [simulation, bootstrap inference]: estimators; built a hybrid-search RAG chatbot (a ranking system). Kishore Kumar J [pandas pipelines]: engineering; built an assistive app (OCR, obstacle detection, SOS) where false alerts are costly, like false approvals. K Asvitha [experiment design, plotting, demo UI]: evaluation, demo; built an agent reproducing bugs from vague reports, i.e. controlled replay. The prototype and run log are shared prior work; about 14 of 28 engineer-days remain.
 
 **Plan.** 10–16 Nov: KuaiRand exposure mapping first (riskiest), go/no-go 16 Nov; fallback OBD plus synthetic families still meets the MVP. 17–23 Nov: OBD loader. 24–30 Nov: sensitivity bounds, midway report (1 Dec). 2–6 Dec: ablations. 7–10 Dec: buffer. 11–14 Dec: rehearsal. Cut order: sensitivity, demo UI.
 
