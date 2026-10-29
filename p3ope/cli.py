@@ -34,7 +34,7 @@ def _fmt_report(r) -> str:
 def cmd_audit(a) -> int:
     from p3ope.audit import run_audit
     try:
-        rep = run_audit(a.kind, a.kappa, a.seed, with_truth=not a.no_truth, progress=None if a.json else _err)
+        rep = run_audit(a.kind, a.kappa, a.seed, with_truth=not a.no_truth, progress=None if a.json else _err, boot=a.boot)
     except ValueError as e:
         _err(f"error: {e}")
         return 2
@@ -121,6 +121,7 @@ def main(argv=None) -> int:
     q.add_argument("--kappa", type=float, default=0.2, help="fatigue strength (>= 0)")
     q.add_argument("--seed", type=int, default=0)
     q.add_argument("--no-truth", action="store_true", help="skip the ground-truth computation")
+    q.add_argument("--boot", type=int, default=30, help="bootstrap replicates B (default 30 reproduces the logged runs; 200+ gives steadier interval ends, about 40 s)")
     q.add_argument("--json", action="store_true", help="machine-readable output")
     q.set_defaults(fn=cmd_audit)
     o = sub.add_parser("ope", help="one-step IPW/SNIPS/DM/DR baseline vs ground truth (no fatigue)")

@@ -228,7 +228,7 @@ Environment: Python 3.12.3, numpy 2.4.4, scipy 1.17.1, scikit-learn 1.8.0, panda
 
 1. **Setup (before the audience arrives):**
    `python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt`
-2. **The problem (30 s):** open `figures/p3_diagram.png` or the dashboard top.
+2. **The problem (30 s):** open `figures/measured-feedback-architecture.png` or the dashboard top.
 3. **Why one-step evaluation fails (30 s):**
    `python -m p3ope ope --beta 0.5 --gamma 0.8`
    Point at the gap: estimators say about +0.158, truth is +0.100, because hidden taste biases the logs.
@@ -248,3 +248,34 @@ Environment: Python 3.12.3, numpy 2.4.4, scipy 1.17.1, scikit-learn 1.8.0, panda
 
 * No credentials, databases or external services are needed for anything delivered.
 * Optional future work (not done): real-data adapter (CSV schema), n\* size in the `audit` output, KuaiRand validation, Python 3.13 check, visual check of the dashboard.
+
+
+## v44: second judge-panel fixes
+
+| Judge point | Change | Where |
+|---|---|---|
+| J5/J2: abstract too long (about 1,070 words), dense | Cut to about 980 words (excluding references), terms defined once, free-form model and tail-weighted shape explained in plain words | `docs/abstract.md` |
+| J5: diagram not mentioned | Abstract cites Figure 1 (`figures/measured-feedback-architecture.png`, checked: matches the current rule) | `docs/abstract.md` |
+| J1: extrapolation beyond slice support | Stated that the coverage guard abstains instead of extrapolating | `docs/abstract.md` |
+| J1: IPW clipping | Stated: static layer is round-0 only, no trajectory weights; weights unclipped by design, ESS/n warns | `docs/abstract.md` |
+| J3: ablation of four-shape agreement | New pooled ablation; four-shape agreement is no better than the tail-weighted shape alone (13/216); free-form alone and final rule 1/216 | `analysis/an_ablation.py` |
+| J2: decision-loss metric | Value per audit with harm weight lambda = 1, 5, 10; sealed generator, lambda = 1: final rule +0.0037, oracle +0.0068, one-step gate -0.0023 | `analysis/an_ablation.py` |
+| J4: compute budget | Measured 8.5 s and 196 MB per audit, one core; 192-audit grid about 20 min | `docs/COMPUTE_BUDGET.md` |
+| J4: drop order | Demo UI, then sensitivity bounds, then KuaiRand placebo | abstract section 8, `docs/COMPUTE_BUDGET.md` |
+| Tests | Two new tests lock the ablation counts and the value ordering; full suite: 28 tests, OK | `tests/test_core.py` |
+
+Not done: KuaiRand dynamics check, head-to-head with non-stationary OPE, MSM-bound tipping comparison, held-out pilot for n* winner's curse, prior projects per member. The last needs the team's input; the abstract keeps its placeholder.
+
+## v46: third judge-panel fixes (panel fix 7, diagram alignment, deliberately not done)
+| Panel fix | Change | Where |
+|---|---|---|
+| 1 Cut to about 900 words | Abstract rewritten (about 900 words excluding references); detail moved to RESULTS | `docs/abstract.md` |
+| 2 Define n*, candidate policy; remove jargon; cite Shekhar and Howard | n* defined (80% power sizing), candidate policy defined, "Addendum 19", "anchor", "sealed generator" removed, [13] cited with a one-line difference | `docs/abstract.md` |
+| 3 Interval method, larger B | Method stated (two-sided percentile); `--boot` option; 48 audits re-run at B = 200: 3 verdicts changed, 0 false approvals, B = 30 intervals about 10% narrower | `p3ope/audit.py`, `experiments/r15_e2.py`, RESULTS R15 |
+| 4 Explain slice bias | Attenuation, not confounding; verified (bias vanishes when the true hidden term is supplied) | `experiments/r15_e3.py` |
+| 5 Diagnose OBD miss | Target mismatch (fixed published BTS mix vs realised mix), from the earlier post-hoc diagnostic | abstract section 4 |
+| 6 Reconcile timeline | "Exists today" listed; OBD loader and sensitivity bounds reworded as rebuild / wire in | abstract section 8 |
+| 8 Second generator, independent worlds | W7 generator, 40 random worlds, all 5 pre-registered criteria pass; world-level counting added (0/21 worlds, bound 13%) | `p3ope/r15_lib.py`, `experiments/r15_e1.py`, `analysis/an_r15.py`, Addendum 20 |
+| Tests | 4 new tests (Round15) | `tests/test_core.py` |
+
+Not done: fix 7 (diagram/text alignment, skipped by request), prior projects per member (the team must supply real ones; the abstract keeps a placeholder), time-aware OPE baseline, backup owner for estimators.

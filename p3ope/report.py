@@ -61,8 +61,8 @@ def build(out: str = "docs/dashboard.html") -> str:
     h5, h4 = S.headline(data["W5"], "v7"), S.headline(data["W4"], "v7")
     h5_6 = S.headline(data["W5"], "v6")
     img = ""
-    if os.path.exists("figures/p3_diagram.png"):
-        with open("figures/p3_diagram.png", "rb") as fh:
+    if os.path.exists("figures/measured-feedback-architecture.png"):
+        with open("figures/measured-feedback-architecture.png", "rb") as fh:
             b64 = base64.b64encode(fh.read()).decode()
         img = f'<h2>Pipeline</h2><img alt="Pipeline diagram: logs and randomised slice feed four fatigue models, then a verdict" src="data:image/png;base64,{b64}">'
     cards = "".join([

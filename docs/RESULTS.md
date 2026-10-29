@@ -201,3 +201,20 @@ Reproduce: P3_TN=0.2 python -m experiments.r13_e1 9000 9004 results/r13_e1_a.jso
 Descriptive, same 192 W6 runs: single shapes false-approve lin 0, log 1, mem7 3 (CP95 upper 0.053, would miss the 5% target), tail2 0; free-form alone 0; v5, v6, v7 all 0; a one-step logs-only gate (SNIPS lower end > 0) approves 144/144 truly-worse. Guard passed in all 192 audits (unsupported share <= 5%).
 Reading (honest): W6 is smooth and nearly monotone, so the linear and tail2 models alone also reach 0/144; W6 shows that v7 does not fail on fresh shapes and that a one-step gate always fails, but it does NOT show that the guard or the veto earn anything (that evidence is W3-W5: delayed onset, linear 19/144 and four-shape 6/144 on W5). The margin ties the plain interval-based score; it is an interpretable unit (fatigue strength at which lift flips), not extra discrimination. W6 was authored by the rule's authors: sealed from the rule, not independent of the team.
 Reproduce: python -m experiments.r14_e1 10000 10016 results/r14_e1_a.jsonl 0 (and ... _b.jsonl 1); python -m analysis.an_r14.
+
+# ROUND 15 (2026-10-29, Addendum 20 pre-registered before the W7 and larger-B runs). Third judge panel: 4 x ADVANCE at 4.00-4.20, 1 x REJECT at 3.90.
+| # | Claim | Result |
+|---|---|---|
+| P60a | W7 (40 random worlds x 3 datasets, 120 audits): v7 false approvals <= 5% of truly-worse audits | PASS: 0/36 (limit 1), CP95 upper 0.080 |
+| P60b | near-boundary truly-worse false approvals <= 10% | PASS: 0/30 |
+| P60c | false rejects on truly-better <= 10% | PASS: 0/75 |
+| P60d | correct approve on truly-better >= 25% | PASS: 31/75 = 0.41 (44 abstain) |
+| P60e | at most 1 truly-worse world with any false approval | PASS: 0/12 worlds, world-level CP95 upper 0.221 |
+| P61a | B = 200 changes the v7 verdict in <= 4/48 R14 audits | PASS: 3/48 (2 APPROVE->NEED, 1 NEED->APPROVE) |
+| P61b | no false approval at B = 200 | PASS: 0/36 |
+Descriptive, W7: single shapes false-approve lin 0, log 2, mem7 6, tail2 0 of 36; free-form alone 1; v5, v6, v7 all 0; one-step logs gate 36/36. Guard passed in all 120 audits, so guard and veto added nothing here. 31 of 36 truly-worse audits are near-boundary (|lift| <= 0.01) and the rule mostly abstains rather than rejects (3 REJECT), so this is a hard but mild-harm test. W7 was written by the rule's authors after the rule froze (sealed from the rule, not independent of the team).
+Independent worlds: R14's 192 audits are 12 worlds (shape x kappa cells) x 16 fresh datasets, 9 truly-worse. World-level, 0/9 (CP95 upper 0.283). W7 adds 12 truly-worse worlds; combined 0/21 worlds, CP95 upper 0.133 (audit-level 0/180, 0.017, overstates because audits in a world share structure).
+B = 200 vs 30 (same datasets): forecast-interval width ratio 1.08-1.12, mean |change| in the lower end 0.0018-0.0023, always shifted down (B = 30 intervals are about 10% too narrow, as expected from a 30-draw percentile). Verdict table: APPROVE 5->5, 2->NEED; NEED 21->21, 1->APPROVE; REJECT 19->19.
+Post hoc R15-3 (not pre-registered): slice kappa-hat bias at kappa 0.8, taste x0/x1/x2/x3: pooled +0.007/-0.055/-0.163/-0.298; with the true hidden term supplied +0.007/-0.009/+0.010/+0.006; logit-attenuation formula kappa/sqrt(1+0.346 gamma^2) gives 0/-0.076/-0.217/-0.338. Exposure is randomised, so the bias is attenuation (non-collapsibility), not confounding. Matches the logged R2 values (-0.049/-0.182/-0.321).
+Reproduce: python -m experiments.r15_e1 20000 20003 results/r15_e1.jsonl; python -m experiments.r15_e2 200 results/r15_e2.jsonl; python -m experiments.r15_e3 results/r15_e3.jsonl; python -m analysis.an_r15.
+Deviations: the B = 200 run was interrupted twice (sandbox restarts) and resumed from its saved records; no record was changed.

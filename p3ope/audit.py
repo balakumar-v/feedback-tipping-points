@@ -103,9 +103,23 @@ def validate(kind: str, kappa: float, seed: int) -> None:
 
 
 def run_audit(kind: str, kappa: float, seed: int = 0, with_truth: bool = True,
-              progress: Optional[Callable[[str], None]] = None) -> AuditReport:
-    """Run the final audit on one simulated scenario (about 10-15 s on one CPU core)."""
+              progress: Optional[Callable[[str], None]] = None, boot: int = 30) -> AuditReport:
+    """Run the final audit on one simulated scenario (about 10-15 s on one CPU core at the default boot=30).
+
+    ``boot`` is the number of user-level Poisson-bootstrap replicates B. The logged grids (R12-R14) use the frozen B = 30, so
+    only boot=30 reproduces them exactly; a larger value (R15-2 used 200, about 40 s per audit) gives steadier interval ends.
+    Intervals are two-sided percentile intervals (quantiles .025 and .975 of the replicates) at any B."""
     validate(kind, kappa, seed)
+    if not isinstance(boot, (int, np.integer)) or boot < 10:
+        raise ValueError(f"boot must be an integer >= 10 (got {boot!r})")
+    old_b, F.B = F.B, int(boot)
+    try:
+        return _run_audit(kind, kappa, seed, with_truth, progress)
+    finally:
+        F.B = old_b
+
+
+def _run_audit(kind, kappa, seed, with_truth, progress):
     say = progress or (lambda msg: None)
     t0 = time.time()
     beta, gamma = F.beta, F.gamma

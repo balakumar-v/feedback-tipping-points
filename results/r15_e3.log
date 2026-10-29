@@ -1,0 +1,5 @@
+taste x0 gamma 0.00 | pooled bias +0.007 (se 0.010) | true hidden term supplied +0.007 | attenuation formula +0.000
+taste x1 gamma 0.80 | pooled bias -0.055 (se 0.009) | true hidden term supplied -0.009 | attenuation formula -0.076
+taste x2 gamma 1.60 | pooled bias -0.163 (se 0.007) | true hidden term supplied +0.010 | attenuation formula -0.217
+taste x3 gamma 2.40 | pooled bias -0.298 (se 0.006) | true hidden term supplied +0.006 | attenuation formula -0.338
+elapsed 16s

@@ -6,7 +6,7 @@ Pre-rollout audit for ranking policies (Perceptron Hackathon 2026, Problem 3: *"
 
 > Everything here runs on our own simulators. No production or personal data is used, and no external service or credential is required.
 
-![Pipeline diagram](figures/p3_diagram.png)
+![Pipeline diagram](figures/measured-feedback-architecture.png)
 
 ## Quick start (about 2 minutes)
 
@@ -24,7 +24,7 @@ Run every command from the repository root. Verified on Python 3.12.3 (the origi
 | Command | What it does |
 |---|---|
 | `python -m p3ope demo` | Runs the final audit on two simulated policies and prints each verdict next to the simulator's ground truth. |
-| `python -m p3ope audit --kind cubic --kappa 0.2 --seed 1` | Audits one scenario (~12 s). Add `--json` for machine-readable output, `--no-truth` to skip the ground-truth step. |
+| `python -m p3ope audit --kind cubic --kappa 0.2 --seed 1` | Audits one scenario (~12 s). Add `--json` for machine-readable output, `--no-truth` to skip the ground-truth step, `--boot 200` for a steadier bootstrap (about 40 s; the default 30 reproduces the logged runs). |
 | `python -m p3ope ope --beta 0.5 --gamma 0.8` | The one-step IPW / SNIPS / DM / DR baseline next to the exact truth. With `--beta 0 --gamma 0` it is accurate; with hidden taste it is biased. |
 | `python -m p3ope kinds` | Lists the 22 fatigue shapes the simulator can generate. |
 | `python -m p3ope summary` | Prints false-approval / correct-approve counts (with 95% bounds) from `results/`. |
@@ -41,9 +41,10 @@ For `cubic`, kappa = 0.5 the one-step estimate says the new policy lifts clicks 
 ```
 .
 ├── docs/
-│   ├── abstract.md            Round-1 abstract (v40; earlier versions in docs/archive/)
-│   ├── PREREGISTRATION.md     Thresholds fixed before each run (addenda 1-10)
+│   ├── abstract.md            Round-1 abstract (v46, about 900 words; earlier versions in docs/archive/)
+│   ├── PREREGISTRATION.md     Thresholds fixed before each run (addenda 1-20)
 │   ├── RESULTS.md             Pass/fail outcome for every claim, per round
+│   ├── COMPUTE_BUDGET.md      NEW  measured time/memory per audit, parallelism, drop order
 │   ├── FILE_MAP.md            Old flat filenames -> current paths
 │   ├── dashboard.html         Generated results dashboard (python -m p3ope report)
 │   └── improvement/           Change report, test report, feature status, demo guide
@@ -55,6 +56,7 @@ For `cubic`, kappa = 0.5 the one-step estimate says the new policy lifts clicks 
 │   ├── r5_lib.py              Tail-targeted slice design, tipping-margin audit
 │   ├── r8_lib.py              Third held-out generator W3 (step/expo/late fatigue, taste-coupled kappa)
 │   ├── r12_lib.py             Free-form count-curve model (fifth shape, used by rule v7)
+│   ├── r15_lib.py             NEW  generator W7: multiplicative fatigue, category spillover, recovery, taste x fatigue; 40 random worlds
 │   ├── audit.py               NEW  one-call entry point for the final rule: run_audit(kind, kappa, seed)
 │   ├── summary.py             NEW  headline statistics computed from results/
 │   ├── report.py              NEW  builds docs/dashboard.html
@@ -138,6 +140,12 @@ P3_TN=0.2 python -m experiments.r13_e1 9000 9004 results/r13_e1_a.jsonl   # and:
 python -m experiments.mvp_drift 0 200 results/mvp_drift_dir_d1.0.jsonl 1.0          # covariate drift along DRIFT_DIR (not adverse for the new policy)
 P3_DRIFT_MODE=logit python -m experiments.mvp_drift 0 200 results/mvp_drift_logit_d1.0.jsonl 1.0   # uniform logit shift: before/after wrong sign 200/200
 python -m analysis.an_r13   # also prints the ablation and the logs-only false-reject check
+python -m analysis.an_ablation   # NEW: pooled shape ablation + decision-value metric (post hoc, from saved logs)
+# Round 15 (third panel): structurally different generator W7, larger bootstrap, slice-bias mechanism
+python -m experiments.r15_e1 20000 20003 results/r15_e1.jsonl   # 40 worlds x 3 datasets, about 13 min
+python -m experiments.r15_e2 200 results/r15_e2.jsonl            # 48 R14 datasets re-run at B = 200, about 50 min
+python -m experiments.r15_e3 results/r15_e3.jsonl                # hidden-taste bias of slice kappa-hat, about 15 s
+python -m analysis.an_r15
 ```
 
 Figures: `python figures/make_diagram.py` renders `figures/diagram.html` from the results.
@@ -153,6 +161,16 @@ Round 13: with a sharper new policy the coverage guard fires in 96/96 audits, so
 KuaiRand (stretch goal), sequential slice sizing, sensitivity bounds. Closed-loop slice sizing was dropped because it fails in the real-world setting.
 
 `python -m p3ope audit` runs the verdict rule (v7) only; it does not print the n\* slice size, which lives in `experiments/r3_e1.py` and `experiments/r10_e1.py`.
+
+## Panel-review fixes (v44)
+
+A dry-run judge panel on the abstract flagged: length, inconsistent counts, undefined terms, no compute budget or drop order, no ablation isolating four-shape agreement, no decision-loss metric. Done here: abstract cut and terms defined; `docs/COMPUTE_BUDGET.md`; `analysis/an_ablation.py` (four-shape agreement vs single shapes vs free-form alone, plus value per audit with false approvals weighted by lambda = 1, 5, 10). Finding: on the two generators seen during rule building, four-shape agreement gave 13/216 false approvals (tail-weighted shape alone also 13/216) while the free-form model alone and the final rule gave 1/216, so safety comes mainly from the free-form model and the guard. These are post hoc and descriptive; `docs/PREREGISTRATION.md` and `docs/RESULTS.md` were not edited.
+
+Not done (needs data or time we do not have here): KuaiRand dynamics check, head-to-head with Chandak-style non-stationary OPE, comparison with an MSM-bound tipping value, held-out-pilot check of the n* winner's-curse bias, and one prior project per team member (only the team can supply that).
+
+## Panel-review fixes (v46)
+
+Third dry-run panel (4 ADVANCE, 1 REJECT at 3.90). Done: abstract cut to about 900 words with n*, the candidate policy and the interval method defined; slice-bias mechanism explained and verified (`experiments/r15_e3.py`); OBD miss diagnosed; timeline reconciled; `--boot` option and a B = 200 re-check (`experiments/r15_e2.py`); structurally different generator W7 with 40 independent worlds (`p3ope/r15_lib.py`, `experiments/r15_e1.py`), all pre-registered criteria met (Addendum 20, RESULTS Round 15). Not done: diagram/text alignment (skipped by request) and one real prior project per team member.
 
 ## Troubleshooting
 

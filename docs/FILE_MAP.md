@@ -38,7 +38,7 @@ Where the records say `python3 r3_e3.py ...`, run `python -m experiments.r3_e3 .
 | `diagram_template.html` | `figures/diagram_template.html` |
 | `make_diagram.py` | `figures/make_diagram.py` |
 | `abstract_v37.md` | `docs/abstract.md` |
-| `perceptron_p3_diagram_v10.png` | `figures/p3_diagram.png` |
+| `perceptron_p3_diagram_v10.png` | `figures/measured-feedback-architecture.png` |
 | `perceptron_p3_diagram_v9.png` | `figures/archive/p3_diagram_v9.png` |
 | `reliability_tipping_margin.png` | `figures/reliability_tipping_margin.png` |
 | `out/` | `results/` |
@@ -53,3 +53,7 @@ Where the records say `python3 r3_e3.py ...`, run `python -m experiments.r3_e3 .
 | (new, R13 strict-panel round) | `experiments/r13_e1.py`, `experiments/mvp_drift.py`, `analysis/an_r13.py`, `results/r13_e1_{a,b}.jsonl`, `results/mvp_drift_*.jsonl`, `results/r13_summary.txt`, Addendum 18 in `docs/PREREGISTRATION.md`, R13 in `docs/RESULTS.md` |
 
 | (new, R14 sealed-generator round) | `experiments/r14_e1.py`, `analysis/an_r14.py`, `results/r14_e1_{a,b}.jsonl`, `results/r14_summary.txt`, W6 shapes in `p3ope/r8_lib.py`, Addendum 19 in `docs/PREREGISTRATION.md`, R14 in `docs/RESULTS.md` |
+
+| (new, v44 panel-2 fixes) | `analysis/an_ablation.py`, `docs/COMPUTE_BUDGET.md`, `docs/archive/abstract_v43_pre_panel2.md`, `TestAblation` in `tests/test_core.py` |
+
+| (new, v46 panel-3 fixes) | `p3ope/r15_lib.py`, `experiments/r15_e1.py`, `experiments/r15_e2.py`, `experiments/r15_e3.py`, `analysis/an_r15.py`, `results/r15_e1.jsonl`, `results/r15_e2.jsonl`, `results/r15_e3.jsonl`, Addendum 20 in `docs/PREREGISTRATION.md`, R15 in `docs/RESULTS.md`, `--boot` option in `p3ope audit`, `docs/archive/abstract_v45_pre_panel3.md`, `Round15` in `tests/test_core.py` |

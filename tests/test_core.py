@@ -212,5 +212,68 @@ class Round13(unittest.TestCase):
         self.assertAlmostEqual(M.one(first["seed"], first["truth"])["dr"], first["dr"], places=9)
 
 
+
+
+class TestAblation(unittest.TestCase):
+    """Post-hoc ablation and decision-value script (analysis/an_ablation.py)."""
+
+    def test_headline_counts(self):
+        from analysis import an_ablation as ab
+        from p3ope.summary import load_records
+        sealed = [r for f in ab.SEALED for r in load_records(f)]
+        t = ab.rule_table(sealed)
+        s = ab.score(sealed, t["four + guard + veto (final v7)"])
+        self.assertEqual((s["fa"], s["nw"], s["ca"], s["nb"]), (0, 144, 26, 48))
+        design = [r for f in ab.DESIGN for r in load_records(f)]
+        td = ab.rule_table(design)
+        self.assertEqual(ab.score(design, td["four-shape agreement"])["fa"], 13)
+        self.assertEqual(ab.score(design, td["free-form model alone"])["fa"], 1)
+
+    def test_decision_value_orders_rules(self):
+        from analysis import an_ablation as ab
+        from p3ope.summary import load_records
+        sealed = [r for f in ab.SEALED for r in load_records(f)]
+        t = ab.rule_table(sealed)
+        final = ab.decision_value(sealed, t["four + guard + veto (final v7)"], 1)
+        oracle = ab.decision_value(sealed, [("APPROVE" if r["true10"] > 0 else "REJECT") for r in sealed], 1)
+        onestep = ab.decision_value(sealed, ["APPROVE" if r["one_step_lo"] > 0 else "NEED" for r in sealed], 1)
+        self.assertGreater(final, onestep)
+        self.assertGreater(oracle, final)
+
+
+class Round15(unittest.TestCase):
+    """R15 (Addendum 20): W7 generator, larger-B option, analysis script."""
+
+    def test_w7_worlds_differ_and_are_reproducible(self):
+        from p3ope import r15_lib as W7
+        a, b = W7.world(3), W7.world(4)
+        self.assertNotEqual((a["phi"], a["rdec"]), (b["phi"], b["rdec"]))
+        self.assertEqual(W7.world(3)["phi"], a["phi"])
+        d1 = W7.sim_w7(300, np.random.default_rng(1), 3, 0.3, .5, .8, "tail", T=6)
+        d2 = W7.sim_w7(300, np.random.default_rng(1), 3, 0.3, .5, .8, "tail", T=6)
+        self.assertTrue(np.array_equal(d1["Y"], d2["Y"]))
+        self.assertEqual(set(d1), {"X0", "A", "Y", "G", "e", "n", "T"})
+
+    def test_w7_truth_falls_with_kappa(self):
+        from p3ope import r15_lib as W7
+        lifts = [W7.true_lift_w7(0, k, .5, .8, n=8000) for k in (0.02, 0.2, 0.8)]
+        self.assertGreater(lifts[0], lifts[1]); self.assertGreater(lifts[1], lifts[2]); self.assertLess(lifts[2], 0)
+
+    def test_boot_validation_and_default(self):
+        from p3ope.audit import run_audit
+        with self.assertRaises(ValueError): run_audit("cubic", 0.2, 1, with_truth=False, boot=3)
+        from experiments import r12_e1 as F
+        self.assertEqual(F.B, 30)
+
+    def test_analysis_world_count(self):
+        import io, contextlib
+        from analysis import an_r15
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf): an_r15.r14_worlds()
+        out = buf.getvalue()
+        self.assertIn("192 audits = 12 worlds (cells) x 16 fresh datasets", out)
+        self.assertIn("truly-worse worlds 9", out)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,4 @@
+{"taste": 0.0, "gamma": 0.0, "pooled_bias": 0.0069449323066156365, "pooled_se": 0.010115495529364863, "oracle_bias": 0.0069449323066156365, "attenuation_formula_bias": 0.0}
+{"taste": 1.0, "gamma": 0.8, "pooled_bias": -0.05548058984610382, "pooled_se": 0.00944396008488369, "oracle_bias": -0.00922906169599158, "attenuation_formula_bias": -0.07614110109227679}
+{"taste": 2.0, "gamma": 1.6, "pooled_bias": -0.1626640011031819, "pooled_se": 0.0068193013242044, "oracle_bias": 0.009947803521022758, "attenuation_formula_bias": -0.21743179638643972}
+{"taste": 3.0, "gamma": 2.4000000000000004, "pooled_bias": -0.29834662120983835, "pooled_se": 0.005774425475694592, "oracle_bias": 0.00637149601342013, "attenuation_formula_bias": -0.33757688951311016}
