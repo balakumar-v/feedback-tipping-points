@@ -1,0 +1,12 @@
+A_lin_k0.0 true lift +0.0744 kstar_true 0.558837890625 elapsed 64
+A_lin_k0.2 true lift +0.0343 kstar_true 0.558837890625 elapsed 125
+A_lin_k0.4 true lift +0.0100 kstar_true 0.558837890625 elapsed 187
+A_lin_k0.6 true lift -0.0017 kstar_true 0.558837890625 elapsed 246
+A_lin_k0.8 true lift -0.0073 kstar_true 0.558837890625 elapsed 307
+A_lin_k1.0 true lift -0.0103 kstar_true 0.558837890625 elapsed 369
+B_taste_lin_k0.0 true lift +0.0367 kstar_true 0.246826171875 elapsed 463
+B_taste_lin_k0.2 true lift +0.0053 kstar_true 0.246826171875 elapsed 555
+B_taste_lin_k0.4 true lift -0.0132 kstar_true 0.246826171875 elapsed 645
+B_taste_lin_k0.6 true lift -0.0211 kstar_true 0.246826171875 elapsed 739
+B_taste_lin_k0.8 true lift -0.0240 kstar_true 0.246826171875 elapsed 829
+B_taste_lin_k1.0 true lift -0.0250 kstar_true 0.246826171875 elapsed 921

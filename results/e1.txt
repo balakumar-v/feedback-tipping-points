@@ -1,0 +1,18 @@
+truth: V_old=0.1983 V_new=0.2169 true lift=+0.0185
+
+== drift=0.0: ESS/n 0.975; first-run case: naive +0.0252 | SNIPS +0.0189 [+0.0180,+0.0197] | DR +0.0183 [+0.0162,+0.0198]
+method | mean lift | sd | rmse vs true lift | P(est<=0) | CI95 coverage of true lift
+naive  | +0.0185 | 0.0039 | 0.0039 | 0.000 | -
+ipw    | +0.0185 | 0.0005 | 0.0005 | 0.000 | 0.95
+snips  | +0.0186 | 0.0004 | 0.0005 | 0.000 | 0.93
+dm     | +0.0186 | 0.0009 | 0.0009 | 0.000 | -
+dr     | +0.0187 | 0.0010 | 0.0010 | 0.000 | 0.93
+
+== drift=1.0: ESS/n 0.975; first-run case: naive +0.0009 | SNIPS +0.0177 [+0.0170,+0.0185] | DR +0.0174 [+0.0156,+0.0193]
+method | mean lift | sd | rmse vs true lift | P(est<=0) | CI95 coverage of true lift
+naive  | -0.0039 | 0.0038 | 0.0227 | 0.820 | -
+ipw    | +0.0185 | 0.0005 | 0.0005 | 0.000 | 0.94
+snips  | +0.0185 | 0.0004 | 0.0004 | 0.000 | 0.95
+dm     | +0.0184 | 0.0010 | 0.0010 | 0.000 | -
+dr     | +0.0185 | 0.0010 | 0.0010 | 0.000 | 0.94
+elapsed 74

@@ -1,0 +1,9 @@
+F_sat_k1.5 true lift -0.0056 kstar_true None elapsed 87
+F_sat_k2.5 true lift -0.0125 kstar_true None elapsed 169
+F_sat_k4.0 true lift -0.0133 kstar_true None elapsed 233
+F_decay_k1.5 true lift -0.0061 kstar_true None elapsed 312
+F_decay_k2.5 true lift -0.0187 kstar_true None elapsed 442
+F_decay_k4.0 true lift -0.0215 kstar_true None elapsed 561
+F_window_k1.5 true lift -0.0076 kstar_true None elapsed 671
+F_window_k2.5 true lift -0.0192 kstar_true None elapsed 733
+F_window_k4.0 true lift -0.0223 kstar_true None elapsed 793

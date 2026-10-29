@@ -1,0 +1,4 @@
+bounded hidden confounder: does the MSM interval at the true Lambda contain the truth, and is it informative?
+beta=0.3 gamma=0.5: true lift +0.0585 | nominal SNIPS bias +0.0200 | mean sup-Lambda 5.81 | bound@Lambda_true covers truth 1.00, mean width 0.801 | median breakdown L* 1.34
+beta=0.5 gamma=1.0: true lift +0.0235 | nominal SNIPS bias +0.0553 | mean sup-Lambda 17.85 | bound@Lambda_true covers truth 1.00, mean width 0.950 | median breakdown L* 1.30
+beta=0.8 gamma=1.5: true lift -0.0352 | nominal SNIPS bias +0.1042 | mean sup-Lambda 59.38 | bound@Lambda_true covers truth 1.00, mean width 0.987 | median breakdown L* 1.27

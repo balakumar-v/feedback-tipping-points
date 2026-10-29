@@ -1,0 +1,5 @@
+c = SD(kappa_slice)*sqrt(n) median over cells: 2.79
+kappa 0.0 elapsed 255
+kappa 0.2 elapsed 444
+kappa 0.4 elapsed 524
+kappa 0.6 elapsed 591

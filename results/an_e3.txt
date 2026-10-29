@@ -1,0 +1,73 @@
+                      n   true     cls     kh kh_bias kh_sd   cov kstar kstar_true     fc fc_sign_err   APP   REJ  NEED onestepAPP ks_bias ks_sd  sAPP  sREJ sNEED   fc_s   fc_h err_b err_s err_h
+C_sat_k0.2           20  0.055  better  0.146  -0.054 0.024 0.450 0.559        NaN  0.043       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_sat_k0.4           20  0.039  better  0.266  -0.134 0.029 0.000 0.546        NaN  0.023       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_sat_k0.6           20  0.025  better  0.428  -0.172 0.033 0.000 0.534        NaN  0.007       0.000 0.850 0.000 0.150      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_sat_k0.9           20  0.010  better  0.661  -0.239 0.031 0.000 0.562        NaN -0.004       1.000 0.000 0.800 0.200      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_decay_k0.2         20  0.058  better  0.093  -0.107 0.030 0.000 0.580        NaN  0.054       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_decay_k0.4         20  0.044  better  0.189  -0.211 0.026 0.000 0.576        NaN  0.036       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_decay_k0.6         20  0.031  better  0.282  -0.318 0.030 0.000 0.542        NaN  0.021       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_decay_k0.9         20  0.014  better  0.420  -0.480 0.029 0.000 0.554        NaN  0.008       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_window_k0.2        20  0.057  better  0.113  -0.087 0.024 0.050 0.554        NaN  0.049       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_window_k0.4        20  0.042  better  0.213  -0.187 0.031 0.000 0.549        NaN  0.031       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_window_k0.6        20  0.029  better  0.300  -0.300 0.022 0.000 0.548        NaN  0.019       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_window_k0.9        20  0.012  better  0.435  -0.465 0.020 0.000 0.534        NaN  0.006       0.000 0.900 0.000 0.100      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_convex_k0.2        20  0.011  better  0.277   0.077 0.027 0.100 0.572        NaN  0.024       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_convex_k0.4        20 -0.004   worse  0.530   0.130 0.025 0.000 0.554        NaN  0.001       0.750 0.300 0.000 0.700      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_convex_k0.6        20 -0.009   worse  0.765   0.165 0.035 0.000 0.553        NaN -0.007       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+C_convex_k0.9        20 -0.012   worse  1.076   0.176 0.040 0.000 0.534        NaN -0.012       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+D_drift_eta0.1_k0.0  20  0.117  better -0.162  -0.162 0.018 0.000 0.596        NaN  0.113       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+D_drift_eta0.2_k0.0  20  0.149  better -0.301  -0.301 0.022 0.000 0.628        NaN  0.143       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+D_drift_eta0.3_k0.0  20  0.171  better -0.429  -0.429 0.025 0.000 0.640        NaN  0.163       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+D_drift_eta0.2_k0.6  20  0.041  better  0.272  -0.328 0.015 0.000 0.605        NaN  0.028       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+E_retrain_k0.2       20  0.034  better  0.208   0.008 0.013 0.900 0.570        NaN  0.033       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+E_retrain_k0.6       20 -0.002    marg  0.604   0.004 0.021 0.900 0.562        NaN -0.002       0.000 0.000 0.850 0.150      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+E_retrain_k1.0       20 -0.010   worse  1.008   0.008 0.021 1.000 0.561        NaN -0.010       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+G_revdrift_eta-0.2   20  0.012  better  0.327   0.327 0.024 0.000 0.521        NaN  0.014       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+G_revdrift_eta-0.35  20 -0.005   worse  0.511   0.511 0.030 0.000 0.483        NaN -0.001       0.200 0.000 0.150 0.850      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+G_revdrift_eta-0.5   20 -0.012   worse  0.701   0.701 0.026 0.000 0.474        NaN -0.008       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+A_lin_k0.0           20  0.074  better  0.004   0.004 0.025 0.850 0.598      0.559  0.075       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+A_lin_k0.2           20  0.034  better  0.196  -0.004 0.032 0.850 0.568      0.559  0.034       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+A_lin_k0.4           20  0.010  better  0.400  -0.000 0.035 0.750 0.561      0.559  0.011       0.000 1.000 0.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+A_lin_k0.6           20 -0.002    marg  0.591  -0.009 0.023 1.000 0.554      0.559 -0.002       0.200 0.050 0.450 0.500      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+A_lin_k0.8           20 -0.007   worse  0.799  -0.001 0.028 1.000 0.559      0.559 -0.008       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+A_lin_k1.0           20 -0.010   worse  0.988  -0.012 0.034 0.950 0.526      0.559 -0.011       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+B_taste_lin_k0.0     20  0.037  better -0.160  -0.160 0.025 0.000 0.447      0.247  0.112       0.000 1.000 0.000 0.000      1.000   0.004 0.073 0.150 0.000 0.850  0.036  0.060 0.075 0.017 0.026
+B_taste_lin_k0.2     20  0.005  better  0.027  -0.173 0.011 0.000 0.465      0.247  0.069       0.000 1.000 0.000 0.000      1.000  -0.017 0.086 0.100 0.150 0.750  0.002  0.024 0.063 0.017 0.024
+B_taste_lin_k0.4     20 -0.013   worse  0.208  -0.192 0.020 0.000 0.504      0.247  0.033       1.000 1.000 0.000 0.000      1.000  -0.024 0.064 0.000 0.600 0.400 -0.018 -0.001 0.046 0.010 0.014
+B_taste_lin_k0.6     20 -0.021   worse  0.401  -0.199 0.022 0.000 0.514      0.247  0.008       1.000 1.000 0.000 0.000      1.000  -0.040 0.083 0.000 1.000 0.000 -0.032 -0.012 0.030 0.012 0.011
+B_taste_lin_k0.8     20 -0.024   worse  0.585  -0.215 0.028 0.000 0.534      0.247 -0.003       0.150 0.000 0.600 0.400      1.000  -0.066 0.096 0.000 1.000 0.000 -0.035 -0.016 0.021 0.012 0.009
+B_taste_lin_k1.0     20 -0.025   worse  0.777  -0.223 0.018 0.000 0.539      0.247 -0.010       0.000 0.000 1.000 0.000      1.000  -0.050 0.097 0.000 1.000 0.000 -0.037 -0.019 0.015 0.012 0.006
+F_sat_k1.5           20 -0.006   worse  1.161  -0.339 0.041 0.000 0.549        NaN -0.011       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+F_sat_k2.5           20 -0.012   worse  2.190  -0.310 0.068 0.000 0.540        NaN -0.014       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+F_sat_k4.0           20 -0.013   worse  3.787  -0.213 0.130 0.800 0.547        NaN -0.013       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+F_decay_k1.5         20 -0.006   worse  0.680  -0.820 0.030 0.000 0.536        NaN -0.005       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+F_decay_k2.5         20 -0.019   worse  1.098  -1.402 0.036 0.000 0.516        NaN -0.012       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+F_decay_k4.0         20 -0.021   worse  1.616  -2.384 0.057 0.000 0.513        NaN -0.013       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+F_window_k1.5        20 -0.008   worse  0.693  -0.807 0.029 0.000 0.515        NaN -0.007       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+F_window_k2.5        20 -0.019   worse  1.026  -1.474 0.035 0.000 0.498        NaN -0.011       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+F_window_k4.0        20 -0.022   worse  1.293  -2.707 0.039 0.000 0.479        NaN -0.013       0.000 0.000 1.000 0.000      1.000     NaN   NaN   NaN   NaN   NaN    NaN    NaN   NaN   NaN   NaN
+
+=== pooled claims ===
+P1 per-cell mean|kh-k|: {'A_lin_k0.0': 0.02, 'A_lin_k0.2': 0.025, 'A_lin_k0.4': 0.028, 'A_lin_k0.6': 0.02, 'A_lin_k0.8': 0.023, 'A_lin_k1.0': 0.028}
+P1 pooled CI coverage (A): 0.9 n 120
+P2 A truly-worse n=40: three-way false-approval 0.000 | one-step false-approval 1.000 | REJECT 1.000 NEED 0.000
+   A truly-better n=60: APPROVE 1.000 REJECT(false) 0.000 NEED 0.000; one-step APPROVE 1.000
+   far-from-tipping cells (|k-k*|>=0.2) n=80 NEED rate 0.000
+P3 |kstar-kstar_true|<=0.10 frac: 0.958 (n=120)
+P4 B logs-only: kh bias per cell {'B_taste_lin_k0.0': -0.16, 'B_taste_lin_k0.2': -0.173, 'B_taste_lin_k0.4': -0.192, 'B_taste_lin_k0.6': -0.199, 'B_taste_lin_k0.8': -0.215, 'B_taste_lin_k1.0': -0.223}
+   B truly-worse n=80: three-way false-approval 0.500 | one-step false-approval 1.000 | REJECT 0.400 NEED 0.100
+P5 B slice: ks bias per cell {'B_taste_lin_k0.0': 0.004, 'B_taste_lin_k0.2': -0.017, 'B_taste_lin_k0.4': -0.024, 'B_taste_lin_k0.6': -0.04, 'B_taste_lin_k0.8': -0.066, 'B_taste_lin_k1.0': -0.05}
+   B truly-worse: slice-audit false-approval 0.000 REJECT 0.900 NEED 0.100
+   B truly-better n=40: slice APPROVE 0.125 REJECT 0.075 NEED 0.800 | logs APPROVE 1.000
+P11 (B, kappa=.4 cell) whole-slice vs hybrid vs bulk |err| wins:
+   B_taste_lin_k0.0 slice<hyb 0.75 slice<bulk 1.00 | mean|err| bulk 0.0753 hyb 0.0265 slice 0.0170
+   B_taste_lin_k0.2 slice<hyb 0.65 slice<bulk 1.00 | mean|err| bulk 0.0633 hyb 0.0235 slice 0.0173
+   B_taste_lin_k0.4 slice<hyb 0.70 slice<bulk 1.00 | mean|err| bulk 0.0459 hyb 0.0136 slice 0.0096
+   B_taste_lin_k0.6 slice<hyb 0.40 slice<bulk 1.00 | mean|err| bulk 0.0296 hyb 0.0113 slice 0.0121
+   B_taste_lin_k0.8 slice<hyb 0.40 slice<bulk 0.95 | mean|err| bulk 0.0211 hyb 0.0089 slice 0.0115
+   B_taste_lin_k1.0 slice<hyb 0.20 slice<bulk 0.75 | mean|err| bulk 0.0155 hyb 0.0058 slice 0.0122
+P6/7 group C: n=320 truly-worse n=60: false-approval 0.100; one-step false-approval 1.000; truly-better n=260: false-reject 0.062; forecast sign error 0.109
+P6/7 group F: n=180 truly-worse n=180: false-approval 0.000; one-step false-approval 1.000; truly-better n=0: false-reject nan; forecast sign error 0.000
+P6/7 group D: n=80 truly-worse n=0: false-approval nan; one-step false-approval nan; truly-better n=80: false-reject 0.000; forecast sign error 0.000
+P6/7 group G: n=60 truly-worse n=40: false-approval 0.000; one-step false-approval 1.000; truly-better n=20: false-reject 0.000; forecast sign error 0.067
+P6/7 group E: n=60 truly-worse n=20: false-approval 0.000; one-step false-approval 1.000; truly-better n=20: false-reject 0.000; forecast sign error 0.000

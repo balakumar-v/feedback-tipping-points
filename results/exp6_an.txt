@@ -1,0 +1,36 @@
+n tasks 1600
+           miss_dr  miss_sn    big  err_dr    ess   khat  lam_star
+fam                                                               
+A_clean      0.068    0.078  0.100   0.011  0.579  0.091     1.143
+B_misspec    0.138    0.082  0.318   0.023  0.282  0.535     1.442
+C_conf       0.665    0.670  0.618   0.059  0.568  0.077     1.183
+D_loop       0.105    0.165  0.262   0.064  0.253  0.710     1.070
+
+=== target: miss_dr (leave-one-family-out AUC; 'in-family' = 5-fold within held-out family is not used) ===
+        features  A_clean  B_misspec  C_conf  D_loop
+        ESS only    0.366      0.364   0.479   0.370
+      k-hat only    0.421      0.373   0.660   0.650
+|mean(w)-1| only    0.358      0.335   0.514   0.725
+ all diagnostics    0.430      0.522   0.486   0.512
+
+=== target: big (leave-one-family-out AUC; 'in-family' = 5-fold within held-out family is not used) ===
+        features  A_clean  B_misspec  C_conf  D_loop
+        ESS only    0.866      0.784   0.615   0.809
+      k-hat only    0.749      0.752   0.687   0.796
+|mean(w)-1| only    0.830      0.775   0.644   0.727
+ all diagnostics    0.748      0.770   0.597   0.828
+
+=== selective reporting: CI miscoverage among tasks the gate keeps (nominal 5%) ===
+ungated: miscoverage 0.244 {'A_clean': 0.07, 'B_misspec': 0.14, 'C_conf': 0.66, 'D_loop': 0.1}
+ESS only           keep 50%: miscoverage 0.409  by family {'A_clean': 0.14, 'B_misspec': 0.16, 'C_conf': 0.66, 'D_loop': 0.14}
+ESS only           keep 80%: miscoverage 0.292  by family {'A_clean': 0.14, 'B_misspec': 0.14, 'C_conf': 0.66, 'D_loop': 0.1}
+k-hat only         keep 50%: miscoverage 0.405  by family {'A_clean': 0.12, 'B_misspec': 0.16, 'C_conf': 0.66}
+k-hat only         keep 80%: miscoverage 0.289  by family {'A_clean': 0.1, 'B_misspec': 0.14, 'C_conf': 0.66, 'D_loop': 0.11}
+|mean(w)-1| only   keep 50%: miscoverage 0.401  by family {'B_misspec': 0.14, 'C_conf': 0.66}
+|mean(w)-1| only   keep 80%: miscoverage 0.286  by family {'A_clean': 0.13, 'B_misspec': 0.14, 'C_conf': 0.66, 'D_loop': 0.08}
+all diagnostics    keep 50%: miscoverage 0.386  by family {'A_clean': 0.08, 'B_misspec': 0.13, 'C_conf': 0.66, 'D_loop': 0.14}
+all diagnostics    keep 80%: miscoverage 0.282  by family {'A_clean': 0.07, 'B_misspec': 0.14, 'C_conf': 0.66, 'D_loop': 0.1}
+rule ESS/n>0.3         keeps 56%: miscoverage 0.257  by family {'A_clean': 0.05, 'B_misspec': 0.09, 'C_conf': 0.65, 'D_loop': 0.06}
+rule k-hat<0.5         keeps 55%: miscoverage 0.244  by family {'A_clean': 0.05, 'B_misspec': 0.09, 'C_conf': 0.61, 'D_loop': 0.05}
+rule k-hat<0.7         keeps 70%: miscoverage 0.238  by family {'A_clean': 0.05, 'B_misspec': 0.11, 'C_conf': 0.64, 'D_loop': 0.05}
+rule |mean(w)-1|<0.1   keeps 81%: miscoverage 0.237  by family {'A_clean': 0.05, 'B_misspec': 0.11, 'C_conf': 0.65, 'D_loop': 0.07}

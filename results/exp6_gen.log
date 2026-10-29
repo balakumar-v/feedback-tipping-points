@@ -1,0 +1,105 @@
+0 1 s
+50 14 s
+100 18 s
+150 22 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+200 27 s
+250 31 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+300 35 s
+350 40 s
+400 45 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+450 49 s
+500 53 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+550 57 s
+600 61 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+650 66 s
+700 71 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+750 75 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+800 79 s
+850 83 s
+900 87 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+950 91 s
+1000 96 s
+1050 100 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+1100 104 s
+1150 108 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+1200 112 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+1250 117 s
+1300 121 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+1350 125 s
+1400 129 s
+1450 134 s
+/home/claude/work/ope_pilot.py:79: RuntimeWarning: divide by zero encountered in divide
+  odds = lambda p: p / (1 - p)
+/home/claude/work/ope_pilot.py:80: RuntimeWarning: invalid value encountered in divide
+  r = odds(e_full) / odds(e_nom)
+1500 138 s
+1550 142 s
+done 146

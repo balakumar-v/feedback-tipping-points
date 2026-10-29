@@ -186,7 +186,7 @@ Third dry-run panel (4 ADVANCE, 1 REJECT at 3.90). Done: abstract cut to about 9
 ## Notes
 
 - `docs/RESULTS.md` and `docs/PREREGISTRATION.md` are the historical record and still use the original flat script names; see [`docs/FILE_MAP.md`](docs/FILE_MAP.md). They were not edited.
-- `e5_full.py` / `e5_diag.py` (the full Open Bandit Dataset runs in the P17-P19 section) were not in the supplied archive, so they are not included here.
+- Round-1 scripts (E1-E5, P1-P19) are now included under `experiments/` and `analysis/` with their logs in `results/`; see `docs/FILE_MAP.md`. The OBD runs (`e5_obd.py`, `e5_full.py`, `e5_diag.py`) additionally need the OBP source (`ZR_OBP=/path/to/zr-obp`, v0.5.5 with torch/tqdm stubbed) and the full 'men' CSVs (`OBD_FULL=/path`, or the path argument for `e5_full.py`/`e5_obd.py`); their logged outputs are `results/e5_*.json|log`.
 - The abstract's repository URL is filled in (this repository).
 - Rounds 1-6 slice and R2-3 logs-only results used a three-shape rule (lin, log, mem7); the abstract's final rule has four shapes (adds tail2). Round 7 re-tests the headline claims under the final rule; see docs/RESULTS.md.
 - Importing an experiment module sets a few module-level constants (for example `r2_lib.NF = 3000`) to match the logged runs. Do not mix experiment modules with different settings in one Python process.

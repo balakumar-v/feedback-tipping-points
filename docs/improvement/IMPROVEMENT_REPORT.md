@@ -59,7 +59,7 @@ The master prompt describes a web app (landing page, responsive layout, forms, d
 | "One command runs IPW, SNIPS, DR" (abstract, MVP item 1) | **Missing**: functions existed, no command |
 | "Demo UI" (abstract, team plan) | **Missing** |
 | n\* slice size in the verdict | Exists in `r3_e1` / `r10_e1`, not part of the v7 entry point |
-| Open Bandit Dataset runs (`e5_full.py`, `e5_diag.py`) | Not in the archive (documented by the authors) |
+| Open Bandit Dataset runs (`e5_full.py`, `e5_diag.py`) | Added later from the round-1 work archive; need OBP source + full OBD files (not bundled) |
 | KuaiRand real-data stretch goal | Not done (documented by the authors) |
 | Tests | **None** |
 | `python -m experiments.r2_e1` / `r2_e4` | **Broken** (see below) |

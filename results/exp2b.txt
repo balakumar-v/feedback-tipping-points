@@ -1,0 +1,4 @@
+MISSPECIFIED reward model (nonlinear truth, logistic-linear fit)
+tau_old 1.00 | V=0.3945 | ipw: bias +0.0002 rmse 0.0130 cov 0.94 | snips: bias -0.0007 rmse 0.0102 cov 0.96 | dm: bias -0.0877 rmse 0.0881 | dr: bias -0.0006 rmse 0.0100 cov 0.93 | 
+tau_old 0.25 | V=0.3938 | ipw: bias +0.0002 rmse 0.0366 cov 0.79 | snips: bias -0.0019 rmse 0.0272 cov 0.85 | dm: bias -0.0605 rmse 0.0610 | dr: bias -0.0014 rmse 0.0325 cov 0.81 | 
+tau_old 0.10 | V=0.3942 | ipw: bias -0.0164 rmse 0.1137 cov 0.49 | snips: bias +0.0214 rmse 0.0767 cov 0.81 | dm: bias -0.0470 rmse 0.0476 | dr: bias +0.0033 rmse 0.0975 cov 0.84 | 

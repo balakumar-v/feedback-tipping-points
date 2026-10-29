@@ -1,0 +1,19 @@
+PART 1: do omitted-covariate benchmarked Lambdas give sensitivity intervals that contain the truth? (n=10000, 30 logs per row)
+hidden strength m x (beta=0.4, gamma=0.5) ~ 'as strong as a typical observed covariate' at m=1
+m=0.0: nominal SNIPS bias -0.0022 (|bias| 0.0041) | q=0.5: Lambda_b 1.26 cover 1.00 width 0.134 | q=0.9: Lambda_b 2.36 cover 1.00 width 0.472 | q=0.99: Lambda_b 6.15 cover 1.00 width 0.802 |
+m=0.5: nominal SNIPS bias +0.0068 (|bias| 0.0073) | q=0.5: Lambda_b 1.25 cover 1.00 width 0.136 | q=0.9: Lambda_b 2.33 cover 1.00 width 0.475 | q=0.99: Lambda_b 5.96 cover 1.00 width 0.802 |
+m=1.0: nominal SNIPS bias +0.0248 (|bias| 0.0248) | q=0.5: Lambda_b 1.26 cover 1.00 width 0.145 | q=0.9: Lambda_b 2.33 cover 1.00 width 0.495 | q=0.99: Lambda_b 5.97 cover 1.00 width 0.816 |
+m=2.0: nominal SNIPS bias +0.0757 (|bias| 0.0757) | q=0.5: Lambda_b 1.25 cover 0.50 width 0.160 | q=0.9: Lambda_b 2.26 cover 1.00 width 0.523 | q=0.99: Lambda_b 5.41 cover 1.00 width 0.827 |
+
+PART 2: closed-loop logs (logger retrained on its own data, sharp). Simple fixes vs plain DR. 200 tasks, n=5000.
+mean ESS/n 0.274; truth 0.2736
+snips                        bias +0.0086 rmse 0.0543
+dm                           bias +0.0035 rmse 0.0082
+dr                           bias +0.0099 rmse 0.1470
+dr_clip10                    bias +0.0024 rmse 0.0092
+dr_clip50                    bias +0.0019 rmse 0.0124
+dr_os1                       bias +0.0036 rmse 0.0082
+dr_os10                      bias +0.0034 rmse 0.0083
+dr_os100                     bias +0.0029 rmse 0.0085
+switch(ESS<.1->DM else DR)   bias +0.0027 rmse 0.0093
+elapsed 50.2

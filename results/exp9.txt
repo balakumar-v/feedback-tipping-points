@@ -1,0 +1,6 @@
+Detection of hidden confounding: z-test of bulk DR vs slice IPW (two-sided, 5% level). m=0 row is the false-alarm rate.
+m=0.0: detection rate by slice size: n_slice=300: 0.08, n_slice=1000: 0.14, n_slice=3000: 0.07
+m=0.5: detection rate by slice size: n_slice=300: 0.13, n_slice=1000: 0.09, n_slice=3000: 0.08
+m=1.0: detection rate by slice size: n_slice=300: 0.12, n_slice=1000: 0.15, n_slice=3000: 0.16
+m=2.0: detection rate by slice size: n_slice=300: 0.21, n_slice=1000: 0.53, n_slice=3000: 0.92
+elapsed 182.9
