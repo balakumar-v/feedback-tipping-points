@@ -1,73 +1,119 @@
-# Measured Feedback Tipping Points: A Pre-Rollout Audit for Ranking Policies
+# Measured Feedback Tipping Points: Did the Policy Work, or Just Look Like It?
 
-*Perceptron Hackathon 2026, Problem 3. Balakumar V, Kishore Kumar J, K Asvitha. Code: github.com/balakumar-v/feedback-tipping-points*
+Repository: [github.com/balakumar-v/feedback-tipping-points](https://github.com/balakumar-v/feedback-tipping-points)
 
-## 1. Problem & Theme chosen
+Balakumar V (leader) · Kishore Kumar J · K Asvitha
 
-Theme 2 (Cause and Effect), Problem 3. An audit that judges a new ranking policy from old logs and returns **APPROVE**, **REJECT** or **NEED RANDOMIZED DATA** [abstain, with data size n*]. The candidate is sharper than the old policy (softmax, temperature 0.5).
+> **Bottom line.** Old logs can't see repeat fatigue, so a new ranking policy can look good in logs and still lose clicks after launch. Our audit measures fatigue with a small randomized slice and returns **APPROVE**, **REJECT** or **NEED RANDOMIZED DATA**. In a preliminary simulator test, logs showed +0.084 where the true ten-round lift was −0.019, and the audit approved none of 144 worse cases while the one-step gate approved all 144.
 
-## 2. Understanding of the challenge
+## 1. Problem & Theme Chosen
 
-The crux is identifiability: a new policy's value is recoverable from old logs only with overlap [the logger showed what the new policy shows], known propensities [logged show-probabilities] and no hidden confounder. Two traps fake a gain:
+**Theme 2, Problem 3.** A recommender team must decide whether to launch a new ranking policy from historical logs. Logs may show a short-term lift (change in click rate) that repeated exposure erodes later, so a wrong launch loses clicks once live. One randomized slice can screen many candidates; an A/B test answers one.
 
-- **Hidden taste** [unlogged preference driving display and click]: IPW, SNIPS, DM and DR [inverse-propensity, self-normalised, direct-method, doubly robust estimators] report +0.154 to +0.158 lift in our simulator; truth is +0.100.
-- **Fatigue** [click odds fall with repeats]: one-step estimates score round 0 only. For cubic fatigue they say +0.084; true 10-round lift is −0.019.
+## 2. Understanding of the Challenge
 
-Users are independent; weights unclipped (capping worsened an Open Bandit Dataset [OBD] error).
+One-step **OPE** needs **overlap**, **known propensities** and **no hidden confounder**. It misses fatigue (click odds fall with each repeat) from repeats a new policy creates, and **hidden taste** can inflate logs-only estimates.
 
-## 3. Proposed approach
+## 3. Proposed Approach
 
-Intervals: two-sided 95% percentile of a user-level Poisson bootstrap, B = 30.
+The audit has five steps; **bold** terms are in the glossary.
 
-1. **Static layer.** IPW, SNIPS, DM, cross-fitted DR on round-0 logs.
-2. **Targeted slice.** 3,000 users × 10 rounds, known propensities: round 0 uniform, later rounds repeat the previous item with probability 0.5, else uniform. Uniform serving costs 24% of OBD clicks, so slices cap at 8,000 users.
-3. **Fatigue models.** logit(click) = base(context, item) + f(c) + round term, c = the user's earlier showings of the item. f: c; log(1+c); 0.7-discounted recency; c + max(c−2, 0). A fifth, free-form model fits one coefficient per count (1…6, ≥7). Both policies roll out 10 rounds, anchored to the old policy's logged reward.
-4. **Tipping point.** Bisection finds κ*, the linear fatigue strength where forecast lift is 0; the margin Φ((κ̂ − κ*)/SE), SE = bootstrap SD of κ̂, is reported only.
-5. **Verdict.** **APPROVE:** static and 10-round lower ends > 0 under all four shapes, a coverage guard (≤ 5% of forecast showings beyond repeat counts the slice shows 100 times) and a free-form veto (its lower ends > 0 too). **REJECT:** under all four shapes, a static or 10-round upper end ≤ 0. **NEED RANDOMIZED DATA:** otherwise, with n* = (2.8·SD/|lift|)², the slice size for 80% power to exclude zero lift. Logs-only audits never approve: hidden taste is untestable.
+1. **Data.** The simulator gives counterfactual ground truth; the Open Bandit Dataset (OBD, public store click logs) gives logged clicks and display propensities.
+2. **One-step estimate.** **IPW, SNIPS, DM and cross-fitted DR** estimate one-step lift; **effective sample size** is reported.
+3. **Fatigue slice.** A 3,000-user, ten-round randomized slice repeats the previous item half the time; user-level bootstraps quantify uncertainty.
+4. **Fatigue shapes.** Four **shapes** and a free-form curve (one free value per repeat count) forecast each policy's ten-round lift and estimate κ̂ (**fatigue strength**). The tipping point κ\* is the fatigue strength at which forecast lift reaches zero; it is reported, never a gate.
+5. **Verdict.** The verdict engine applies one rule:
+   - **APPROVE** needs *all four* shapes to show a forecast lift with lower 95% bound above zero, the free-form curve to agree, and the **coverage guard** to pass.
+   - **REJECT** needs all four to agree on a loss.
+   - Otherwise: **NEED RANDOMIZED DATA**, with n\* reported as a hint only.
 
-## 4. Minimum Viable
+Logs-only audits never approve because hidden taste is untestable.
 
-`python -m p3ope ope` scores all four against exact simulator truth. After a uniform 1.0 click-logit drop post-launch, before/after has the wrong sign in 200/200 runs; SNIPS and DR intervals cover truth in 187/200. OBD control: DR is 8.8% below the A/B click rate and its interval misses. Post hoc, against Bernoulli Thompson Sampling's realised mix the error is −6.7%, interval covering.
+**Planned:** APPROVE must also hold under the fitted **logit attenuation**, κ̂ × √(1 + 0.346 γ²), at γ = 1.6; effective sample size below 10% of users forces NEED.
 
-## 5. Stretch ambitions
+## 4. Minimum Viable Scope
 
-Dropped last-first: (1) KuaiRand [3]: κ̂ on real repeats with a shuffled-round placebo. (2) Sensitivity bounds [8, 9] (written, not wired in).
+The MVP is the verdict engine (`python -m p3ope audit`): logs and a randomized slice in, a verdict with κ̂, κ\* and n\* out.
 
-## 6. Novelty / differentiation
+**Working now:**
 
-Claim to test: a measured-fatigue verdict approves fewer worse policies than one-step OPE, before/after or the best single shape. Beyond IPW/DR [1, 2] and experimental grounding [10]: (a) a fatigue tipping point κ*, like E-value tipping [7] but for dynamics; (b) randomization targeted at repeat-heavy histories; (c) abstention via guard, veto and shape disagreement. Prior [4, 5, 11, 12] covers non-stationarity or fatigue, not launch verdicts.
+- The engine, its tests and the live demo on our simulator;
+- On full OBD, DR is about 9% below the A/B click rate and its interval misses it;
+- Drift check: before/after gets the sign wrong in all 200 runs after a uniform click-odds drop.
 
-## 7. Evaluation plan
+**Midway report target, 1 Dec:** attenuation gate integrated, 200-world grid scored and OBD loader running; KuaiRand is optional.
 
-**Truth:** 60,000-user simulator Monte Carlo; OBD A/B rates. **Metrics:** false approval [worse policy approved] with a one-sided 95% Clopper–Pearson bound, also near the boundary (|true lift| ≤ 0.01); false reject; correct approve. **Baselines:** before/after; one-step OPE [round-0 estimators as an approve gate]; best single shape.
+## 5. Stretch Ambitions
 
-**Preregistered criterion** (rule frozen, generators written after; counted per audit): false-approval bound ≤ 5%, near-boundary ≤ 10%, false reject ≤ 10%, correct approve ≥ 25%, else we report failure. Results follow this order.
+KuaiRand (public short-video logs with random insertions): estimate κ̂ on real repeats and run the Section 7 placebo on its real rounds.
 
-- *Test 1, smooth shapes:* 0/144, 0/48, 0/48, 26/48; one-step gate 144/144 false approvals. Linear-only also scored 0/144, so no evidence here that guard or veto help.
-- *Test 2, structurally different generator* (multiplicative, cross-category, recovering, taste-scaled fatigue). 40 worlds × 3 datasets: 0/36, 0/30, 0/75, 31/75; one-step gate 36/36. By world 0/21 truly-worse worlds had a false approval (bound 13%, above the 5% target).
-- *Ablation (post hoc).* Test 2: single shapes falsely approve 0–6/36, four-shape agreement 0/36. Delayed-onset shapes: agreement alone 13/216, final rule 1/216.
-- *Bootstrap size.* B = 200 on 48 Test 1 datasets: intervals 11% wider, 3 verdicts changed, 0 false approvals.
+## 6. Novelty / Differentiation
 
-## 8. Feasibility and Risks
+The new part is the audit itself. It measures repeat fatigue with a small randomized slice instead of assuming it, forecasts lift under four fatigue shapes plus a free-form curve, and answers NEED RANDOMIZED DATA when evidence is thin. Approval needs all four shapes to agree, and the coverage guard blocks it if over 5% of showings exceed the slice's repeat range. We build on non-stationary OPE (Chandak et al.) and fatigue models (Levine et al.).
 
-**Team.** Balakumar V [simulation, bootstrap inference]: estimators; built a hybrid-search RAG chatbot. Kishore Kumar J [pandas pipelines]: engineering, loaders; built an assistive app where false alerts are costly. K Asvitha [experiment design, plotting]: evaluation, demo UI; built a bug-reproduction agent. About 14 of 28 engineer-days remain.
+**Claim to test:** At matched correct-approval rates, the audit falsely approves fewer worse policies than the listed baselines and delivers greater net value.
 
-**Plan.** *Exists:* rule, simulators, tests, OBD results (scripts lost). 10–16 Nov: KuaiRand mapping (riskiest; go/no-go 16 Nov; fallback OBD plus synthetic meets the MVP). 17–23 Nov: OBD loader. 24–30 Nov: sensitivity bounds; midway report 1 Dec. 2–6 Dec: ablations. 7–14 Dec: buffer, rehearsal. **Drop order:** demo UI (fallback: the self-contained dashboard with pre-computed audits), sensitivity bounds, KuaiRand placebo.
+**Costs:** Uniform serving loses about a quarter of OBD clicks; if n\* exceeds our 8,000-user cap, run a real A/B.
 
-**Risks.** (1) Near the tipping point it abstains (16/16 at +0.005). (2) Hidden taste biases κ̂ low (−0.06, −0.16, −0.30 when taste strength is ×1, ×2, ×3), understating fatigue and so leaning toward false approval. Exposure is randomised: attenuation, not confounding. Safety rests on shape agreement, guard and veto (0/36 on Test 2); until sensitivity bounds are wired in, an APPROVE assumes taste is no stronger than tested. (3) Truth is simulated; KuaiRand may lack repeats.
+## 7. Evaluation Plan
 
-## References
+**Metrics:** false approval (a worse policy approved) with a one-sided 95% bound; false reject; correct approve; net value per audit at λ = 1, 5, 10 (an approval earns the true lift, or loses λ times its harm if worse), shown beside an oracle that approves exactly the better policies.
 
-1. Dudík, Langford, Li. Doubly Robust Policy Evaluation and Learning. ICML 2011.
-2. Saito et al. Open Bandit Dataset and Pipeline. NeurIPS D&B 2021.
-3. Gao et al. KuaiRand. CIKM 2022.
-4. Chandak et al. Off-Policy Evaluation for Action-Dependent Non-Stationary Environments. NeurIPS 2022.
-5. Jagerman, Markov, de Rijke. When People Change their Mind. WSDM 2019.
-6. Thomas, Theocharous, Ghavamzadeh. High Confidence Off-Policy Evaluation. AAAI 2015.
-7. VanderWeele, Ding. Sensitivity Analysis in Observational Research: the E-value. Ann. Intern. Med. 2017.
-8. Tan. A Distributional Approach for Causal Inference Using Propensity Scores. JASA 2006.
-9. Kallus, Zhou. Confounding-Robust Policy Improvement. NeurIPS 2018.
-10. Kallus, Puli, Shalit. Removing Hidden Confounding by Experimental Grounding. NeurIPS 2018.
-11. Levine, Crammer, Mannor. Rotting Bandits. NeurIPS 2017.
-12. Li et al. Modeling User Fatigue for Sequential Recommendation. SIGIR 2024. arXiv:2405.11764.
-13. Shekhar, Howard. Decision Support for Marketplace Policies under Incomplete Evidence. arXiv:2605.12840, 2026.
+**Baselines:** Before/after; one-step OPE gate; best single shape; equal-exposure A/B; non-stationary OPE forecast (Chandak et al.).
+
+**Real-data placebo:** Randomly assign repeat counts to OBD clicks. Assigned repeats have no causal effect by construction, so κ̂'s interval should cover zero in at least 95% of reshuffles.
+
+**Pre-registered targets** (rule frozen before we wrote the test generators; we report failure if missed):
+
+| Measure | Target |
+| --- | --- |
+| False-approval bound | ≤ 5% |
+| False approval, near-boundary (true lift within 0.01 of zero) | ≤ 10% |
+| False reject | ≤ 10% |
+| Correct approve | ≥ 25% |
+| Placebo coverage | ≥ 95% |
+
+**Results so far (simulator, preliminary):** On a held-out generator the audit approved none of 144 worse cases (one-step gate: all 144) and correctly approved 26 of 48 better cases. Single shapes falsely approved up to 6 of 36; four-shape agreement approved none. A second, structurally different generator (40 worlds) produced no false approvals.
+
+**Where we miss our targets:** Cases share only 9 **worlds**, so the by-world false-approval bound is 28% (13% across both generators) against 5%, and the n\* band covered the truth in 85% of pilot runs against 90%. We plan to fix both in the next stage with a sealed 200-world grid (about 60 worse worlds; 59 clean would bound false approval at 5%) and a no-fatigue world where the audit must approve.
+
+**Limits:** Fatigue is validated only on our own simulators, so some success is built in; fatigue is assumed uniform across users; intervals used 30 bootstrap resamples so far (200 for final verdicts).
+
+## 8. Feasibility & Risks
+
+**Team**
+
+- **Balakumar V** (leader): simulation, bootstrap inference and estimators; built a hybrid-search RAG chatbot.
+- **Kishore Kumar J**: pipelines and loaders; his assistive app, where false alerts cost, parallels false approvals.
+- **K Asvitha**: experiment design and live-audit demo; built an agent that reproduces bugs from vague reports.
+
+**Timeline**
+
+- **10–16 Nov:** OBD loader and 200-world grid.
+- **17–23 Nov:** attenuation-aware gate.
+- **24–30 Nov:** KuaiRand mapping; go/no-go by 30 Nov, with OBD and the simulator as fallback; **midway report 1 Dec**.
+- **2–6 Dec:** A/B and non-stationary baselines, net-value table, placebo and ablations.
+- **Buffer through 14 Dec;** drop KuaiRand first.
+
+**Risks**
+
+1. Hidden taste may attenuate measured fatigue, risking false approval. Randomization removes exposure confounding, but attenuation remains; until the gate lands (23 Nov), APPROVE assumes taste is within the tested range.
+2. KuaiRand may lack suitable repeat-exposure data.
+
+## Glossary
+
+| Term | Definition |
+| --- | --- |
+| OPE | Off-policy evaluation: estimating a new policy's results from old logs. |
+| Overlap | Logs cover what the new policy would show. |
+| Known propensities | Logged display probabilities. |
+| No hidden confounder | No unlogged factor drives both display and click. |
+| Hidden taste | Unlogged preference behind both display and click. |
+| IPW, SNIPS, DM, DR | Standard one-step estimators: propensity-weighted, self-normalized, direct model, doubly robust. |
+| Effective sample size | How many logged users really count. |
+| Shapes | Linear, logarithmic, 0.7-discounted recency, steeper after two repeats. |
+| Fatigue strength (κ̂) | Estimated fall in click log-odds per repeat. |
+| n\* | Slice size for 80% power to exclude zero lift. |
+| Coverage guard | Blocks approval when over 5% of the new policy's showings exceed the slice's repeat range. |
+| Logit attenuation | Adjustment for hidden taste weakening measured fatigue; 0.346 fitted. |
+| Case, world | A world is one simulated policy pair with its fatigue mechanism; a case is one audit of it. Cases in one world are not independent. |
