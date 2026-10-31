@@ -9,7 +9,7 @@ from a single function:
     print(report.verdict)            # APPROVE | REJECT | NEED_DATA
 
 Pipeline (identical to ``experiments/r12_e1.one``, so a run with the same
-kind / kappa / seed reproduces the logged record in ``results/r12_e1.jsonl``):
+kind / kappa / seed reproduces the logged record in ``results/round-12/r12_e1.jsonl``):
 
 1. Simulate 4,000 users of *logged* data from the old policy (hidden taste drives
    both the old policy's choices and the clicks).

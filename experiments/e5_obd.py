@@ -44,4 +44,4 @@ def run(log_pol, eval_pol):
                 naive_mean_logged_ctr=float(y.mean()), in_ci={k: bool(ci[k][0] <= gt <= ci[k][1]) for k in ci})
 for lp, ep in (("random", "bts"), ("bts", "random")):
     out[f"{lp}_logs_evaluate_{ep}"] = run(lp, ep); print(lp, "->", ep, json.dumps(out[f"{lp}_logs_evaluate_{ep}"], indent=1), flush=True)
-json.dump(out, open("results/e5_obd.json", "w"), indent=1)
+json.dump(out, open("results/round-01/e5_obd.json", "w"), indent=1)

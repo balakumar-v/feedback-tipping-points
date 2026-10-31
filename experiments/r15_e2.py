@@ -6,7 +6,7 @@ from p3ope import r8_lib as W
 if __name__ == "__main__":
     if len(sys.argv) < 3: sys.exit("usage: python -m experiments.r15_e2 B OUT")
     E14.B = int(sys.argv[1]); f = sys.argv[2]
-    truth = {(r["kind"], r["kappa"]): r["true10"] for fn in glob.glob("results/r14_e1_*.jsonl") for r in map(json.loads, open(fn))}
+    truth = {(r["kind"], r["kappa"]): r["true10"] for fn in glob.glob("results/round-14/r14_e1_*.jsonl") for r in map(json.loads, open(fn))}
     done = set()
     if os.path.exists(f): done = {(r["kind"], r["kappa"], r["seed"]) for r in map(json.loads, open(f))}
     out = open(f, "a"); T0 = time.time()

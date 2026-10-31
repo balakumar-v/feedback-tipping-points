@@ -1,5 +1,5 @@
 import json, pandas as pd, numpy as np
-df = pd.DataFrame([json.loads(l) for l in open("results/e4_loop.jsonl")]); df["capped"] = df.capped.fillna(False).astype(bool); print("rows", len(df))
+df = pd.DataFrame([json.loads(l) for l in open("results/round-01/e4_loop.jsonl")]); df["capped"] = df.capped.fillna(False).astype(bool); print("rows", len(df))
 for k, x in df.groupby("kappa"):
     need = x[x.v1 == "NEED_DATA"]
     print(f"kappa {k}: true {x.true_lift.iloc[0]:+.4f} {x.cls.iloc[0]} | pilot(1500) verdict: APP {np.mean(x.v1=='APPROVE'):.2f} REJ {np.mean(x.v1=='REJECT'):.2f} NEED {np.mean(x.v1=='NEED_DATA'):.2f} (n={len(x)})")

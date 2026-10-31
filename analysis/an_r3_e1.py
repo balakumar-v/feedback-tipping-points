@@ -1,7 +1,7 @@
 import json, numpy as np, pandas as pd
 from scipy.stats import beta
 def cp(k,n): return 1.0 if k==n else beta.ppf(.95,k+1,n-k)
-df=pd.DataFrame([json.loads(l) for l in open("results/r3_e1.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
+df=pd.DataFrame([json.loads(l) for l in open("results/round-03/r3_e1.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
 print("pilots",len(df)); print(df.groupby("kappa").agg(n=("seed","count"),true=("true10","first"),A=("pilot",lambda x:(x=="APPROVE").sum()),N=("pilot",lambda x:(x=="NEED").sum()),R=("pilot",lambda x:(x=="REJECT").sum())).round(4))
 nd=df[df.pilot=="NEED"].copy(); print("NEED pilots",len(nd))
 for v in ("V0","V1","V2"):

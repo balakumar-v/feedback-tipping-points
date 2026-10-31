@@ -11,8 +11,8 @@ import numpy as np
 from p3ope.summary import classify, clopper_pearson_upper as cp, load_records
 
 SH = ("lin", "log", "mem7", "tail2")
-DESIGN = ["results/r12_e1.jsonl", "results/r12_e1_w4.jsonl"]   # W5, W4: seen during rule building
-SEALED = ["results/r14_e1_a.jsonl", "results/r14_e1_b.jsonl"]  # W6: sealed generator
+DESIGN = ["results/round-12/r12_e1.jsonl", "results/round-12/r12_e1_w4.jsonl"]   # W5, W4: seen during rule building
+SEALED = ["results/round-14/r14_e1_a.jsonl", "results/round-14/r14_e1_b.jsonl"]  # W6: sealed generator
 LAMBDAS = (1, 5, 10)          # a false approval costs lambda times its harm
 
 

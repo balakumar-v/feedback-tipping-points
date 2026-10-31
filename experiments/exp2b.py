@@ -1,4 +1,5 @@
-import numpy as np, ope_pilot as op
+import numpy as np
+from p3ope import ope_pilot as op
 from p3ope.ope_pilot import *
 op.NL = 0.8
 rng = np.random.default_rng(78)

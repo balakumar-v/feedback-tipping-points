@@ -1,6 +1,6 @@
 import json, numpy as np, pandas as pd
 pd.set_option("display.width",220)
-df=pd.DataFrame([json.loads(l) for l in open("results/r2_e4.jsonl")])
+df=pd.DataFrame([json.loads(l) for l in open("results/round-02/r2_e4.jsonl")])
 df["ka_b"]=df.k_a-df.kappa; df["kb_b"]=df.k_b-df.kappa
 print(df.groupby(["kappa","delta"]).agg(n=("seed","count"),ka_bias=("ka_b","mean"),kb_bias=("kb_b","mean"),theta=("theta","mean"),t6=("t6","first"),t10=("t10","first")).round(3).to_string())
 for v in ("a","bflat","blin"):

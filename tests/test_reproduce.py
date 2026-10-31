@@ -12,7 +12,7 @@ os.chdir(ROOT)
 
 class ReproduceLoggedRuns(unittest.TestCase):
     def _logged(self, kind, kappa, seed):
-        with open("results/r12_e1.jsonl") as fh:
+        with open("results/round-12/r12_e1.jsonl") as fh:
             for line in fh:
                 r = json.loads(line)
                 if (r["kind"], r["kappa"], r["seed"]) == (kind, kappa, seed):

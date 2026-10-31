@@ -1,5 +1,5 @@
 import json, numpy as np, pandas as pd
-df=pd.DataFrame([json.loads(l) for l in open("results/r6.jsonl")]); SH=("lin","log","mem7")
+df=pd.DataFrame([json.loads(l) for l in open("results/round-06/r6.jsonl")]); SH=("lin","log","mem7")
 df["static_bound"]=df.lin_slo<=0   # static interval identical across shapes
 df["fc_bound"]=df[[f"{s}_flo" for s in SH]].min(axis=1)<=0
 print("runs",len(df)); print(df.groupby(["kappa","ns"]).agg(n=("seed","size"),APPROVE=("v3",lambda x:(x=="APPROVE").sum()),NEED=("v3",lambda x:(x=="NEED").sum()),REJECT=("v3",lambda x:(x=="REJECT").sum()),static_lo_le0=("static_bound","mean"),fc_lo_le0=("fc_bound","mean"),sd_static=("lin_sds","median"),sd_fc_lin=("lin_sdf","median"),sd_fc_log=("log_sdf","median"),sd_fc_mem7=("mem7_sdf","median"),spt=("lin_spt","median"),fpt=("lin_fpt","median")).round(4).to_string())

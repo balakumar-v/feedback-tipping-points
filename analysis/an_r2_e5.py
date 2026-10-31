@@ -1,7 +1,7 @@
 import json, numpy as np, pandas as pd, sys
 from scipy.stats import beta
 def cp(k,n): return 1.0 if k==n else beta.ppf(.95,k+1,n-k)
-df=pd.DataFrame([json.loads(l) for l in open("results/r2_e5.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
+df=pd.DataFrame([json.loads(l) for l in open("results/round-02/r2_e5.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
 g=df.groupby(["m","kappa"]).agg(n=("seed","count"),true=("true10","first"),cls=("cls","first"),v3A=("v3",lambda x:(x=="APPROVE").mean()),v3R=("v3",lambda x:(x=="REJECT").mean()),v3N=("v3",lambda x:(x=="NEED").mean()),v1A=("v1",lambda x:(x=="APPROVE").mean()),v1R=("v1",lambda x:(x=="REJECT").mean()),fc=("lin_pt","mean"))
 print(g.round(3).to_string())
 w=df[df.cls=="worse"]; b=df[df.cls=="better"]; bb=b[b.true10>=0.02]

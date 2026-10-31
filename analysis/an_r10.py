@@ -1,5 +1,5 @@
 import json, numpy as np, pandas as pd
-d = pd.DataFrame([json.loads(l) for l in open("results/r10_e1.jsonl")]); Z = 2.8
+d = pd.DataFrame([json.loads(l) for l in open("results/round-10/r10_e1.jsonl")]); Z = 2.8
 d["orc"] = d.groupby("kappa").sd_f.transform("mean").pipe(lambda s: (Z * s / d.true10.abs()) ** 2)
 d["in_band"] = (d.orc >= d.n_lo) & (d.orc <= d.n_hi); d["pt_ok"] = (d.n_pt / d.orc).between(.5, 2)
 g = d.groupby("kappa").agg(n=("seed", "size"), true10=("true10", "first"), oracle=("orc", "first"), med_pt=("n_pt", "median"), med_lo=("n_lo", "median"), inf_hi=("n_hi", lambda x: np.isinf(x).mean()), in_band=("in_band", "mean"), pt_within2=("pt_ok", "mean"))

@@ -27,5 +27,5 @@ for drift in (0.0, 1.0):
     for k in E:
         a = np.array(E[k]); print(f"{k:6s} | {a.mean():+.4f} | {a.std():.4f} | {np.sqrt(((a-lift)**2).mean()):.4f} | {np.mean(a<=0):.3f} | " + (f"{np.mean(cov[k]):.2f}" if k in cov else "-"))
     res[drift] = {k: list(map(float, v)) for k, v in E.items()}
-json.dump(dict(lift=lift, res=res), open("results/e1.json", "w"))
+json.dump(dict(lift=lift, res=res), open("results/round-01/e1.json", "w"))
 print("elapsed", round(time.time() - T0))

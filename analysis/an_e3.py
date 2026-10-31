@@ -1,6 +1,6 @@
 import json, glob, numpy as np, pandas as pd, sys
 pd.set_option("display.width", 250); pd.set_option("display.max_columns", 40)
-rows = [json.loads(l) for f in glob.glob("results/e3_*.jsonl") if "smoke" not in f for l in open(f)]
+rows = [json.loads(l) for f in glob.glob("results/round-01/e3_*.jsonl") if "smoke" not in f for l in open(f)]
 df = pd.DataFrame(rows); df["cls"] = np.where(df.true_lift < -0.002, "worse", np.where(df.true_lift > 0.002, "better", "marg"))
 df["grp"] = df.cell.str[0]
 def fa(v, cls, col="v_logs"):

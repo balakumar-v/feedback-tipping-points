@@ -61,4 +61,4 @@ for cap in (None, 100, 50, 20, 10, 5):
 out["bts_scores_random_clip"] = clip; out["bts_pscore_quantiles"] = {q: float(np.quantile(bb["pscore"], q)) for q in (0, .001, .01, .1, .5, 1)}
 out["bts_scores_random_w_quantiles"] = {q: float(np.quantile(w, q)) for q in (.5, .9, .99, .999, 1)}
 print(json.dumps({k: out[k] for k in ("bts_scores_random_clip", "bts_pscore_quantiles", "bts_scores_random_w_quantiles")}, indent=1))
-json.dump(out, open("results/e5_diag.json", "w"), indent=1)
+json.dump(out, open("results/round-01/e5_diag.json", "w"), indent=1)

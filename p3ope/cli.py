@@ -81,8 +81,8 @@ def cmd_ope(a) -> int:
 
 def cmd_summary(a) -> int:
     try:
-        for path, tag in (("results/r12_e1.jsonl", "W5 held-out generator (pre-registered)"),
-                          ("results/r12_e1_w4.jsonl", "W4 retro (descriptive)")):
+        for path, tag in (("results/round-12/r12_e1.jsonl", "W5 held-out generator (pre-registered)"),
+                          ("results/round-12/r12_e1_w4.jsonl", "W4 retro (descriptive)")):
             recs = S.load_records(path)
             print(f"\n== {tag}: {len(recs)} logged audits")
             for rule in ("v6", "v7"):

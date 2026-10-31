@@ -1,7 +1,7 @@
 """POST-HOC, exploratory (NOT pre-registered): does an APPROVE margin m (lower ends > m instead of > 0) remove the R4-1 near-tie false approvals? Uses stored interval ends in out/r4_e1.jsonl."""
 import json, numpy as np, pandas as pd
 from analysis.an_percell import cp, cls
-df=pd.DataFrame([json.loads(l) for l in open("results/r4_e1.jsonl")]); df["cls"]=cls(df.true10.values)
+df=pd.DataFrame([json.loads(l) for l in open("results/round-04/r4_e1.jsonl")]); df["cls"]=cls(df.true10.values)
 SH=("lin","log","mem7","tail2")
 def appr(r,m): return (r.s_lo>m) and all(r[f"{s}_lo"]>m for s in SH)
 w=df[df.cls=="worse"]; b=df[df.cls=="better"]; strong=b[b.true10>=0.02]

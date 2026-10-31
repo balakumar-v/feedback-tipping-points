@@ -5,7 +5,7 @@ def cp(k, n): return np.nan if n == 0 else (1.0 if k == n else beta.ppf(.95, k +
 def auc(score, y):
     s1, s0 = score[y == 1], score[y == 0]
     return mannwhitneyu(s1, s0, alternative="greater").statistic / (len(s1) * len(s0))
-D = pd.DataFrame([json.loads(l) for f in sorted(glob.glob("results/r14_e1_*.jsonl")) for l in open(f)])
+D = pd.DataFrame([json.loads(l) for f in sorted(glob.glob("results/round-14/r14_e1_*.jsonl")) for l in open(f)])
 D = D.drop_duplicates(["kind", "kappa", "seed"]); print("audits:", len(D))
 M = 0.002
 D["cls"] = np.where(D.true10 < -M, "worse", np.where(D.true10 > M, "better", "marginal"))
@@ -36,5 +36,5 @@ print("per-generator AUC margin / CI-only:", {k: (round(auc(g.lin_margin.values,
 nn = E[E.v7 == "NEED"]; print("among v7-NEED runs (n=%d, worse %d): AUC margin %.3f | CI-only %.3f" % (len(nn), nn.y.sum(), auc(nn.lin_margin.values, nn.y.values), auc(-nn.z_ci.values, nn.y.values)))
 print("P59a gap: mean(p_margin) %.3f vs base rate %.3f; margin>0 share among worse %.3f, among better %.3f" % (E.p_margin.mean(), E.y.mean(), (E[E.y == 1].lin_margin > 0).mean(), (E[E.y == 0].lin_margin > 0).mean()))
 # P59c saved data
-A = pd.read_csv("results/r5_all.csv"); A = A[A.true10.abs() > M]; need = A[A.v3 == "NEED"]; yy = (need.true10 < 0).astype(int).values
+A = pd.read_csv("results/round-05/r5_all.csv"); A = A[A.true10.abs() > M]; need = A[A.v3 == "NEED"]; yy = (need.true10 < 0).astype(int).values
 print("\nP59c saved R5 runs with 3-shape verdict NEED: n=%d (worse %d): AUC margin %.3f (>=0.70?) -> %s" % (len(need), yy.sum(), auc(need.margin.values, yy), "PASS" if auc(need.margin.values, yy) >= .7 else "FAIL"))

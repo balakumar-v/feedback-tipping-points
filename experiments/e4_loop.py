@@ -2,7 +2,7 @@
 import sys, json, time, numpy as np, pandas as pd
 from p3ope.exp13_lib import *
 S0, S1, out = int(sys.argv[1]), int(sys.argv[2]), open(sys.argv[3], "a")
-df = pd.DataFrame([json.loads(l) for l in open("results/e4_sizing.jsonl")]); C = float((df.ks.groupby([df.m, df.ns]).std() * np.sqrt(df.groupby(["m", "ns"]).ns.first())).median())
+df = pd.DataFrame([json.loads(l) for l in open("results/round-01/e4_sizing.jsonl")]); C = float((df.ks.groupby([df.m, df.ns]).std() * np.sqrt(df.groupby(["m", "ns"]).ns.first())).median())
 print("c = SD(kappa_slice)*sqrt(n) median over cells:", round(C, 3), flush=True)
 N, NS0, B, CAP = 4000, 1500, 60, 8000; beta, gamma = 0.5, 0.8; T0 = time.time()
 

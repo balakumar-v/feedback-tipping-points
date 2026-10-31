@@ -234,7 +234,7 @@ Findings from re-reading code, logs and abstract (no new runs): (i) the abstract
 - P56c: v7 false rejects on truly-better <= 10%.
 - Descriptive: v5 (no guard) false approvals and correct-approve on the same runs, to isolate the guard; v7 correct-approve (expected 0 when the guard fires: abstention by design).
 Rule v7 is not changed whatever this shows; failures are reported.
-## R13-2 ABLATION from saved W5 logs (results/r12_e1.jsonl; NO new runs; descriptive, post hoc, not a claim): false approvals and correct-approve for each single shape, for every leave-one-shape-out agreement of the four shapes (with and without the free-form veto, guard applied).
+## R13-2 ABLATION from saved W5 logs (results/round-12/r12_e1.jsonl; NO new runs; descriptive, post hoc, not a claim): false approvals and correct-approve for each single shape, for every leave-one-shape-out agreement of the four shapes (with and without the free-form veto, guard applied).
 ## R13-3 MVP (2) REPRODUCTION (experiments/mvp_drift.py; replaces the missing e1_table.py): base world (K=10, D=5), logs from the old policy (no hidden taste), 4,000 users before and 4,000 after; adverse covariate drift d = 1.0 along DRIFT_DIR applies to the after period only; the new policy runs in the after period. Before/after lift = after mean click rate (new policy, drifted) minus before mean click rate (old policy). Truth round-one lift = new minus old at drift 0 (300,000-user Monte Carlo). OPE = SNIPS and DR on the BEFORE logs with 95% row-bootstrap interval (B=300), compared with the truth round-one lift. 200 independent runs (seeds 0-199). Single drift value fixed here, no tuning.
 - P57a: before/after has the wrong sign (negative while truth > 0) in >= 50% of runs.
 - P57b: the SNIPS interval and the DR interval each cover the truth round-one lift in >= 90% of runs.
@@ -256,7 +256,7 @@ Rule v7 is FROZEN (no change whatever R14 shows): per shape REJECT iff static OR
 ## R14-2 TIPPING MARGIN vs CI-ONLY SCORE (ablation of the margin, on the R14-1 runs, linear-model quantities; margin = (kappa-hat - kappa*) / SD of bootstrap kappa-hat; CI-only score = forecast point / bootstrap SD of the linear forecast, P(worse) = Phi(-point/SD)). Target event: truly worse (< -0.002) among all 192 runs.
 - P59a: Brier(Phi(margin)) < Brier(constant base rate).
 - P59b: AUC(margin) >= AUC(CI-only score) - 0.02 (margin loses nothing against the plain interval).
-- P59c (saved data, no new runs; results/r5_all.csv design runs where the 3-shape verdict is NEED): AUC of the margin for truly-worse vs truly-better >= 0.70 (does the margin say something where the CI verdict abstains?).
+- P59c (saved data, no new runs; results/round-05/r5_all.csv design runs where the 3-shape verdict is NEED): AUC of the margin for truly-worse vs truly-better >= 0.70 (does the margin say something where the CI verdict abstains?).
 - Expectation written before running: P59a uncertain (the linear margin is misspecified on W6), P59b about a tie. A margin that does not beat the CI-only score is reported as an interpretation aid, not as extra evidence.
 Disclosure: a smoke run (the six even-indexed cells, one audit each, seed 99999, outside the run seeds; 30 s total, verdicts not inspected) was executed for timing and plumbing before the 192 audits.
 

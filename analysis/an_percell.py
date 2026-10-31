@@ -19,10 +19,10 @@ def summ(df,name,vcol="v3",edge=0.01):
     print(f"[{name}] truly-worse n={len(w)} FA={fa} CP95upper={cp(fa,len(w)):.3f} | near-boundary worse (|lift|<={edge}) n={len(wn)} FA={fan} CP95upper={cp(fan,len(wn)):.3f}")
     print(f"[{name}] truly-better n={len(b)} FR={fr} ({fr/max(len(b),1):.3f}) CP95upper={cp(fr,len(b)):.3f} | near-boundary better n={len(bn)} FR={frn} | abstain overall {(df[vcol]=='NEED').mean():.3f}; abstain on truly-better {(b[vcol]=='NEED').mean():.3f}; correct-approve {(b[vcol]=='APPROVE').mean():.3f}")
 if __name__=="__main__":
-    e3=pd.DataFrame([json.loads(l) for f in ("results/r2_e3_a.jsonl","results/r2_e3_b.jsonl") for l in open(f)])
+    e3=pd.DataFrame([json.loads(l) for f in ("results/round-02/r2_e3_a.jsonl","results/round-02/r2_e3_b.jsonl") for l in open(f)])
     print("== R2-3 logs only (REAL world), three-shape rule v3; seeds per cell:",e3.groupby(["kind","kappa"]).size().unique())
     t=table(e3,["kind","kappa"]); print(t.round(3).to_string(index=False)); summ(e3,"R2-3 v3"); summ(e3,"R2-3 linear-only","v1") if "v1" in e3 else None
-    e5=pd.DataFrame([json.loads(l) for l in open("results/r2_e5.jsonl")]); print("\n== R2-5 slice audit (REAL), seeds:",sorted(e5.seed.unique())[:3],"..",len(e5))
+    e5=pd.DataFrame([json.loads(l) for l in open("results/round-02/r2_e5.jsonl")]); print("\n== R2-5 slice audit (REAL), seeds:",sorted(e5.seed.unique())[:3],"..",len(e5))
     for m,g in e5.groupby("m"):
         print("--- taste x%g"%m); print(table(g,["kappa"]).round(3).to_string(index=False)); summ(g,"R2-5 m=%g"%m)
     summ(e5,"R2-5 all m"); summ(e5[e5.m==1.0],"R2-5 m=1")

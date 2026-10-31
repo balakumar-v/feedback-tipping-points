@@ -1,6 +1,6 @@
 import json, numpy as np, pandas as pd
 pd.set_option("display.width", 250); pd.set_option("display.max_columns", 30)
-df = pd.DataFrame([json.loads(l) for l in open("results/e4_sizing.jsonl")]); print("rows", len(df))
+df = pd.DataFrame([json.loads(l) for l in open("results/round-01/e4_sizing.jsonl")]); print("rows", len(df))
 rows = []
 for (m, ns), x in df.groupby(["m", "ns"]):
     rows.append(dict(m=m, ns=ns, kb_bias=(x.kb - 0.4).mean(), ks_bias=(x.ks - 0.4).mean(), ks_sd=x.ks.std(), c_sd_sqrt_n=x.ks.std() * np.sqrt(ns), ks_se=x.ses.mean(), ks_cov=x.ks_in_ci.mean(),

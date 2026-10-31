@@ -3,7 +3,7 @@ import json, numpy as np, pandas as pd, sys
 from analysis.an_percell import cp, cls, table, summ
 def load(f): return pd.DataFrame([json.loads(l) for l in open(f)])
 def r41():
-    df=load("results/r4_e1.jsonl"); df["cls"]=cls(df.true10.values); print("R4-1 W2 runs",len(df),"seeds/cell",df.groupby(["kind","kappa"]).size().unique())
+    df=load("results/round-04/r4_e1.jsonl"); df["cls"]=cls(df.true10.values); print("R4-1 W2 runs",len(df),"seeds/cell",df.groupby(["kind","kappa"]).size().unique())
     print(table(df,["kind","kappa"],"v4").round(3).to_string(index=False))
     for v in ("v4","v3","lin_v"): summ(df,"R4-1 "+v,v)
     w=df[df.cls=="worse"]; b=df[df.cls=="better"]; ws=w[abs(w.true10)<=0.01]; strong=b[b.true10>=0.02]
@@ -15,7 +15,7 @@ def r41():
     oof=df[df.kind.isin(["convex","quad"])&(df.cls=="worse")]
     print("descriptive out-of-family truly-worse n=%d: FA v4 %d, v3 %d, lin-only %d"%(len(oof),(oof.v4=="APPROVE").sum(),(oof.v3=="APPROVE").sum(),(oof.lin_v=="APPROVE").sum()))
 def r42():
-    df=load("results/r4_e2.jsonl"); df["cls"]=cls(df.true10.values); print("\nR4-2 slice runs",len(df),"seeds/cell",df.groupby("kappa").size().unique())
+    df=load("results/round-04/r4_e2.jsonl"); df["cls"]=cls(df.true10.values); print("\nR4-2 slice runs",len(df),"seeds/cell",df.groupby("kappa").size().unique())
     print(table(df,["kappa"]).round(3).to_string(index=False)); summ(df,"R4-2 v3")
     w=df[df.cls=="worse"]; b=df[df.cls=="better"]; ws=w[abs(w.true10)<=0.01]
     fa=(w.v3=="APPROVE").sum(); fan=(ws.v3=="APPROVE").sum(); fr=(b.v3=="REJECT").sum()
@@ -25,4 +25,4 @@ def r42():
 if __name__=="__main__":
     r41()
     import os
-    if os.path.exists("results/r4_e2.jsonl"): r42()
+    if os.path.exists("results/round-04/r4_e2.jsonl"): r42()

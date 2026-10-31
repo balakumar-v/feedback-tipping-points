@@ -9,7 +9,7 @@ def table(df, keys):
     for c in ("APPROVE", "NEED", "REJECT"):
         if c not in g: g[c] = 0
     g["n"] = g[["APPROVE", "NEED", "REJECT"]].sum(1); print(g[["n", "APPROVE", "NEED", "REJECT"]].round(4).to_string())
-e1 = load("results/r8_e1.jsonl")
+e1 = load("results/round-08/r8_e1.jsonl")
 if len(e1):
     print("== R8-1 logs-only UNDER hidden taste, v4 (16/cell)"); table(e1, ["m", "kappa"])
     e1["cls"] = e1.true10.map(cls)
@@ -20,7 +20,7 @@ if len(e1):
     print(f"P49b v5 false rejects (taste x1+x2 pooled): {fr}/{len(b)} = {fr/max(len(b),1):.3f}")
     w1 = e1[(e1.m == 1.0) & (e1.cls == "worse")]; fa = int((w1.v4 == "APPROVE").sum())
     print(f"P49a v4 FA at taste x1: {fa}/{len(w1)} upper {cp_up(fa, len(w1)):.3f}  ->", "PASS" if cp_up(fa, len(w1)) <= .05 else "FAIL")
-e2 = load("results/r8_e2.jsonl")
+e2 = load("results/round-08/r8_e2.jsonl")
 if len(e2):
     print("\n== R8-2 held-out W3 slice audit, taste x1, 3,000 users (16/cell)"); table(e2, ["kind", "kappa"])
     e2["cls"] = e2.true10.map(cls); w = e2[e2.cls == "worse"]; nb = w[w.true10.abs() <= 0.01]; b = e2[e2.cls == "better"]

@@ -2,7 +2,7 @@ import json, numpy as np, pandas as pd
 from scipy.stats import beta
 def cp(k,n): return 1.0 if k==n else beta.ppf(.95,k+1,n-k)
 pd.set_option("display.width",220)
-df=pd.DataFrame([json.loads(l) for f in ("results/r2_e3_a.jsonl","results/r2_e3_b.jsonl") for l in open(f)])
+df=pd.DataFrame([json.loads(l) for f in ("results/round-02/r2_e3_a.jsonl","results/round-02/r2_e3_b.jsonl") for l in open(f)])
 df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
 g=df.groupby(["kind","kappa"],sort=False).agg(n=("seed","count"),true10=("true10","first"),true6=("true6","first"),cls=("cls","first"),A3=("v3",lambda x:(x=="APPROVE").mean()),N3=("v3",lambda x:(x=="NEED").mean()),R3=("v3",lambda x:(x=="REJECT").mean()),A1=("v1",lambda x:(x=="APPROVE").mean()),N1=("v1",lambda x:(x=="NEED").mean()),R1=("v1",lambda x:(x=="REJECT").mean()))
 print(g.round(3).to_string())

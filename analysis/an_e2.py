@@ -1,6 +1,6 @@
 import json, numpy as np, pandas as pd
 pd.set_option("display.width", 250)
-df = pd.DataFrame(json.load(open("results/e2_rows.json"))); df["cls"] = np.where(df.true_lift < -0.002, "worse", np.where(df.true_lift > 0.002, "better", "marg"))
+df = pd.DataFrame(json.load(open("results/round-01/e2_rows.json"))); df["cls"] = np.where(df.true_lift < -0.002, "worse", np.where(df.true_lift > 0.002, "better", "marg"))
 print("rows", len(df), "candidate classes per tau_old:\n", df.groupby(["tau_old"]).cls.value_counts().unstack().to_string())
 print("\n--- per overlap level (tau_old): separate findings ---")
 R = []

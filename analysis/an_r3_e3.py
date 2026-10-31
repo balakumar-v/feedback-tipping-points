@@ -1,7 +1,7 @@
 import json, numpy as np, pandas as pd
 from scipy.stats import beta
 def cp(k,n): return 1.0 if k==n else beta.ppf(.95,k+1,n-k)
-df=pd.DataFrame([json.loads(l) for l in open("results/r3_e3.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
+df=pd.DataFrame([json.loads(l) for l in open("results/round-03/r3_e3.jsonl")]); df["cls"]=np.where(df.true10<-0.002,"worse",np.where(df.true10>0.002,"better","marg"))
 g=df.groupby(["kind","kappa"],sort=False).agg(n=("seed","count"),true=("true10","first"),cls=("cls","first"),v3A=("v3",lambda x:(x=="APPROVE").mean()),v3N=("v3",lambda x:(x=="NEED").mean()),v3R=("v3",lambda x:(x=="REJECT").mean()),v4A=("v4",lambda x:(x=="APPROVE").mean()),v4N=("v4",lambda x:(x=="NEED").mean()),v4R=("v4",lambda x:(x=="REJECT").mean()),linA=("lin_v",lambda x:(x=="APPROVE").mean()))
 print(g.round(3).to_string())
 for nm,sub in (("out-of-family (convex+quad)",df[df.kind.isin(["convex","quad"])]),("in-family lin",df[df.kind=="lin"]),("all",df)):

@@ -27,7 +27,7 @@ def guard_stress(files):
     w = [r for r in rs if classify(r["true10"]) == "worse"]
     print(f"truly-worse runs the four shapes agreed to APPROVE (v5): {sum(r['v5']=='APPROVE' for r in w)}/{len(w)}")
 
-def ablation(path="results/r12_e1.jsonl"):
+def ablation(path="results/round-12/r12_e1.jsonl"):
     if not os.path.exists(path): return
     rs = load_records(path); print(f"\n## R13-2 ablation on saved W5 logs ({len(rs)} audits; post hoc, descriptive)")
     for s in SH:
@@ -47,7 +47,7 @@ def ablation(path="results/r12_e1.jsonl"):
     print(line("four + guard (v6)", fa_ca(mk(SH, True, False), "c"))); print(line("four + guard + ff veto (v7)", fa_ca(mk(SH, True, True), "c")))
     x = [dict(true10=r["true10"], c=r["ff_v"]) for r in rs]; print(line("free-form model alone", fa_ca(x, "c")))
 
-def logs_only(path="results/r8_e1.jsonl"):
+def logs_only(path="results/round-08/r8_e1.jsonl"):
     if not os.path.exists(path): return
     rs = load_records(path); print(f"\n## logs-only audit under hidden taste (R8-1, {len(rs)} audits): rule v5 = v4 with APPROVE capped to NEED")
     for m in (1.0, 2.0):
@@ -56,10 +56,10 @@ def logs_only(path="results/r8_e1.jsonl"):
     print("mean one-step SNIPS lift minus true 10-round lift (hidden taste x1):", round(float(np.mean([r['s_pt'] - r['true10'] for r in rs if r['m'] == 1.0])), 3))
 
 def drift():
-    for f in sorted(glob.glob("results/mvp_drift_*.jsonl")):
+    for f in sorted(glob.glob("results/round-13/mvp_drift_*.jsonl")):
         rs = load_records(f); d = os.path.basename(f)[len("mvp_drift_"):-6]
         print(f"\n## R13-3 drift {d}: {len(rs)} runs, truth {rs[0]['truth']:+.4f}, mean before/after {np.mean([r['before_after'] for r in rs]):+.4f}")
         print(f"before/after wrong sign {np.mean([r['ba_wrong_sign'] for r in rs]):.3f} | SNIPS interval covers truth {np.mean([r['snips_cov'] for r in rs]):.3f} | DR {np.mean([r['dr_cov'] for r in rs]):.3f} | mean widths SNIPS {np.mean([r['snips_hi']-r['snips_lo'] for r in rs]):.4f} DR {np.mean([r['dr_hi']-r['dr_lo'] for r in rs]):.4f}")
 
 if __name__ == "__main__":
-    guard_stress(sorted(glob.glob("results/r13_e1_*.jsonl"))); ablation(); logs_only(); drift()
+    guard_stress(sorted(glob.glob("results/round-13/r13_e1_*.jsonl"))); ablation(); logs_only(); drift()

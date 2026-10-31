@@ -10,4 +10,4 @@ def rep(path, tag):
         fa = int((w[col] == "APPROVE").sum()); fn = int((nb[col] == "APPROVE").sum()); fr = int((b[col] == "REJECT").sum()); ca = int((b[col] == "APPROVE").sum())
         print(f"{col}: FA {fa}/{len(w)} CP95 upper {cp(fa, len(w)):.3f} | near-boundary FA {fn}/{len(nb)} upper {cp(fn, len(nb)):.3f} | false rejects {fr}/{len(b)} | correct-approve {ca}/{len(b)} = {ca/max(len(b),1):.2f}")
     return d
-rep("results/r12_e1.jsonl", "W5 (held-out, pre-registered P55)"); rep("results/r12_e1_w4.jsonl", "W4 retro (descriptive)")
+rep("results/round-12/r12_e1.jsonl", "W5 (held-out, pre-registered P55)"); rep("results/round-12/r12_e1_w4.jsonl", "W4 retro (descriptive)")

@@ -1,6 +1,6 @@
 import json, numpy as np, pandas as pd
 pd.set_option("display.width",220)
-df=pd.DataFrame([json.loads(l) for l in open("results/r2_e1.jsonl")])
+df=pd.DataFrame([json.loads(l) for l in open("results/round-02/r2_e1.jsonl")])
 E1=df[df.exp=="E1"].copy()
 for c in ("pool","ri","fe"): E1[c+"_b"]=E1[c]-E1.kappa
 g=E1.groupby(["m","kappa","ns"]).agg(n=("seed","count"),pool_bias=("pool_b","mean"),pool_sd=("pool","std"),ri_bias=("ri_b","mean"),ri_sd=("ri","std"),fe_bias=("fe_b","mean"),fe_sd=("fe","std"),nd=("nd","mean"))

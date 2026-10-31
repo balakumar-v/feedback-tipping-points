@@ -10,7 +10,7 @@ def load(pat): return pd.DataFrame([json.loads(l) for f in sorted(glob.glob(pat)
 
 
 def r15_1():
-    D = load("results/r15_e1.jsonl")
+    D = load("results/round-15/r15_e1.jsonl")
     if not len(D): print("R15-1: no runs"); return
     D = D.drop_duplicates(["world", "seed"]); M = 0.002
     D["cls"] = np.where(D.true10 < -M, "worse", np.where(D.true10 > M, "better", "marginal"))
@@ -36,16 +36,16 @@ def r15_1():
 
 
 def r14_worlds():
-    D = load("results/r14_e1_*.jsonl").drop_duplicates(["kind", "kappa", "seed"]); w = D[D.true10 < -0.002]
+    D = load("results/round-14/r14_e1_*.jsonl").drop_duplicates(["kind", "kappa", "seed"]); w = D[D.true10 < -0.002]
     c = w.groupby(["kind", "kappa"]).v7.apply(lambda s: (s == "APPROVE").any()); k = int(c.sum())
     print("\nR14 effective independent worlds: %d audits = %d worlds (cells) x %d fresh datasets; truly-worse worlds %d; worlds with a false approval %d; world-level CP95 upper %.3f (audit-level 0/%d bound %.3f)" % (
         len(D), D.groupby(["kind", "kappa"]).ngroups, len(D) // D.groupby(["kind", "kappa"]).ngroups, len(c), k, cp(k, len(c)), len(w), cp(int((w.v7 == "APPROVE").sum()), len(w))))
 
 
 def r15_2():
-    N = load("results/r15_e2.jsonl")
+    N = load("results/round-15/r15_e2.jsonl")
     if not len(N): print("\nR15-2: no runs"); return
-    O = load("results/r14_e1_*.jsonl").drop_duplicates(["kind", "kappa", "seed"])
+    O = load("results/round-14/r14_e1_*.jsonl").drop_duplicates(["kind", "kappa", "seed"])
     M = N.merge(O, on=["kind", "kappa", "seed"], suffixes=("_B", "_30"))
     nd = int((M.v7_B != M.v7_30).sum()); w = M[M.true10_30 < -0.002]; fa = int((w.v7_B == "APPROVE").sum())
     print("\nR15-2 B=%d vs B=30 on %d identical datasets: v7 verdict changed in %d (limit 4) -> %s ; false approvals at B=%d: %d/%d -> %s" % (
@@ -56,7 +56,7 @@ def r15_2():
 
 
 def r15_3():
-    f = "results/r15_e3.jsonl"
+    f = "results/round-15/r15_e3.jsonl"
     if os.path.exists(f):
         print("\nR15-3 (post hoc) slice kappa-hat bias, true kappa 0.8:")
         for r in map(json.loads, open(f)): print("  taste x%.0f: pooled %+.3f | true hidden term supplied %+.3f | attenuation formula %+.3f" % (r["taste"], r["pooled_bias"], r["oracle_bias"], r["attenuation_formula_bias"]))

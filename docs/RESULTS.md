@@ -21,7 +21,7 @@
 - Grid extension after seeing results: groups F (sat/decay/window at kappa 1.5/2.5/4.0; the preregistered grid never crossed zero) and G (reverse drift) were added; 'convex' form was exploratory. All labelled as such.
 - Forecast baseline calibration (old-policy observed rewards offset) is a design choice added in E3; exp12's original numbers were reproduced separately.
 - E3 per-cell truth: 60k-user Monte Carlo; "truly worse" = true 10-round lift < -0.002.
-- E5: the bundled 10k OBD sample was plumbing only; the full 'men' files (random 452,949 rows, bts 4,077,727) were uploaded later and run via e5_full.py (out/e5_full.json). Row-level Poisson bootstrap because OBD has no user IDs. KuaiRand not started.
+- E5: the bundled 10k OBD sample was plumbing only; the full 'men' files (random 452,949 rows, bts 4,077,727) were uploaded later and run via e5_full.py (results/round-01/e5_full.json). Row-level Poisson bootstrap because OBD has no user IDs. KuaiRand not started.
 ## Addendum runs (pre-registered after first analysis; see PREREGISTRATION.md addendum)
 | P15 | DR static lift on slice fixes closed loop (>=70% decisive uncapped; 0 false approvals; pilot NEED on truly-better <=0.50) | FAIL: 8/26 (31%) decisive uncapped; pilot NEED on truly-better 0.875; 0 false approvals but 3 false rejects (kappa 0.2). n* ignores uncertainty in kappa* |
 | P16 | second world (ALPHA .5, TN .25) replicates A and B | PASS: A: FA 0/60 vs one-step 60/60, kappa-hat err<=0.035, coverage 0.925, kappa* within .1 120/120; B: logs-only FA 30/80, slice 0/80, slice abstains 57.5% of truly-better |
@@ -30,7 +30,7 @@
 | P19 | DR CI narrower than SNIPS CI both ways; ESS/n>=0.10 Random->BTS | FAIL in part: ESS/n .247 ok; DR narrower Random->BTS (.00098 vs .00101) but wider BTS->Random (.00095 vs .00065) |
 Tally: 19 thresholds, 10 held (P1-P6, P8, P9, P16, P18), 9 failed in whole or part (P7, P10-P15, P17, P19). P17-P19 deviation: row-level Poisson bootstrap (OBD has no user IDs); BTS evaluated as OBP's fixed zozotown-prior distribution; reward model fit on <=1M rows.
 
-## Post-hoc diagnostic of the P17 misses (NOT pre-registered; e5_diag.py, out/e5_diag.json)
+## Post-hoc diagnostic of the P17 misses (NOT pre-registered; e5_diag.py, results/round-01/e5_diag.json)
 - A/B truth with exact 95% CI: BTS 0.006743 [0.006664, 0.006823]; Random 0.005124 [0.004918, 0.005336].
 - Random logs scoring BTS, DR error vs truth: OBP static BTS distribution -8.8% (CI misses); BTS realised weekly action mix -6.7% (CI covers); BTS realised daily mix -1.8% (CI covers). SNIPS: -9.1%, -6.9%, -2.0% (covers only for daily). The daily mix uses hindsight from the BTS A/B logs, so it explains the gap but is not a deployable fix.
 - BTS logs scoring Random: ESS/n 0.0004, max weight 29,412 (min logged pscore 1e-6). SNIPS with weights capped at 100/50/20/10/5 gives +7.0/+8.7/+10.2/+11.4/+12.0% error vs -7.0% uncapped: no cap fixes it; the estimate is dominated by the tail, so the right output is an ESS/n warning, not a tight interval.
@@ -80,12 +80,12 @@ Post-hoc (not pre-registered), REAL logs, analysis only (an_percell.py): per-kap
 | P40b | slice false reject <= 0.10 | PASS: 0/30 |
 Descriptive: slice audit abstains on 100% of runs with |true lift| <= 0.01 (90/90) and on 80% of truly-better runs (kappa .2, +0.010): near the tipping point the audit mostly returns NEED RANDOMIZED DATA. Tail guard cut out-of-family false approvals from 24 to 8 (of 96 truly-worse convex+quad), not to <= 5%.
 Post-hoc exploratory (NOT pre-registered; an_r4_margin.py): requiring all interval lower ends > +0.002 instead of > 0 gives 1/144 false approvals (CP95 upper 0.033), correct-approve 0.73 (0.76 at margin 0), 1.00 at lift >= +0.02. The margin equals the 'truly worse' cutoff, so this is circular; it is registered below as the next test, not adopted.
-Cost of the randomised slice (descriptive, out/r4_cost.txt): OBD real A/B CTR Random 0.005124 vs BTS 0.006743 = 24.0% fewer clicks; stand-in simulator 27-33% fewer clicks (about 400-590 clicks lost per 1,000 slice users over 6 rounds). Timing: one audit about 3 s (logs, B=30, four shapes) and 2.5 s (slice, B=40) on one CPU core; the 264-audit W2 grid took 13.5 min.
+Cost of the randomised slice (descriptive, results/round-04/r4_cost.txt): OBD real A/B CTR Random 0.005124 vs BTS 0.006743 = 24.0% fewer clicks; stand-in simulator 27-33% fewer clicks (about 400-590 clicks lost per 1,000 slice users over 6 rounds). Timing: one audit about 3 s (logs, B=30, four shapes) and 2.5 s (slice, B=40) on one CPU core; the 264-audit W2 grid took 13.5 min.
 Wording fix (no code change): the code already used two-sided 95% percentile intervals (quantiles .025/.975) with z = 1.96 in n*, so "95% lower bound" was a wording mismatch, not a numerical one; abstract and diagram now say two-sided 95% intervals, lower/upper ends.
 Not done: panel's optional twists (non-uniform slice exposure design, tipping-margin metric, verdict reliability diagram) and a prior-work statement for the team (cannot be invented). Repository URL left as an explicit placeholder in abstract_v29.md.
-Re-run on the real world: PYTHONPATH=. python3 r4_e1.py 400 424 out/r4_e1.jsonl && python3 r4_e2.py 500 530 out/r4_e2.jsonl && python3 an_r4.py   (with the real exp13_lib.py next to the scripts, not standin/).
+Re-run on the real world: PYTHONPATH=. python3 r4_e1.py 400 424 results/round-04/r4_e1.jsonl && python3 r4_e2.py 500 530 results/round-04/r4_e2.jsonl && python3 an_r4.py   (with the real exp13_lib.py next to the scripts, not standin/).
 
-# ROUND 4 REAL-WORLD RE-RUN (2026-10-20; real exp13_lib.py + ope_pilot.py from p3_round2_runs.zip; Addendum 8). SUPERSEDES the stand-in Round 3/4 numbers above, which stay in the record as stand-in only (out/standin/).
+# ROUND 4 REAL-WORLD RE-RUN (2026-10-20; real exp13_lib.py + ope_pilot.py from p3_round2_runs.zip; Addendum 8). SUPERSEDES the stand-in Round 3/4 numbers above, which stay in the record as stand-in only (results/standin_superseded/).
 Real library reproduces logged truths exactly (taste x1 lin .4 -0.0132, .2 +0.0053). Post-hoc per-cell tables on real round-2 logs: see an_percell.py (logs-only 0/240 false approvals, 0/120 near-boundary, CP95 upper .025; slice 0/60).
 | # | Claim | Real result |
 |---|---|---|
@@ -101,7 +101,7 @@ Real library reproduces logged truths exactly (taste x1 lin .4 -0.0132, .2 +0.00
 Descriptive: slice audit abstains on 98.7% of runs (150: 148 NEED, 2 REJECT, 0 APPROVE) and on 100% of truly-better runs at kappa .2 (+0.0053): safe but nearly always asks for more data near the tipping point. The stand-in's second-generator failure (8/144) did NOT reproduce on the real world.
 Wording fix, cost of slice (OBD 24%, stand-in sim 27-33%), runtime (about 6 s per audit on one CPU core in the real world; 312-audit grid 32 min): as in the stand-in block.
 
-# ROUND 5 (2026-10-21, REAL world; Addendum 9 pre-registered before any R5 audit; r5_lib.py, r5_e1.py, an_r5.py; logs out/r5_*.jsonl, out/r5_all.csv)
+# ROUND 5 (2026-10-21, REAL world; Addendum 9 pre-registered before any R5 audit; r5_lib.py, r5_e1.py, an_r5.py; logs results/round-05/r5_*.jsonl, results/round-05/r5_all.csv)
 | # | Claim | Result |
 |---|---|---|
 | P42a | tail-targeted slice (repeat previous item w.p. .5) lowers abstention on truly-better by >= 20 pts vs uniform, NS=3000 | FAIL: abstention tail 0.72 vs uniform 0.59 (kappa 0 and .2, 32 runs each); correct-approve 0.28 vs 0.38 |
@@ -113,7 +113,7 @@ Wording fix, cost of slice (OBD 24%, stand-in sim 27-33%), runtime (about 6 s pe
 Real-world closed-loop sizing (R3-1, seeds 200-213, 84 pilots; 51 NEED): P34 FAIL (V2: 1 of 51 uncapped, 0 decisive; V0 decisive 5/35 uncapped, 0.10 overall), P35 PASS (0 false approvals after re-audit, 0 false rejects; pilot 0/56 truly-worse), P36 FAIL (V2 n* <= cap in 2% of NEED pilots; median n* V0 3,571 / V1 65,288 / V2 133,240). Closed-loop sizing is dropped from the plan.
 Consequences carried into abstract_v32.md: KuaiRand moved from stretch to plan (Core); stretch = variance-reduced static layer, sensitivity bounds, sequential slice with early stopping; 'minimum certifiable lift at the cap' (about +0.04) and the tipping margin added; effort now ~17 core + 9 stretch engineer-days.
 
-# ROUND 6 (2026-10-21, REAL world; Addendum 10 pre-registered): which layer causes abstention? (r6_e1.py, an_r6.py, out/r6.jsonl; 64 slice audits, kappa 0 (+0.037) and .2 (+0.005), NS 3000/8000, 16 seeds)
+# ROUND 6 (2026-10-21, REAL world; Addendum 10 pre-registered): which layer causes abstention? (r6_e1.py, an_r6.py, results/round-06/r6.jsonl; 64 slice audits, kappa 0 (+0.037) and .2 (+0.005), NS 3000/8000, 16 seeds)
 H1 FAIL: static (one-step) lower end <= 0 in only 43% of NEED runs (needed >= 70%). H2 FAIL: some shape's forecast lower end <= 0 in 82% of NEED runs (needed <= 50%). So the hypothesis 'the one-step lift interval limits approval' is REJECTED and removed from the abstract.
 What actually happens: at +0.037 lift (kappa 0) NEED runs are static-bound 75% (forecast 33%); at +0.005 (kappa .2) the forecast interval binds in 100% (static 31%): forecast point estimates there are 0.002-0.005 against SD 0.007-0.012 (static SD 0.013-0.018; median static/forecast SD ratio 1.37). Abstention near the tipping point is mostly the small forecast lift itself (power), not one layer's variance. At kappa 0: approve 7/16 at 3000, 13/16 at 8000; kappa .2: 0/32.
 
@@ -132,7 +132,7 @@ What actually happens: at +0.037 lift (kappa 0) NEED runs are static-bound 75% (
 | P48a | slice correct-approve at +0.037 at the 8,000 cap >= 0.50 | PASS: 13/16 = 0.81 |
 | P48b | abstention on truly-better at the cap <= 0.50 | FAIL: 19/32 = 0.594 (kappa .2, +0.005: 16/16 abstain; 0/16 approvals) |
 Descriptive: four-shape correct-approve at +0.010 (logs, linear) is 2/20 vs 20/20 for three shapes: the tail guard removes small-lift approvals. The diagram's left panel previously showed the three-shape rule (kappa .4: 95% approve); it now shows the final rule (10%). Earlier prototype figures quoted as 0/240 (logs) and 0/228 (slice) were three-shape results; the four-shape counts are in this table and in R4-1 (0/192 second generator).
-Reproduce: python -m experiments.r7_e1 1000 1016 results/r7_e1_a.jsonl (and 1016 1032 -> _b); r7_e2 1100 1110 / 1110 1120; r7_e3 1200 1208 / 1208 1216; r7_e4 1300 1308 / 1308 1316; then python -m analysis.an_r7. About 60 minutes on two CPU cores for all 436 audits (4-9 s each).
+Reproduce: python -m experiments.r7_e1 1000 1016 results/round-07/r7_e1_a.jsonl (and 1016 1032 -> _b); r7_e2 1100 1110 / 1110 1120; r7_e3 1200 1208 / 1208 1216; r7_e4 1300 1308 / 1308 1316; then python -m analysis.an_r7. About 60 minutes on two CPU cores for all 436 audits (4-9 s each).
 
 # ROUND 8-9 (2026-10-22, REAL world; Addenda 13-14 pre-registered before the runs). Motivated by the judge-panel read of abstract v38.
 | # | Claim | Result |
@@ -144,7 +144,7 @@ Reproduce: python -m experiments.r7_e1 1000 1016 results/r7_e1_a.jsonl (and 1016
 | P50c | false rejects <= 10% | PASS: 0/48. Correct-approve 12/48, abstention 0.75 |
 | P51a | tail-targeted slice (R9-1, fresh seeds 5000-5015) false approvals CP95 upper <= 0.10 | FAIL: 12/96 (upper 0.195): step 0/48, late-onset 12/48 |
 | P51b | false rejects <= 10% | PASS: 0/32; correct-approve 15/32 |
-Consequence: fatigue that only starts at the third or later repeat is not covered by the verdict; the abstract says so. The tail guard's earlier 1/240 is on its own design shapes (convex, quad). Reproduce: python -m experiments.r8_e1 3000 3016 results/r8_e1.jsonl; python -m experiments.r8_e2 4000 4016 results/r8_e2.jsonl; P3_SLICE=tail P3_CELLS=step,late python -m experiments.r8_e2 5000 5016 results/r9_e1.jsonl; python -m analysis.an_r8.
+Consequence: fatigue that only starts at the third or later repeat is not covered by the verdict; the abstract says so. The tail guard's earlier 1/240 is on its own design shapes (convex, quad). Reproduce: python -m experiments.r8_e1 3000 3016 results/round-08/r8_e1.jsonl; python -m experiments.r8_e2 4000 4016 results/round-08/r8_e2.jsonl; P3_SLICE=tail P3_CELLS=step,late python -m experiments.r8_e2 5000 5016 results/round-09/r9_e1.jsonl; python -m analysis.an_r8.
 
 # ROUND 10 (2026-10-22, Addendum 15 pre-registered): n* with a pilot-uncertainty band. 3,000-user slice pilots, linear fatigue, taste x1, kappa 0/.2/.3/.4/.6, 32 pilots each (seeds 6000-6031).
 | # | Claim | Result |
@@ -152,7 +152,7 @@ Consequence: fatigue that only starts at the third or later repeat is not covere
 | P52a | band [n*(|e|+1.96 se), n*(|e|-1.96 se)] contains the oracle n* in >= 90% of pilots | FAIL: 0.85 (kappa 0: .94, .2: .97, .3: .88, .4: .81, .6: .66) |
 | P52b | point n* within 2x of the oracle in >= 50% | FAIL: 0.34 (point n* is too small: kappa .4 median 4,259 vs oracle 12,769) |
 | P52c | band upper end <= 8,000 => oracle <= 8,000 in >= 90% | FAIL: 27/32 = 0.84 (32 pilots declared affordable) |
-Descriptive: upper end infinite in 28% (kappa 0), 97% (.2), 84% (.3), 38% (.4), 0% (.6) of pilots. Consequence: n* is reported as a band, labelled indicative; the point value under-sizes, and the band under-covers when the true effect is clearly nonzero (kappa .6). Reproduce: python -m experiments.r10_e1 6000 6032 results/r10_e1.jsonl; python -m analysis.an_r10.
+Descriptive: upper end infinite in 28% (kappa 0), 97% (.2), 84% (.3), 38% (.4), 0% (.6) of pilots. Consequence: n* is reported as a band, labelled indicative; the point value under-sizes, and the band under-covers when the true effect is clearly nonzero (kappa .6). Reproduce: python -m experiments.r10_e1 6000 6032 results/round-10/r10_e1.jsonl; python -m analysis.an_r10.
 
 # ROUND 11 (2026-10-22, Addendum 16 pre-registered before any run): rule v6 = repeat-heavy 10-round slice + coverage guard (APPROVE only if <= 5% of the new policy's forecast impressions have prior counts above the slice's support), fourth generator W4 (cliff4 / late4 / quadlate, taste-coupled kappa), 16 fresh seeds per cell (7000-7015).
 | # | Claim | Result |
@@ -161,7 +161,7 @@ Descriptive: upper end infinite in 28% (kappa 0), 97% (.2), 84% (.3), 38% (.4), 
 | P53b | near-boundary (|true lift| <= 0.01, 96 runs) upper <= 0.10 | FAIL: 16/96, upper 0.242 (the other 2 false approvals have true lift -0.012) |
 | P53c | false rejects <= 10% | PASS: 0/48 |
 | P53d | correct-approve on truly-better >= 0.25 | PASS: 25/48 = 0.52 |
-Guard: unsupported share 2-4%, so the guard passed in all 288 audits and changed no verdict (v5 = v6). The repeat-heavy 10-round slice itself lowered false approvals on W3 from 12/96 (6 rounds) to 5/96 (descriptive: W3 is no longer held out). P54 (saved R8-2 data): single-shape false approvals lin 56, log 78, mem7 69, tail2 37, four-shape agreement 37 of 144, so agreement ties the tail guard alone. Consequence: fatigue that starts after the third repeat is not reliably covered, and the abstract states the measured rates. Reproduce: python -m experiments.r11_e1 7000 7016 results/r11_e1.jsonl; python -m analysis.an_r11.
+Guard: unsupported share 2-4%, so the guard passed in all 288 audits and changed no verdict (v5 = v6). The repeat-heavy 10-round slice itself lowered false approvals on W3 from 12/96 (6 rounds) to 5/96 (descriptive: W3 is no longer held out). P54 (saved R8-2 data): single-shape false approvals lin 56, log 78, mem7 69, tail2 37, four-shape agreement 37 of 144, so agreement ties the tail guard alone. Consequence: fatigue that starts after the third repeat is not reliably covered, and the abstract states the measured rates. Reproduce: python -m experiments.r11_e1 7000 7016 results/round-11/r11_e1.jsonl; python -m analysis.an_r11.
 
 # ROUND 12 (2026-10-22, Addendum 17 pre-registered before the run): rule v7 = v6 + free-form count-curve veto (coefficient per prior-count bin 1..6, >=7; APPROVE also needs its static and forecast lower ends > 0). Fifth generator W5 (cubic, q2, expl3; taste-coupled kappa), 10-round repeat-heavy slice, 3,000 users, 16 fresh seeds per cell (8000-8015).
 | # | Claim | Result |
@@ -170,9 +170,9 @@ Guard: unsupported share 2-4%, so the guard passed in all 288 audits and changed
 | P55b | near-boundary (48 runs) upper <= 0.10 | PASS: v7 0/48, upper 0.061 (v6: 6/48) |
 | P55c | false rejects <= 10% | PASS: 0/48 |
 | P55d | correct-approve >= 0.25 | PASS: 26/48 = 0.54 (v6: 29/48) |
-Descriptive W4 retro (12 cells, 8 seeds, seeds 8000-8007; W4 was seen by R11): v7 false approvals 1/72 (upper 0.064; late4 kappa 1.6, true lift -0.0038), near-boundary 1/48 (upper 0.095), false rejects 0/24, correct-approve 8/24 (v6: 7/72 false approvals, 13/24 correct-approve). Cost: the veto trades about 0.2 correct-approve (W4) or 0.06 (W5) for removing the delayed-onset false approvals. Limits: one fresh generator family; the free-form curve is estimated only for repeat counts the slice shows (up to 7). Reproduce: python -m experiments.r12_e1 8000 8016 results/r12_e1.jsonl W5; python -m experiments.r12_e1 8000 8008 results/r12_e1_w4.jsonl W4; python -m analysis.an_r12.
+Descriptive W4 retro (12 cells, 8 seeds, seeds 8000-8007; W4 was seen by R11): v7 false approvals 1/72 (upper 0.064; late4 kappa 1.6, true lift -0.0038), near-boundary 1/48 (upper 0.095), false rejects 0/24, correct-approve 8/24 (v6: 7/72 false approvals, 13/24 correct-approve). Cost: the veto trades about 0.2 correct-approve (W4) or 0.06 (W5) for removing the delayed-onset false approvals. Limits: one fresh generator family; the free-form curve is estimated only for repeat counts the slice shows (up to 7). Reproduce: python -m experiments.r12_e1 8000 8016 results/round-12/r12_e1.jsonl W5; python -m experiments.r12_e1 8000 8008 results/round-12/r12_e1_w4.jsonl W4; python -m analysis.an_r12.
 
-# ROUND 13 (2026-10-27, REAL world; Addendum 18 pre-registered before any R13 audit). Motivated by the strict judge-panel read of abstract v39 + diagram. Output: results/r13_summary.txt (python -m analysis.an_r13).
+# ROUND 13 (2026-10-27, REAL world; Addendum 18 pre-registered before any R13 audit). Motivated by the strict judge-panel read of abstract v39 + diagram. Output: results/round-13/r13_summary.txt (python -m analysis.an_r13).
 | # | Claim | Result |
 |---|---|---|
 | P56a | guard (unsupported share > 5%) fires in >= 90% of 96 audits when the new policy is sharper (TN 0.2) | PASS: 96/96 (unsupported share 0.088-0.090) |
@@ -186,9 +186,9 @@ Descriptive R13-2 (saved W5 logs, 192 audits, post hoc): single shapes false app
 Logs-only under hidden taste (saved R8-1, 224 audits): v4 REJECT on truly-better 0/32 (taste x1; no truly-better cell at x2); the mean one-step SNIPS lift exceeds the true 10-round lift by 0.092, i.e. hidden taste biases toward APPROVE in this simulator, so logs-only REJECT is conservative here; taste that biases the other way is untested.
 Cost: 6.1 s per audit on one CPU core (96 audits; 4,000 logged + 3,000 slice users, B = 30, five models).
 Smoke test and amendment disclosures: see Addendum 18.
-Reproduce: P3_TN=0.2 python -m experiments.r13_e1 9000 9004 results/r13_e1_a.jsonl (and 9004 9008 -> _b); python -m experiments.mvp_drift 0 200 results/mvp_drift_dir_d1.0.jsonl 1.0; P3_DRIFT_MODE=logit python -m experiments.mvp_drift 0 200 results/mvp_drift_logit_d1.0.jsonl 1.0; python -m analysis.an_r13.
+Reproduce: P3_TN=0.2 python -m experiments.r13_e1 9000 9004 results/round-13/r13_e1_a.jsonl (and 9004 9008 -> _b); python -m experiments.mvp_drift 0 200 results/round-13/mvp_drift_dir_d1.0.jsonl 1.0; P3_DRIFT_MODE=logit python -m experiments.mvp_drift 0 200 results/round-13/mvp_drift_logit_d1.0.jsonl 1.0; python -m analysis.an_r13.
 
-# ROUND 14 (2026-10-28, REAL world; Addendum 19 pre-registered before the 192 audits). Sealed generator W6 (sigm, hump, logsq; added after rule v7 froze) + tipping margin vs CI-only score. Output: results/r14_summary.txt (python -m analysis.an_r14).
+# ROUND 14 (2026-10-28, REAL world; Addendum 19 pre-registered before the 192 audits). Sealed generator W6 (sigm, hump, logsq; added after rule v7 froze) + tipping margin vs CI-only score. Output: results/round-14/r14_summary.txt (python -m analysis.an_r14).
 | # | Claim | Result |
 |---|---|---|
 | P58a | v7 false approvals on W6 truly-worse (144 runs): CP95 upper <= 0.05 | PASS: 0/144 (upper 0.021) |
@@ -200,7 +200,7 @@ Reproduce: P3_TN=0.2 python -m experiments.r13_e1 9000 9004 results/r13_e1_a.jso
 | P59c | saved R5 runs with verdict NEED: margin AUC >= 0.70 | PASS: 0.939 (n = 211, worse 125; only 5 distinct true lifts, correct-shape generator, so a favourable test) |
 Descriptive, same 192 W6 runs: single shapes false-approve lin 0, log 1, mem7 3 (CP95 upper 0.053, would miss the 5% target), tail2 0; free-form alone 0; v5, v6, v7 all 0; a one-step logs-only gate (SNIPS lower end > 0) approves 144/144 truly-worse. Guard passed in all 192 audits (unsupported share <= 5%).
 Reading (honest): W6 is smooth and nearly monotone, so the linear and tail2 models alone also reach 0/144; W6 shows that v7 does not fail on fresh shapes and that a one-step gate always fails, but it does NOT show that the guard or the veto earn anything (that evidence is W3-W5: delayed onset, linear 19/144 and four-shape 6/144 on W5). The margin ties the plain interval-based score; it is an interpretable unit (fatigue strength at which lift flips), not extra discrimination. W6 was authored by the rule's authors: sealed from the rule, not independent of the team.
-Reproduce: python -m experiments.r14_e1 10000 10016 results/r14_e1_a.jsonl 0 (and ... _b.jsonl 1); python -m analysis.an_r14.
+Reproduce: python -m experiments.r14_e1 10000 10016 results/round-14/r14_e1_a.jsonl 0 (and ... _b.jsonl 1); python -m analysis.an_r14.
 
 # ROUND 15 (2026-10-29, Addendum 20 pre-registered before the W7 and larger-B runs). Third judge panel: 4 x ADVANCE at 4.00-4.20, 1 x REJECT at 3.90.
 | # | Claim | Result |
@@ -216,5 +216,5 @@ Descriptive, W7: single shapes false-approve lin 0, log 2, mem7 6, tail2 0 of 36
 Independent worlds: R14's 192 audits are 12 worlds (shape x kappa cells) x 16 fresh datasets, 9 truly-worse. World-level, 0/9 (CP95 upper 0.283). W7 adds 12 truly-worse worlds; combined 0/21 worlds, CP95 upper 0.133 (audit-level 0/180, 0.017, overstates because audits in a world share structure).
 B = 200 vs 30 (same datasets): forecast-interval width ratio 1.08-1.12, mean |change| in the lower end 0.0018-0.0023, always shifted down (B = 30 intervals are about 10% too narrow, as expected from a 30-draw percentile). Verdict table: APPROVE 5->5, 2->NEED; NEED 21->21, 1->APPROVE; REJECT 19->19.
 Post hoc R15-3 (not pre-registered): slice kappa-hat bias at kappa 0.8, taste x0/x1/x2/x3: pooled +0.007/-0.055/-0.163/-0.298; with the true hidden term supplied +0.007/-0.009/+0.010/+0.006; logit-attenuation formula kappa/sqrt(1+0.346 gamma^2) gives 0/-0.076/-0.217/-0.338. Exposure is randomised, so the bias is attenuation (non-collapsibility), not confounding. Matches the logged R2 values (-0.049/-0.182/-0.321).
-Reproduce: python -m experiments.r15_e1 20000 20003 results/r15_e1.jsonl; python -m experiments.r15_e2 200 results/r15_e2.jsonl; python -m experiments.r15_e3 results/r15_e3.jsonl; python -m analysis.an_r15.
+Reproduce: python -m experiments.r15_e1 20000 20003 results/round-15/r15_e1.jsonl; python -m experiments.r15_e2 200 results/round-15/r15_e2.jsonl; python -m experiments.r15_e3 results/round-15/r15_e3.jsonl; python -m analysis.an_r15.
 Deviations: the B = 200 run was interrupted twice (sandbox restarts) and resumed from its saved records; no record was changed.

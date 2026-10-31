@@ -4,7 +4,7 @@ from scipy.stats import norm, beta
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 def cp(k,n): return np.nan if n==0 else (1.0 if k==n else beta.ppf(.95,k+1,n-k))
 def load(f): return pd.DataFrame([json.loads(l) for l in open(f)]) if os.path.exists(f) else pd.DataFrame()
-D=load("results/r5_design.jsonl"); C=load("results/r5_curve.jsonl"); A=pd.concat([D,C],ignore_index=True)
+D=load("results/round-05/r5_design.jsonl"); C=load("results/round-05/r5_curve.jsonl"); A=pd.concat([D,C],ignore_index=True)
 print("runs: design",len(D),"curve",len(C))
 def rates(g): n=len(g); return dict(n=n,APPROVE=(g.v3=="APPROVE").mean(),NEED=(g.v3=="NEED").mean(),REJECT=(g.v3=="REJECT").mean())
 print("\n== per design/NS/kappa"); print(pd.DataFrame([dict(design=k[0],ns=k[1],kappa=k[2],true=g.true10.iloc[0],**rates(g),med_se=g.se_k.median(),med_nV2=g.n_V2.median()) for k,g in A.groupby(["design","ns","kappa"])]).round(3).to_string(index=False))
@@ -30,4 +30,4 @@ big=R[R.n>=10]; mg=(big.gap*big.n).sum()/big.n.sum() if len(big) else np.nan
 print("mean |pred-obs| (bins n>=10, n-weighted) = %.3f (<=0.15?) ; Brier better than constant: %s -> %s"%(mg,br<br0,"PASS" if (br<br0 and mg<=.15) else "FAIL"))
 fig,ax=plt.subplots(figsize=(4.6,4.2)); ax.plot([0,1],[0,1],"--",c="gray"); ax.scatter(R.pred,R.obs,s=R.n*2.5,c="#1f6f8b"); [ax.annotate(f"n={int(r.n)}",(r.pred,r.obs),xytext=(5,-10),textcoords="offset points",fontsize=7) for r in R.itertuples()]
 ax.set_xlabel("predicted P(truly worse) = Phi(tipping margin)"); ax.set_ylabel("observed share truly worse"); ax.set_xlim(-.03,1.03); ax.set_ylim(-.03,1.03); ax.set_title("Reliability of the tipping margin",fontsize=10); plt.tight_layout(); plt.savefig("figures/reliability_tipping_margin.png",dpi=160)
-A.drop(columns=["bin"]).to_csv("results/r5_all.csv",index=False)
+A.drop(columns=["bin"]).to_csv("results/round-05/r5_all.csv",index=False)

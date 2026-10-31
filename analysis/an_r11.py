@@ -1,7 +1,7 @@
 import json, numpy as np, pandas as pd
 from scipy.stats import beta as Be
 def cp(x, n): return 1.0 if x >= n else float(Be.ppf(.95, x + 1, n - x))
-d = pd.DataFrame([json.loads(l) for l in open("results/r11_e1.jsonl")]); d["cls"] = np.where(d.true10 < -.002, "worse", np.where(d.true10 > .002, "better", "marg"))
+d = pd.DataFrame([json.loads(l) for l in open("results/round-11/r11_e1.jsonl")]); d["cls"] = np.where(d.true10 < -.002, "worse", np.where(d.true10 > .002, "better", "marg"))
 print("guard: csup", sorted(d.csup.unique()), "unsupported share", d.unsup.round(3).unique()[:5], "pass(<=5%) rate", round((d.unsup <= .05).mean(), 3))
 for gen in ("W4", "W3"):
     g = d[d.gen == gen]

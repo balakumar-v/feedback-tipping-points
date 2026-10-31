@@ -1,7 +1,7 @@
 # File map
 
 Original flat filenames (as cited in RESULTS.md / PREREGISTRATION.md) -> current location.
-Where the records say `python3 r3_e3.py ...`, run `python -m experiments.r3_e3 ...` from the repo root; `out/` is now `results/`.
+Where the records say `python3 r3_e3.py ...`, run `python -m experiments.r3_e3 ...` from the repo root; `out/` is now `results/`, grouped by round as `results/round-NN/`.
 
 | Original | Now |
 |---|---|
@@ -48,7 +48,7 @@ Where the records say `python3 r3_e3.py ...`, run `python -m experiments.r3_e3 .
 | (new, Round 7) | `experiments/r7_e1.py` … `r7_e4.py`, `analysis/an_r7.py`, `results/r7_e*_{a,b}.jsonl`, `docs/archive/abstract_v37.md`, `figures/archive/p3_diagram_v10.png` |
 
 | (new, Round 8-12 files, previously unlisted) | `p3ope/r8_lib.py`, `p3ope/r12_lib.py`, `experiments/r7_e*.py`, `experiments/r8_e*.py`, `experiments/r10_e1.py`, `experiments/r11_e1.py`, `experiments/r12_e1.py`, `analysis/an_r7.py`, `analysis/an_r8.py`, `analysis/an_r10.py`, `analysis/an_r11.py`, `analysis/an_r12.py` |
-| (new, v40 improvement) | `p3ope/audit.py`, `p3ope/summary.py`, `p3ope/report.py`, `p3ope/cli.py`, `p3ope/__main__.py`, `tests/`, `docs/dashboard.html`, `docs/improvement/`, `requirements-tested.txt` |
+| (new, v40 improvement) | `p3ope/audit.py`, `p3ope/summary.py`, `p3ope/report.py`, `p3ope/cli.py`, `p3ope/__main__.py`, `tests/`, `docs/dashboard.html`, `requirements-tested.txt` |
 
 | (new, R13 strict-panel round) | `experiments/r13_e1.py`, `experiments/mvp_drift.py`, `analysis/an_r13.py`, `results/r13_e1_{a,b}.jsonl`, `results/mvp_drift_*.jsonl`, `results/r13_summary.txt`, Addendum 18 in `docs/PREREGISTRATION.md`, R13 in `docs/RESULTS.md` |
 
@@ -61,3 +61,9 @@ Where the records say `python3 r3_e3.py ...`, run `python -m experiments.r3_e3 .
 | (new, round-1 scripts restored from work.zip) | `experiments/{e1_table,e2_audit,exp13_e3,exp14_e4,e4_loop,e4_loop2,e5_obd,e5_full,e5_diag}.py`, pilots `experiments/exp{1b,2,2b,3,3b,4,5,6_gen,7,8,9,10,11,12}.py`, checks `experiments/{bench,t13,xcheck_gen,xcheck_obp,xcheck_obp_src}.py`; `analysis/{an_e2,an_e3,an_e4,an_loop,an_loop2,an_w2,exp6_an}.py`; helpers `p3ope/{khat,sharp,slice_util}.py`; `tests/test_msm.py` (run `python -m tests.test_msm`); logs `results/{e1,e2,e3_*,e4_*,e5_*,w2_AB,exp*,an_e3}.*`; old abstract `docs/archive/abstract_round1_final.md` |
 
 Round-1 mapping: E1 = `e1_table`/`exp1b`; E2 = `e2_audit`; E3 = `exp13_e3` (groups A-G) + `an_e3`/`an_w2` (W2 world); E4 = `exp14_e4` + `an_e4`, closed loop `e4_loop` (P12) / `e4_loop2` (P15) + `an_loop`/`an_loop2`; E5 = `e5_obd`/`e5_full`/`e5_diag` (P17-P19). Run as `python -m experiments.<name> ...` from the repo root; outputs go to `results/` (was `out/`). `exp1b`-`exp12` are the early pilots (`out/exp*.txt` logs). Not rerun: E5 (needs OBD data + OBP). Checked: `python -m analysis.an_e3` output is identical to `results/an_e3.txt`; `exp13_e3 A 0 1` reproduces the logged records exactly.
+
+## Where results went (restructure)
+
+Run logs were flat in `results/`; they now live in `results/round-NN/` with contents untouched. The round is the number in the file name (`r7_e1_a.jsonl` -> `results/round-07/`). Exceptions: `mvp_drift_*` -> `round-13`, `test_run_r14.log` -> `round-14`, and every Round-1 log (`e1`-`e5`, `exp*`, `w2_*`, `an_e3.txt`, `bgtest.txt`) -> `round-01`. `results/standin_superseded/` is unchanged. References to logs in `RESULTS.md` and `PREREGISTRATION.md` use the new paths.
+
+Removed in the public release: `docs/archive/` (earlier abstract drafts), `figures/archive/` (earlier diagrams) and `docs/improvement/` (internal v40 improvement report). Entries above that mention them are historical. The README review/notes sections moved to `docs/DEVELOPMENT_NOTES.md`; command lists moved to `docs/REPRODUCING.md`. `diagram_template.html` and `make_diagram.py` are not in this archive.

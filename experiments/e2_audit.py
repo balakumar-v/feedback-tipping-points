@@ -30,4 +30,4 @@ for tau_old in (2.0, 1.0, 0.5, 0.25, 0.1):
                 rec[f"naive_{nm}_app"] = int(d - 1.96 * se > 0); rec[f"naive_{nm}_delta"] = d
             rows.append(rec)
     print("tau_old", tau_old, "done", round(time.time() - T0), flush=True)
-json.dump(rows, open("results/e2_rows.json", "w"), default=float)
+json.dump(rows, open("results/round-01/e2_rows.json", "w"), default=float)
